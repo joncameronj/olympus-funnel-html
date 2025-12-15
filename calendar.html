@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Call | Olympus</title>
+  <meta name="description" content="Select a time that works best for you.">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Favicon -->
+  <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-dark.ico" type="image/x-icon">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Calendar-specific overrides */
+    .page-header {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-block;
+      height: 32px;
+    }
+
+    .logo img {
+      height: 100%;
+      width: auto;
+    }
+
+    .logo-dark {
+      display: block;
+    }
+
+    .logo-light {
+      display: none;
+    }
+
+    [data-theme="light"] .logo-dark {
+      display: none;
+    }
+
+    [data-theme="light"] .logo-light {
+      display: block;
+    }
+
+    .calendar-section {
+      padding: 48px 20px;
+      max-width: 928px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Acid Grotesk', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--text-primary);
+    }
+
+    #cal-embed {
+      min-height: 600px;
+      background: var(--bg-card);
+      border-radius: 4px;
+      overflow: hidden;
+      color-scheme: dark;
+    }
+
+    [data-theme="light"] #cal-embed {
+      background: var(--bg-card);
+      color-scheme: light;
+    }
+
+    [data-theme="light"] #cal-embed * {
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] #cal-embed {
+      background: var(--bg-page);
+      color-scheme: dark;
+    }
+
+    [data-theme="dark"] #cal-embed * {
+      color-scheme: dark;
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <a href="/" class="logo">
+      <img src="/olympus-icons/olympus-line-dark.svg" alt="Olympus" class="logo-dark">
+      <img src="/olympus-icons/olympus-line-light.svg" alt="Olympus" class="logo-light">
+    </a>
+  </header>
+
+  <main class="calendar-section">
+    <h1 class="section-title">Select Your Preferred Time</h1>
+
+    <div id="cal-embed"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-logo">
+      <img src="/olympus-icons/olympus-line-dark.svg" alt="Olympus" class="logo-dark" width="32" height="32">
+      <img src="/olympus-icons/olympus-line-light.svg" alt="Olympus" class="logo-light" width="32" height="32">
+    </div>
+    <nav class="footer-links">
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/cookies.html">Cookie Policy</a>
+    </nav>
+    <div class="footer-olympus-ghost">Olympus</div>
+  </footer>
+
+  <!-- Theme Detection Script -->
+  <script>
+    (function() {
+      const favicon = document.getElementById('favicon');
+      const html = document.documentElement;
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      // Set initial theme based on system preference
+      const initialTheme = systemDark ? 'dark' : 'light';
+      html.setAttribute('data-theme', initialTheme);
+      favicon.href = initialTheme === 'dark'
+        ? '/olympus-icons/olympus-line-dark.ico'
+        : '/olympus-icons/olympus-line-light.ico';
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const theme = e.matches ? 'dark' : 'light';
+        html.setAttribute('data-theme', theme);
+        favicon.href = theme === 'dark'
+          ? '/olympus-icons/olympus-line-dark.ico'
+          : '/olympus-icons/olympus-line-light.ico';
+
+        // Update Cal.com if loaded
+        if (typeof Cal !== 'undefined' && Cal.ns && Cal.ns["olympus-demo"]) {
+          Cal.ns["olympus-demo"]("ui", {
+            "cssVarsPerTheme": {
+              "light": {"cal-brand": "#000000"},
+              "dark": {"cal-brand": "#ffffff", "cal-bg": "#0a0a0a"}
+            }
+          });
+        }
+      });
+    })();
+  </script>
+
+  <!-- Cal inline embed code begins -->
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "olympus-demo", {origin:"https://app.cal.com"});
+
+    Cal.ns["olympus-demo"]("inline", {
+      elementOrSelector:"#cal-embed",
+      config: {"layout":"month_view"},
+      calLink: "joncameron/olympus-demo",
+    });
+
+    Cal.ns["olympus-demo"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#000000"},"dark":{"cal-brand":"#ffffff","cal-bg":"#0a0a0a"}},"hideEventTypeDetails":false,"layout":"month_view"});
+
+    // Update Cal.com theme when it's ready
+    Cal("on", {
+      action: "ready",
+      callback: function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        Cal.ns["olympus-demo"]("ui", {
+          "cssVarsPerTheme": {
+            "light": {"cal-brand": "#000000"},
+            "dark": {"cal-brand": "#ffffff", "cal-bg": "#0a0a0a"}
+          }
+        });
+      }
+    });
+
+    // Listen for booking success
+    Cal("on", {
+      action: "bookingSuccessfulV2",
+      callback: function(e) {
+        const data = e.detail.data;
+
+        sessionStorage.setItem('booking', JSON.stringify({
+          uid: data.uid,
+          title: data.title,
+          startTime: data.startTime,
+          endTime: data.endTime
+        }));
+
+        // Fire conversion events
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Schedule', {
+            content_name: data.title,
+            booking_id: data.uid
+          });
+        }
+
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-XXXXXXXXX/BOOKING_LABEL',
+            'value': 1.0,
+            'currency': 'USD'
+          });
+        }
+
+        // Send notification to RO.AM
+        fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'booking',
+            data: {
+              uid: data.uid,
+              title: data.title,
+              startTime: data.startTime,
+              endTime: data.endTime,
+              attendeeName: sessionStorage.getItem('lead_name') || 'Unknown',
+              attendeeEmail: sessionStorage.getItem('lead_email') || 'Unknown'
+            }
+          })
+        }).catch(function() {
+          console.log('Booking notification queued for retry');
+        });
+
+        setTimeout(function() {
+          window.location.href = '/confirmation.html';
+        }, 1500);
+      }
+    });
+  </script>
+  <!-- Cal inline embed code ends -->
+
+  <script>
+    (function() {
+      const ghostText = document.querySelector('.footer-olympus-ghost');
+      if (!ghostText) return;
+
+      ghostText.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+        this.style.setProperty('--mouse-x', `${x}%`);
+        this.style.setProperty('--mouse-y', `${y}%`);
+      });
+
+      ghostText.addEventListener('mouseleave', function() {
+        this.style.removeProperty('--mouse-x');
+        this.style.removeProperty('--mouse-y');
+      });
+    })();
+  </script>
+
+  <script src="/assets/js/tracking.js" defer></script>
+</body>
+</html>

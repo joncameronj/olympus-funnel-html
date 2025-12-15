@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're Booked! | Olympus</title>
+  <meta name="description" content="Your strategy call has been confirmed.">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+  <style>
+    /* OlympusAI Design System */
+    :root {
+      --bg-page: rgb(10, 10, 10);
+      --bg-card: rgb(15, 15, 15);
+      --border-input: rgb(25, 25, 25);
+      --text-primary: rgb(255, 255, 255);
+      --text-muted: rgb(155, 155, 155);
+      --btn-bg: #FFFFFF;
+      --btn-text: #000000;
+      --success: #22c55e;
+    }
+
+    [data-theme="light"] {
+      --bg-page: rgb(255, 255, 255);
+      --bg-card: rgb(250, 250, 250);
+      --border-input: rgb(245, 245, 245);
+      --text-primary: rgb(0, 0, 0);
+      --text-muted: rgb(135, 135, 135);
+      --btn-bg: #000000;
+      --btn-text: #FFFFFF;
+    }
+
+    @font-face {
+      font-family: 'TASA Orbiter';
+      src: url('/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf') format('opentype');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'TASA Orbiter';
+      src: url('/fonts/tasa-orbiter/TASAOrbiterDisplay-SemiBold-BF64891cba47942.otf') format('opentype');
+      font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/inter/Inter-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/inter/Inter-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; line-height: 1.5; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--border-input);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: var(--text-primary); fill: none; }
+    .theme-toggle .sun { display: none; }
+    .theme-toggle .moon { display: block; }
+    [data-theme="light"] .theme-toggle .sun { display: block; }
+    [data-theme="light"] .theme-toggle .moon { display: none; }
+
+    .page-header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-input);
+    }
+
+    .logo {
+      font-family: 'TASA Orbiter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .confirmation-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      animation: scaleIn 0.5s ease-out;
+    }
+
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: #fff;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .confirmation-title {
+      font-family: 'TASA Orbiter', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+    }
+
+    .confirmation-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 450px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .booking-details {
+      background: var(--bg-card);
+      border-radius: 4px;
+      padding: 24px 32px;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+
+    .booking-details h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .booking-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .booking-item:last-child { margin-bottom: 0; }
+
+    .booking-item svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--text-muted);
+      fill: none;
+    }
+
+    .booking-item span {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+
+    .next-steps {
+      max-width: 450px;
+    }
+
+    .next-steps h3 {
+      font-family: 'TASA Orbiter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+    }
+
+    .next-steps ul {
+      list-style: none;
+      text-align: left;
+    }
+
+    .next-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .next-steps li .num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-input);
+      color: var(--text-primary);
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-input);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--text-primary); }
+
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <svg class="sun" viewBox="0 0 24 24" stroke-width="2">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <svg class="moon" viewBox="0 0 24 24" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
+  <header class="page-header">
+    <a href="/" class="logo">OLYMPUS</a>
+  </header>
+
+  <main class="confirmation-section">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h1 class="confirmation-title">You're All Set.</h1>
+    <p class="confirmation-subtitle">Your strategy call has been booked. Check your email for the calendar invite and meeting details.</p>
+
+    <div class="booking-details">
+      <h3>Booking Details</h3>
+      <div class="booking-item">
+        <svg viewBox="0 0 24 24" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span id="booking-date">Loading...</span>
+      </div>
+      <div class="booking-item">
+        <svg viewBox="0 0 24 24" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span id="booking-time">Loading...</span>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>What Happens Next</h3>
+      <ul>
+        <li><span class="num">1</span> Check your inbox for a calendar invite with the meeting link</li>
+        <li><span class="num">2</span> Add the event to your calendar so you don't forget</li>
+        <li><span class="num">3</span> Come prepared with questions about your business goals</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/cookies.html">Cookie Policy</a>
+    </nav>
+    <p class="footer-copy">&copy; 2024 OLYMPUS. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    // Theme toggle
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const savedTheme = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+      } else if (!systemDark) {
+        html.setAttribute('data-theme', 'light');
+      }
+
+      toggle.addEventListener('click', function() {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+    // Display booking details
+    (function() {
+      const booking = JSON.parse(sessionStorage.getItem('booking') || '{}');
+
+      if (booking.startTime) {
+        const date = new Date(booking.startTime);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+
+        document.getElementById('booking-date').textContent = date.toLocaleDateString('en-US', options);
+        document.getElementById('booking-time').textContent = date.toLocaleTimeString('en-US', timeOptions);
+      } else {
+        document.getElementById('booking-date').textContent = 'Check your email for details';
+        document.getElementById('booking-time').textContent = 'Check your email for details';
+      }
+    })();
+  </script>
+
+  <script src="/assets/js/tracking.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<svg viewBox="0 0 485 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="485" height="240" fill="#000000" rx="0"/>
+
+  <!-- Header Section -->
+  <text x="16" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="500" fill="#FFFFFF" letter-spacing="-0.5">Olympus Actions</text>
+
+  <!-- SEE ACTIONS Button -->
+  <g>
+    <rect x="203" y="13" width="120" height="32" rx="4" fill="transparent" stroke="#3B82F6" stroke-width="1"/>
+    <text x="215" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#3B82F6" letter-spacing="0.5">SEE ACTIONS</text>
+    <path d="M 313 28 L 318 33 L 313 38" stroke="#3B82F6" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 5 ACTIONS Text -->
+  <text x="392" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#9B9B9B" letter-spacing="1">5 ACTIONS</text>
+
+  <!-- Alert Card -->
+  <g>
+    <!-- Card Border -->
+    <rect x="16" y="68" width="445" height="148" rx="4" fill="transparent" stroke="#FF0000" stroke-width="2"/>
+
+    <!-- Card Background -->
+    <rect x="17" y="69" width="443" height="146" rx="3" fill="#0A0A0A"/>
+
+    <!-- Alert Title -->
+    <text x="41" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF" letter-spacing="-0.3">Ad Spend Alert</text>
+
+    <!-- Alert Description Line 1 -->
+    <text x="41" y="133" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#9B9B9B">Your Facebook ad spend has exceeded</text>
+
+    <!-- Alert Description Line 2 -->
+    <text x="41" y="153" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#9B9B9B">budget by 47%. Immediate action required</text>
+
+    <!-- Alert Description Line 3 -->
+    <text x="41" y="173" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#9B9B9B">to prevent further overspend.</text>
+
+    <!-- Action Buttons Container -->
+    <g>
+      <!-- Green Checkmark Button -->
+      <rect x="350" y="116" width="40" height="40" rx="4" fill="#10B981"/>
+      <path d="M 362 136 L 367 141 L 378 130" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Red X Button -->
+      <rect x="402" y="116" width="40" height="40" rx="4" fill="#EF4444"/>
+      <path d="M 414 128 L 430 144 M 430 128 L 414 144" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>

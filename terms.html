@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Olympus</title>
+  <meta name="description" content="Terms of service for Olympus.">
+  <meta name="color-scheme" content="dark light">
+
+  <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+  <style>
+    :root {
+      --bg-page: rgb(10, 10, 10);
+      --bg-card: rgb(15, 15, 15);
+      --border-input: rgb(25, 25, 25);
+      --text-primary: rgb(255, 255, 255);
+      --text-muted: rgb(155, 155, 155);
+    }
+
+    [data-theme="light"] {
+      --bg-page: rgb(255, 255, 255);
+      --bg-card: rgb(250, 250, 250);
+      --border-input: rgb(245, 245, 245);
+      --text-primary: rgb(0, 0, 0);
+      --text-muted: rgb(135, 135, 135);
+    }
+
+    @font-face {
+      font-family: 'TASA Orbiter';
+      src: url('/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf') format('opentype');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'TASA Orbiter';
+      src: url('/fonts/tasa-orbiter/TASAOrbiterDisplay-SemiBold-BF64891cba47942.otf') format('opentype');
+      font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/inter/Inter-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fonts/inter/Inter-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; line-height: 1.6; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--border-input);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .theme-toggle svg { width: 20px; height: 20px; stroke: var(--text-primary); fill: none; }
+    .theme-toggle .sun { display: none; }
+    .theme-toggle .moon { display: block; }
+    [data-theme="light"] .theme-toggle .sun { display: block; }
+    [data-theme="light"] .theme-toggle .moon { display: none; }
+
+    .page-header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-input);
+    }
+
+    .logo {
+      font-family: 'TASA Orbiter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .content h1 {
+      font-family: 'TASA Orbiter', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+    }
+
+    .content .last-updated {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    .content h2 {
+      font-family: 'TASA Orbiter', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      margin-top: 40px;
+      margin-bottom: 16px;
+    }
+
+    .content p {
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .content ul {
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+
+    .content li {
+      font-size: 0.875rem;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer {
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-input);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--text-primary); }
+
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <svg class="sun" viewBox="0 0 24 24" stroke-width="2">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <svg class="moon" viewBox="0 0 24 24" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
+  <header class="page-header">
+    <a href="/" class="logo">OLYMPUS</a>
+  </header>
+
+  <main class="content">
+    <h1>Terms of Service</h1>
+    <p class="last-updated">LAST UPDATED: [DATE]</p>
+
+    <h2>1. Agreement to Terms</h2>
+    <p>By accessing or using our services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
+
+    <h2>2. Services</h2>
+    <p>We provide business strategy consulting services through scheduled video calls. Our services include:</p>
+    <ul>
+      <li>Strategy consultation sessions</li>
+      <li>Business growth planning</li>
+      <li>Implementation guidance</li>
+    </ul>
+
+    <h2>3. Booking and Cancellation</h2>
+    <p>When you book a call through our platform:</p>
+    <ul>
+      <li>You agree to attend at the scheduled time</li>
+      <li>Cancellations must be made at least 24 hours in advance</li>
+      <li>No-shows may be restricted from future bookings</li>
+    </ul>
+
+    <h2>4. User Responsibilities</h2>
+    <p>You agree to:</p>
+    <ul>
+      <li>Provide accurate information when booking</li>
+      <li>Use our services for lawful purposes only</li>
+      <li>Respect the time and expertise of our consultants</li>
+    </ul>
+
+    <h2>5. Intellectual Property</h2>
+    <p>All content, materials, and methodologies shared during our sessions remain our intellectual property unless otherwise agreed in writing.</p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>Our services are provided for informational purposes. We are not liable for any business decisions you make based on our consultations. Results may vary.</p>
+
+    <h2>7. Privacy</h2>
+    <p>Your privacy is important to us. Please review our Cookie Policy for information on how we collect and use your data.</p>
+
+    <h2>8. Changes to Terms</h2>
+    <p>We reserve the right to modify these terms at any time. Continued use of our services after changes constitutes acceptance of the new terms.</p>
+
+    <h2>9. Contact</h2>
+    <p>For questions about these terms, please contact us at [YOUR EMAIL].</p>
+  </main>
+
+  <footer class="footer">
+    <nav class="footer-links">
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/cookies.html">Cookie Policy</a>
+    </nav>
+    <p class="footer-copy">&copy; 2024 OLYMPUS. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <script>
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const savedTheme = localStorage.getItem('theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+      } else if (!systemDark) {
+        html.setAttribute('data-theme', 'light');
+      }
+
+      toggle.addEventListener('click', function() {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+  </script>
+</body>
+</html>
