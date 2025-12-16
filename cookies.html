@@ -10,6 +10,9 @@
   <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
 
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/styles.css">
+
   <style>
     :root {
       --bg-page: rgb(10, 10, 10);
@@ -113,7 +116,7 @@
 
     .content h1 {
       font-family: 'TASA Orbiter', sans-serif;
-      font-size: clamp(2rem, 4vw, 2.5rem);
+      font-size: clamp(2.5rem, 4vw, 3rem);
       font-weight: 500;
       letter-spacing: -0.05em;
       margin-bottom: 12px;
@@ -219,26 +222,64 @@
   </style>
 </head>
 <body>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <svg class="sun" viewBox="0 0 24 24" stroke-width="2">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-    <svg class="moon" viewBox="0 0 24 24" stroke-width="2">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-  </button>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <a href="/"><img src="/assets/Etho Logo.svg" alt="Etho" width="80" height="32"></a>
+      </div>
 
-  <header class="page-header">
-    <a href="/" class="logo">OLYMPUS</a>
+      <!-- Desktop nav (hidden on mobile) -->
+      <nav class="header-nav">
+        <a href="/#problem" class="header-nav-link">Problem</a>
+        <a href="/#product" class="header-nav-link">Product</a>
+        <a href="/#compare" class="header-nav-link">Compare</a>
+        <a href="/#results" class="header-nav-link">Proof</a>
+        <a href="/#features" class="header-nav-link">Features</a>
+        <a href="/#process" class="header-nav-link">Process</a>
+        <a href="/#pricing" class="header-nav-link">Pricing</a>
+      </nav>
+
+      <!-- Desktop CTA (hidden on mobile) -->
+      <a href="/calendar.html" class="header-cta header-cta-desktop">Book Demo</a>
+
+      <!-- Mobile: CTA + Hamburger (hidden on desktop) -->
+      <div class="header-mobile-actions">
+        <a href="/calendar.html" class="header-cta">Book Demo</a>
+        <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <div class="header-logo">
+        <img src="/assets/Etho Logo.svg" alt="Etho" width="80" height="32">
+      </div>
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="/#problem" class="mobile-menu-link">Problem</a>
+      <a href="/#product" class="mobile-menu-link">Product</a>
+      <a href="/#compare" class="mobile-menu-link">Compare</a>
+      <a href="/#results" class="mobile-menu-link">Proof</a>
+      <a href="/#features" class="mobile-menu-link">Features</a>
+      <a href="/#process" class="mobile-menu-link">Process</a>
+      <a href="/#pricing" class="mobile-menu-link">Pricing</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="/calendar.html" class="mobile-menu-cta">Book Your Demo</a>
+    </div>
+  </div>
 
   <main class="content">
     <h1>Cookie Policy</h1>
@@ -325,9 +366,9 @@
     <p class="footer-copy">&copy; 2024 OLYMPUS. ALL RIGHTS RESERVED.</p>
   </footer>
 
+  <!-- Theme Detection -->
   <script>
     (function() {
-      const toggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
       const savedTheme = localStorage.getItem('theme');
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -338,13 +379,57 @@
         html.setAttribute('data-theme', 'light');
       }
 
-      toggle.addEventListener('click', function() {
-        const current = html.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
       });
     })();
+  </script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+  (function() {
+    var hamburger = document.querySelector('.hamburger');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var closeBtn = document.querySelector('.mobile-menu-close');
+
+    if (!hamburger || !mobileMenu) return;
+
+    function openMenu() {
+      mobileMenu.classList.add('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
+
+    hamburger.addEventListener('click', openMenu);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking a nav link
+    var navLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+  })();
   </script>
 </body>
 </html>

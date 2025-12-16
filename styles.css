@@ -76,12 +76,14 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   transition: background-color 0.3s, color 0.3s;
+  overflow-x: clip;
 }
 
 /* Header */
 .header {
   width: 100%;
   padding: 16px 48px;
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -160,6 +162,166 @@ body {
 
 .header-cta:hover {
   opacity: 0.9;
+}
+
+/* Mobile Actions - hidden on desktop */
+.header-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Hamburger animation - transform to X when open */
+.hamburger.is-open .hamburger-line:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.hamburger.is-open .hamburger-line:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-page);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.mobile-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Lock body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.mobile-menu-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.mobile-menu-close svg,
+.mobile-menu-close svg line {
+  stroke: var(--text-primary);
+}
+
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  flex: 1;
+}
+
+.mobile-menu-link {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 16px 0;
+  letter-spacing: -0.03em;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-menu-link:hover {
+  opacity: 0.7;
+}
+
+.mobile-menu-footer {
+  padding: 24px;
+  padding-bottom: 40px;
+  padding-bottom: env(safe-area-inset-bottom, 40px);
+}
+
+.mobile-menu-cta {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--btn-primary-text);
+  background: var(--btn-primary-bg);
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 4px;
+  letter-spacing: -0.03em;
+  display: block;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-menu-cta:hover {
+  opacity: 0.9;
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 20px;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .header-cta-desktop {
+    display: none;
+  }
+
+  .header-mobile-actions {
+    display: flex;
+  }
 }
 
 
@@ -344,6 +506,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .content-carousel-graphic::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    mask-image: linear-gradient(to right, transparent, black);
+    -webkit-mask-image: linear-gradient(to right, transparent, black);
+    pointer-events: none;
+    z-index: 10;
+  }
 }
 
 .content-carousel {
@@ -357,8 +537,8 @@ body {
 
 .creative-card {
   flex-shrink: 0;
-  width: 140px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   background: #E5E5E5;
   border-radius: 16px;
   display: flex;
@@ -366,10 +546,18 @@ body {
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
+  overflow: hidden;
 }
 
 [data-theme="dark"] .creative-card {
   background: #3A3A3C;
+}
+
+.creative-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
 .creative-label {
@@ -382,6 +570,13 @@ body {
 
 [data-theme="dark"] .creative-label {
   color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 767px) {
+  .creative-card {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 /* Ads card animation transitions */
@@ -516,24 +711,23 @@ body {
 /* Headline */
 .headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 98px;
+  font-size: 6rem;
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
   margin-top: 32px;
   margin-bottom: 48px;
   color: var(--text-primary);
-  white-space: nowrap;
 }
 
 /* Subheadline */
 .subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 900px;
   margin: 0 auto 48px;
 }
@@ -553,7 +747,7 @@ body {
 
 .support-copy {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 40px;
+  font-size: 24px;
   font-weight: 500;
   letter-spacing: -0.05em;
   color: #000000;
@@ -571,6 +765,15 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@media (max-width: 600px) {
+  .support-copy-container {
+    padding: 24px 24px;
+  }
+  .support-copy {
+    font-size: 24px;
+  }
 }
 
 /* Risk Reversal */
@@ -648,7 +851,7 @@ body {
 
 .testimonial-bento-card {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   border-radius: 16px;
   padding: 32px;
   display: flex;
@@ -657,7 +860,7 @@ body {
 
 [data-theme="light"] .testimonial-bento-card {
   background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: none;
 }
 
 .testimonial-bento-card-wide {
@@ -824,7 +1027,7 @@ body {
 /* Footer Ghost Text */
 .footer-olympus-ghost {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 320px;
+  font-size: clamp(5rem, 20vw, 320px);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -908,15 +1111,31 @@ wistia-player:not(:defined) {
 /* Responsive */
 @media (max-width: 600px) {
   .hero {
-    padding: 24px 16px 60px;
+    padding: 16px 16px 40px;
+  }
+
+  .pre-video-headline {
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    padding: 6px 12px;
   }
 
   .headline {
-    font-size: 4rem;
+    font-size: 48px;
+    margin-top: 16px;
+    margin-bottom: 24px;
   }
 
   .subheadline {
-    font-size: 1.5rem;
+    font-size: 22px;
+    letter-spacing: -0.07em;
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+
+  .video-wrapper {
+    margin-top: 32px;
   }
 
   .description {
@@ -937,6 +1156,10 @@ wistia-player:not(:defined) {
     height: 96px;
     margin-bottom: 16px;
   }
+
+  .footer-olympus-ghost {
+    font-size: 5rem;
+  }
 }
 
 /* ==========================================
@@ -948,6 +1171,10 @@ wistia-player:not(:defined) {
   padding: 120px 24px;
 }
 
+.agents-section-inner {
+  margin-top: 240px;
+}
+
 .agents-header {
   text-align: center;
   margin-bottom: 64px;
@@ -955,7 +1182,7 @@ wistia-player:not(:defined) {
 
 .agents-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1.1;
@@ -965,11 +1192,11 @@ wistia-player:not(:defined) {
 
 .agents-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: #a0a0a0;
-  line-height: 38px;
+  line-height: 1.4;
   max-width: 700px;
   margin: 0 auto;
 }
@@ -998,7 +1225,7 @@ wistia-player:not(:defined) {
 }
 
 .agents-master-logo {
-  width: 320px;
+  width: 100%;
   height: auto;
   margin-bottom: 24px;
 }
@@ -1148,9 +1375,10 @@ wistia-player:not(:defined) {
 
 .agent-subtitle {
   font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  letter-spacing: -0.05em;
+  font-size: 1.25rem;
+  letter-spacing: -0.07em;
   color: var(--text-muted);
+  line-height: 1.4;
   margin: 0;
 }
 
@@ -1236,7 +1464,7 @@ wistia-player:not(:defined) {
 
 .features-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
@@ -1259,12 +1487,12 @@ wistia-player:not(:defined) {
 
 .features-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 700px;
   margin: 0 auto 64px;
 }
@@ -1317,12 +1545,8 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 600px) {
-  .features-headline {
-    font-size: 3rem;
-  }
-
   .features-subheadline {
-    font-size: 1.5rem;
+    font-size: 1.125rem;
   }
 
   .features-grid {
@@ -1331,6 +1555,34 @@ wistia-player:not(:defined) {
 
   .feature-graphic {
     height: 200px;
+    overflow: hidden;
+  }
+
+  /* Scale down gauges to fit all 3 on mobile - no wrapping */
+  .analytics-gauges {
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .stat-gauge {
+    flex: 0 0 auto;
+    max-width: 60px;
+  }
+
+  .gauge-container {
+    width: 38px;
+    height: 38px;
+  }
+
+  .gauge-value {
+    font-size: 0.7rem;
+  }
+
+  .gauge-label {
+    font-size: 0.4rem;
   }
 }
 
@@ -1490,6 +1742,34 @@ wistia-player:not(:defined) {
   letter-spacing: 0.12em;
 }
 
+/* Analytics gauges - responsive for mobile/tablet */
+@media (max-width: 768px) {
+  .analytics-gauges {
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .stat-gauge {
+    flex: 0 0 auto;
+    max-width: 100px;
+  }
+
+  .gauge-container {
+    width: 80px;
+    height: 80px;
+  }
+
+  .gauge-value {
+    font-size: 1.25rem;
+  }
+
+  .gauge-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+}
+
 /* How It Works Section */
 .how-it-works-section {
   max-width: 1300px;
@@ -1504,7 +1784,7 @@ wistia-player:not(:defined) {
 
 .how-it-works-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
@@ -1529,11 +1809,11 @@ wistia-player:not(:defined) {
 
 .how-it-works-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 700px;
   margin: 0 auto 24px;
   text-align: center;
@@ -1598,7 +1878,7 @@ wistia-player:not(:defined) {
 
 .step-title {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 8px;
@@ -1621,7 +1901,7 @@ wistia-player:not(:defined) {
 
 .step-description {
   font-family: 'Inter', sans-serif;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
   letter-spacing: -0.06em;
   color: var(--text-muted);
@@ -1685,6 +1965,7 @@ wistia-player:not(:defined) {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  margin: 30px 29px;
 }
 
 .browser-header {
@@ -1762,12 +2043,8 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 768px) {
-  .how-it-works-headline {
-    font-size: 3rem;
-  }
-
   .how-it-works-subheadline {
-    font-size: 1.5rem;
+    font-size: 1.125rem;
   }
 
   .how-it-works-steps {
@@ -1789,6 +2066,12 @@ wistia-player:not(:defined) {
     gap: 24px;
     padding: 24px;
     margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  /* Override the alternating layout for Build step on mobile */
+  .how-it-works-steps > .step-card:nth-child(2) {
+    flex-direction: column;
   }
 
   .step-card .step-content {
@@ -1797,7 +2080,11 @@ wistia-player:not(:defined) {
   }
 
   .step-card .step-image {
-    width: 100%;
+    width: 800px;
+    min-width: 800px;
+    height: 600px;
+    padding: 0;
+    margin: 0 auto;
   }
 
   .step-number {
@@ -1805,16 +2092,16 @@ wistia-player:not(:defined) {
     top: -10px;
   }
 
-  .step-title {
-    font-size: 2rem;
-  }
-
   .step-description {
     max-width: 100%;
   }
 
-  .step-image {
-    aspect-ratio: 8 / 7;
+  .step-card .step-image {
+    aspect-ratio: auto;
+  }
+
+  .browser-frame {
+    margin: 30px 29px;
   }
 }
 
@@ -1827,7 +2114,7 @@ wistia-player:not(:defined) {
 
 .faq-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
@@ -1921,10 +2208,6 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 600px) {
-  .faq-headline {
-    font-size: 3rem;
-  }
-
   .faq-question {
     font-size: 1.25rem;
     letter-spacing: -0.06em;
@@ -1940,6 +2223,18 @@ wistia-player:not(:defined) {
   .faq-answer p:last-child {
     margin-bottom: 20px;
   }
+
+  .solution-cards-subheadline {
+    font-size: 18px;
+  }
+
+  .problem-bento-subheadline {
+    font-size: 18px;
+  }
+
+  .agents-subheadline {
+    font-size: 18px;
+  }
 }
 
 /* ========================================
@@ -1952,61 +2247,95 @@ wistia-player:not(:defined) {
 }
 
 .founder-container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.founder-photo {
+  flex-shrink: 0;
+}
+
+.founder-photo img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.founder-divider {
+  width: 2px;
+  align-self: stretch;
+  background: linear-gradient(180deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  flex-shrink: 0;
+}
+
+.founder-content {
+  flex: 1;
 }
 
 .founder-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0 0 24px 0;
 }
 
 .founder-quote {
-  margin: 0 0 40px 0;
+  margin: 0 0 32px 0;
   padding: 0;
 }
 
 .founder-quote p {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.5;
-  color: var(--text-primary);
-  margin: 0;
+  font-style: normal;
+  letter-spacing: -0.07em;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 16px 0;
+}
+
+.founder-quote p:last-child {
+  margin-bottom: 0;
 }
 
 .founder-attribution {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.founder-dash {
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  color: var(--text-muted);
+  flex-direction: column;
+  gap: 4px;
 }
 
 .founder-name {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
 .founder-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--text-muted);
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.founder-title .gradient-text {
+  background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Founder Section Responsive */
@@ -2015,16 +2344,42 @@ wistia-player:not(:defined) {
     padding: 80px 20px;
   }
 
-  .founder-quote p {
-    font-size: 20px;
+  .founder-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
   }
 
-  .founder-name {
+  .founder-photo img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .founder-divider {
+    width: 60px;
+    height: 2px;
+    align-self: center;
+  }
+
+  .founder-headline {
+    font-size: 26px;
+  }
+
+  .founder-quote p {
     font-size: 18px;
   }
 
+  .founder-name {
+    font-size: 20px;
+  }
+
   .founder-title {
-    font-size: 16px;
+    font-size: 24px;
+  }
+
+  .founder-attribution {
+    align-items: center;
   }
 }
 
@@ -2044,7 +2399,7 @@ wistia-player:not(:defined) {
 
 .pricing-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
@@ -2065,12 +2420,12 @@ wistia-player:not(:defined) {
 
 .pricing-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 800px;
   margin: 0 auto 64px;
 }
@@ -2092,6 +2447,14 @@ wistia-player:not(:defined) {
   margin-bottom: 16px;
 }
 
+.revenue-label-muted {
+  color: var(--text-muted);
+}
+
+.revenue-label-primary {
+  color: var(--text-primary);
+}
+
 .revenue-input-wrapper {
   position: relative;
   display: flex;
@@ -2102,7 +2465,7 @@ wistia-player:not(:defined) {
   position: absolute;
   left: 20px;
   font-family: 'Inter', sans-serif;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: rgb(160, 160, 160);
   pointer-events: none;
@@ -2117,11 +2480,15 @@ wistia-player:not(:defined) {
   font-weight: 300;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  background: var(--bg-input);
+  background: rgb(20, 20, 20);
   border: 2px solid var(--border-input);
   border-radius: 4px;
   outline: none;
   transition: border-color 0.2s;
+}
+
+[data-theme="light"] .revenue-input {
+  background: rgb(250, 250, 250);
 }
 
 .revenue-input:focus {
@@ -2409,9 +2776,9 @@ wistia-player:not(:defined) {
 /* Implementation Fee */
 .pricing-card-implementation {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
   margin-bottom: 32px;
 }
@@ -2521,6 +2888,12 @@ wistia-player:not(:defined) {
   padding: 48px;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+  background: #1a1a1a;
+}
+
+[data-theme="light"] .pricing-card-enterprise {
+  background: #ffffff;
 }
 
 .pricing-card-enterprise::after {
@@ -2556,10 +2929,10 @@ wistia-player:not(:defined) {
 
 .enterprise-description {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.06em;
-  color: rgb(160, 160, 160);
+  letter-spacing: -0.07em;
+  color: var(--text-primary);
   line-height: 1.4;
   max-width: 600px;
   margin: 0;
@@ -2567,7 +2940,8 @@ wistia-player:not(:defined) {
 
 .pricing-card-enterprise .pricing-card-button {
   width: fit-content;
-  min-width: 360px;
+  min-width: 200px;
+  max-width: 100%;
 }
 
 .enterprise-right {
@@ -2575,6 +2949,7 @@ wistia-player:not(:defined) {
   z-index: 1;
   display: flex;
   align-items: center;
+  max-width: 100%;
 }
 
 .enterprise-price {
@@ -2588,12 +2963,8 @@ wistia-player:not(:defined) {
 
 /* Responsive Design */
 @media (max-width: 900px) {
-  .pricing-headline {
-    font-size: 4rem;
-  }
-
   .pricing-subheadline {
-    font-size: 22px;
+    font-size: 1.125rem;
   }
 
   .pricing-grid {
@@ -2610,10 +2981,11 @@ wistia-player:not(:defined) {
     grid-template-columns: 1fr;
     gap: 32px;
     text-align: left;
+    padding: 32px 24px;
   }
 
   .enterprise-right {
-    order: -1;
+    width: 100%;
   }
 
   .enterprise-price {
@@ -2622,6 +2994,8 @@ wistia-player:not(:defined) {
 
   .pricing-card-enterprise .pricing-card-button {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -2630,12 +3004,8 @@ wistia-player:not(:defined) {
     padding: 120px 24px 60px 24px;
   }
 
-  .pricing-headline {
-    font-size: 3rem;
-  }
-
   .pricing-subheadline {
-    font-size: 18px;
+    font-size: 1.125rem;
     margin-bottom: 48px;
   }
 
@@ -2644,7 +3014,7 @@ wistia-player:not(:defined) {
   }
 
   .revenue-label {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .revenue-input {
@@ -2654,7 +3024,7 @@ wistia-player:not(:defined) {
 
   .revenue-currency-symbol {
     left: 16px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .pricing-grid {
@@ -2703,7 +3073,7 @@ wistia-player:not(:defined) {
 
 .cta-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
@@ -2731,10 +3101,11 @@ wistia-player:not(:defined) {
 
 .cta-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 32px;
+  font-size: 1.375rem;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.07em;
   color: #000000;
+  line-height: 1.2;
   margin-bottom: 40px;
 }
 
@@ -2765,12 +3136,11 @@ wistia-player:not(:defined) {
 
 @media (max-width: 600px) {
   .cta-headline {
-    font-size: 3rem;
     white-space: normal;
   }
 
   .cta-subheadline {
-    font-size: 1.5rem;
+    font-size: 1.125rem;
   }
 
   .cta-section-button {
@@ -2811,10 +3181,10 @@ wistia-player:not(:defined) {
 
 .problem-bento-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  line-height: 1.3;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  line-height: 1.4;
   color: rgb(160, 160, 160);
   max-width: 800px;
   margin: 0 auto;
@@ -2987,6 +3357,12 @@ wistia-player:not(:defined) {
   transform: translateX(30px);
 }
 
+@media (max-width: 600px) {
+  .toggle-header {
+    font-size: 20px;
+  }
+}
+
 /* Dark tall card */
 .problem-bento-card-dark {
   background: #000000;
@@ -3069,6 +3445,31 @@ wistia-player:not(:defined) {
   stroke: #FFFFFF !important;
 }
 
+@media (max-width: 600px) {
+  /* Vertical layout for red lock card */
+  .problem-bento-card-blue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+
+  .problem-bento-card-blue .problem-bento-card-title {
+    max-width: 100%;
+    padding-right: 0;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .problem-bento-lock-icon {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 200px;
+    height: 200px;
+  }
+}
+
 /* Small bottom card */
 .problem-bento-card-small {
   padding: 32px 48px;
@@ -3077,9 +3478,10 @@ wistia-player:not(:defined) {
 
 .problem-bento-card-text-small {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
   color: var(--text-primary);
   margin: 0;
 }
@@ -3095,7 +3497,7 @@ wistia-player:not(:defined) {
   font-weight: 500;
   letter-spacing: -0.05em;
   color: var(--text-primary);
-  line-height: 1.15;
+  line-height: 1.1;
   margin: 0;
 }
 
@@ -3189,7 +3591,7 @@ wistia-player:not(:defined) {
   justify-content: center;
   gap: 16px;
   width: 100%;
-  padding: 40px 0 20px;
+  padding: 20px 0 20px;
 }
 
 .battery-percentage {
@@ -3277,10 +3679,6 @@ wistia-player:not(:defined) {
     margin-top: 24px;
   }
 
-  .problem-bento-headline {
-    font-size: 3.5rem;
-  }
-
   .problem-bento-card-title {
     font-size: 2rem;
   }
@@ -3291,6 +3689,26 @@ wistia-player:not(:defined) {
 
   .problem-bento-battery {
     max-width: 240px;
+  }
+}
+
+@media (max-width: 600px) {
+  .problem-bento-headline {
+    font-size: 40px;
+  }
+
+  .problem-bento-card {
+    padding: 24px;
+  }
+
+  .problem-bento-card-tall {
+    min-height: auto;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .battery-percentage {
+    font-size: 2.5rem;
   }
 }
 
@@ -3307,7 +3725,7 @@ wistia-player:not(:defined) {
 
 .problem-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
@@ -3356,11 +3774,6 @@ wistia-player:not(:defined) {
   .problem-card {
     padding: 48px 24px;
   }
-
-  .problem-headline {
-    font-size: 4rem;
-    margin-bottom: 24px;
-  }
 }
 
 /* Solution Section */
@@ -3380,13 +3793,19 @@ wistia-player:not(:defined) {
 
 .solution-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: 96px;
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 0.9;
   margin-bottom: 24px;
   text-align: center;
   color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .solution-headline {
+    font-size: 56px;
+  }
 }
 
 /* Shiny Text Animation */
@@ -3424,12 +3843,12 @@ wistia-player:not(:defined) {
 
 .solution-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   text-align: center;
   color: rgb(160, 160, 160);
-  line-height: 1.3;
+  line-height: 1.4;
   margin-bottom: 48px;
   max-width: 700px;
   margin-left: auto;
@@ -3444,11 +3863,26 @@ wistia-player:not(:defined) {
 /* Monitor Display */
 .monitor-display-container {
   position: relative;
-  max-width: 1300px;
+  width: 90%;
+  max-width: 1200px;
   margin: 0 auto 64px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  .monitor-display-container {
+    width: 220%;
+    margin-left: 0;
+  }
+
+  .monitor-video-container {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
 }
 
 .monitor-display {
@@ -3507,18 +3941,65 @@ wistia-player:not(:defined) {
   border: 8px solid rgba(200, 200, 200, 0.4);
 }
 
+@media (max-width: 600px) {
+  /* Reduced by factor of 3 for mobile */
+  .macos-menu-bar {
+    height: 1%;
+    font-size: clamp(3px, 0.27vw, 4px);
+    padding: 0 clamp(2px, 0.27vw, 4px);
+  }
+
+  .menu-bar-left,
+  .menu-bar-right {
+    gap: clamp(3px, 0.33vw, 5px);
+  }
+
+  .apple-logo {
+    width: clamp(3px, 0.27vw, 4px);
+    height: clamp(3px, 0.27vw, 4px);
+  }
+
+  /* Traffic lights reduced by factor of 3 */
+  .traffic-light {
+    width: 3px;
+    height: 3px;
+  }
+
+  .macos-traffic-lights {
+    gap: 2px;
+  }
+
+  /* Title bar reduced by factor of 3 */
+  .macos-title-bar {
+    height: 9px;
+    padding: 0 3px;
+    border-radius: 3px 3px 0 0;
+    border-bottom-width: 0.33px;
+  }
+
+  .macos-title-text {
+    font-size: 4px;
+  }
+
+  /* Window reduced by factor of 3 */
+  .macos-window {
+    border-width: 3px;
+    border-radius: 5px;
+  }
+}
+
 /* macOS Title Bar */
 .macos-title-bar {
   width: 100%;
-  height: 28px;
+  height: 14px;
   background: rgba(60, 60, 60, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px 8px 0 0;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px 4px 0 0;
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 5px;
   flex-shrink: 0;
   position: relative;
 }
@@ -3533,7 +4014,7 @@ wistia-player:not(:defined) {
   left: 50%;
   transform: translateX(-50%);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-  font-size: 11px;
+  font-size: 5.5px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -3545,12 +4026,12 @@ wistia-player:not(:defined) {
 /* macOS Traffic Lights */
 .macos-traffic-lights {
   display: flex;
-  gap: 6px;
+  gap: 3px;
 }
 
 .traffic-light {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -3562,17 +4043,17 @@ wistia-player:not(:defined) {
 
 .traffic-light-red {
   background: #FF5F57;
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border: 0.25px solid rgba(0, 0, 0, 0.1);
 }
 
 .traffic-light-yellow {
   background: #FFBD2E;
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border: 0.25px solid rgba(0, 0, 0, 0.1);
 }
 
 .traffic-light-green {
   background: #28C840;
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border: 0.25px solid rgba(0, 0, 0, 0.1);
 }
 
 /* macOS Window Content */
@@ -3607,16 +4088,16 @@ wistia-player:not(:defined) {
   top: 1.8%;
   left: 2.3%;
   right: 2.3%;
-  height: 3%;
+  height: 2.1%;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 clamp(6px, 0.8vw, 13px);
+  padding: 0 clamp(4.2px, 0.56vw, 9.1px);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-size: clamp(9px, 0.8vw, 11px);
+  font-size: clamp(6.3px, 0.56vw, 7.7px);
   color: #000000;
   z-index: 10;
 }
@@ -3630,7 +4111,7 @@ wistia-player:not(:defined) {
 .menu-bar-right {
   display: flex;
   align-items: center;
-  gap: clamp(10px, 1vw, 16px);
+  gap: clamp(7px, 0.7vw, 11.2px);
 }
 
 .menu-item {
@@ -3647,8 +4128,8 @@ wistia-player:not(:defined) {
 }
 
 .apple-logo {
-  width: clamp(10px, 0.8vw, 13px);
-  height: clamp(10px, 0.8vw, 13px);
+  width: clamp(7px, 0.56vw, 9.1px);
+  height: clamp(7px, 0.56vw, 9.1px);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000000'%3E%3Cpath d='M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5M13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
@@ -3686,7 +4167,7 @@ wistia-player:not(:defined) {
 
 .solution-cards-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1.1;
@@ -3706,12 +4187,12 @@ wistia-player:not(:defined) {
 
 .solution-cards-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 700px;
   margin: 0 auto 64px;
 }
@@ -3746,7 +4227,7 @@ wistia-player:not(:defined) {
 
 .solution-card-title {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 2.5rem;
+  font-size: 32px;
   font-weight: 500;
   letter-spacing: -0.05em;
   color: var(--text-primary);
@@ -3769,11 +4250,11 @@ wistia-player:not(:defined) {
 
 .solution-card-description {
   font-family: 'Inter', sans-serif;
-  font-size: 24px;
+  font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.07em;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1;
 }
 
 .solution-card-header {
@@ -3926,12 +4407,10 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 768px) {
-  .solution-headline {
-    font-size: 4rem;
-  }
-
   .solution-subheadline {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+    letter-spacing: -0.08em;
+    line-height: 1.2;
   }
 
   .solution-cards {
@@ -3940,6 +4419,11 @@ wistia-player:not(:defined) {
 
   .solution-card {
     padding: 32px 24px;
+  }
+
+  .solution-card-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -3953,11 +4437,11 @@ wistia-player:not(:defined) {
 
 .speed-stat-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 400;
+  font-size: 5.5rem;
+  font-weight: 600;
   letter-spacing: -0.05em;
   color: #ffffff;
-  margin: 0 auto 80px auto;
+  margin: 0 auto 100px auto;
   line-height: 1;
   max-width: 700px;
 }
@@ -4079,13 +4563,13 @@ wistia-player:not(:defined) {
 
 .speed-stat-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 700px;
-  margin: -40px auto 0;
+  margin: -20px auto 0;
 }
 
 .speed-stat-highlight {
@@ -4103,11 +4587,15 @@ wistia-player:not(:defined) {
   }
 
   .speed-stat-headline {
-    margin-bottom: 24px;
+    font-size: 40px;
+    margin-bottom: 44px;
   }
 
   .speed-stat-subheadline {
-    font-size: 18px;
+    font-size: 1.125rem;
+    letter-spacing: -0.08em;
+    line-height: 1.2;
+    margin-top: 20px;
   }
 }
 
@@ -4134,7 +4622,7 @@ wistia-player:not(:defined) {
 
 .comparison-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1.1;
@@ -4145,14 +4633,15 @@ wistia-player:not(:defined) {
 
 .comparison-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: var(--text-muted);
   text-align: center;
+  line-height: 1.4;
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .comparison-card {
@@ -4373,11 +4862,12 @@ wistia-player:not(:defined) {
 
 .cb-card-probability h3 {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 48px;
+  font-size: 28px;
   font-weight: 700;
-  color: #000000;
+  color: var(--text-primary);
   margin-bottom: 8px;
   letter-spacing: -0.05em;
+  line-height: 1.1;
 }
 
 .cb-card-probability p {
@@ -4533,6 +5023,20 @@ wistia-player:not(:defined) {
   overflow: hidden;
 }
 
+.cb-card-velocity h3 {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.cb-card-velocity h3 .highlight-black {
+  color: var(--text-primary);
+}
+
 .cb-velocity-stack {
   display: flex;
   flex-direction: column;
@@ -4560,14 +5064,40 @@ wistia-player:not(:defined) {
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .cb-velocity-row.live .cb-velocity-status {
-  color: #3b82f6;
+  color: #ffffff;
+}
+
+[data-theme="light"] .cb-velocity-row.live .cb-velocity-status {
+  color: #000000;
 }
 
 .cb-velocity-row.next .cb-velocity-status {
   color: var(--text-primary);
+}
+
+.recording-indicator {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  animation: blink 1.5s ease-in-out infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .cb-velocity-row.fade {
@@ -4591,16 +5121,36 @@ wistia-player:not(:defined) {
   right: 0;
   height: 48px;
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-list);
   border-radius: 8px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 16px;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.cb-campaign-card-content {
+  display: flex;
+  align-items: center;
+}
+
+.cb-campaign-logo {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  color: var(--text-primary);
+}
+
+.cb-campaign-logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .cb-campaign-card:nth-child(1) {
@@ -4759,13 +5309,13 @@ wistia-player:not(:defined) {
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.05em;
-  line-height: 0.9;
+  line-height: 1.1;
   margin: 0;
   text-align: left;
 }
 
 .cb-card-strip .cb-muted-text {
-  opacity: 0.7;
+  color: var(--text-muted);
 }
 
 .cb-card-strip .anxiety {
@@ -4793,12 +5343,8 @@ wistia-player:not(:defined) {
     padding: 80px 16px;
   }
 
-  .comparison-headline {
-    font-size: 3rem;
-  }
-
   .comparison-subheadline {
-    font-size: 16px;
+    font-size: 1.125rem;
   }
 
   .cb-card {
@@ -4810,7 +5356,8 @@ wistia-player:not(:defined) {
   }
 
   .cb-card-probability h3 {
-    font-size: 32px;
+    font-size: 28px;
+    line-height: 1.1;
   }
 
   .cb-card-probability p {
@@ -4840,18 +5387,28 @@ wistia-player:not(:defined) {
   }
 
   .cb-them-square {
-    width: 100%;
-    height: 80px;
-    font-size: 24px;
+    width: 300px;
+    height: 140px;
+    font-size: 32px;
   }
 
   .cb-olympus-grid {
     grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    width: 100%;
   }
 
   .cb-test-rect {
-    width: auto;
-    font-size: 11px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .cb-card-velocity h3 {
+    font-size: 28px;
+    line-height: 1.1;
   }
 
   .cb-velocity-status {
@@ -4863,7 +5420,7 @@ wistia-player:not(:defined) {
   }
 
   .cb-certainty-subhead {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   .cb-card-strip {
@@ -4871,7 +5428,8 @@ wistia-player:not(:defined) {
   }
 
   .cb-card-strip p {
-    font-size: 18px;
+    font-size: 40px;
+    line-height: 1.1;
   }
 }
 
@@ -5116,7 +5674,7 @@ wistia-player:not(:defined) {
 
 .upside-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1.1;
@@ -5127,14 +5685,15 @@ wistia-player:not(:defined) {
 
 .upside-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
   text-align: center;
+  line-height: 1.4;
   max-width: 700px;
   margin: 0 auto 64px;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .upside-subheadline .highlight {
@@ -5231,11 +5790,11 @@ wistia-player:not(:defined) {
 
 .upside-card-description {
   font-family: 'Inter', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.07em;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .upside-card-description-large {
@@ -5298,8 +5857,18 @@ wistia-player:not(:defined) {
 
 /* Phone card specific styles */
 .upside-card-phone .upside-card-title {
-  font-size: 2.5rem;
+  font-size: 40px;
   color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .upside-card-phone .upside-card-title {
+    font-size: 28px;
+  }
+}
+
+.upside-card-phone .upside-card-icon {
+  display: none;
 }
 
 .upside-card-phone .upside-card-title .theme-text {
@@ -5503,6 +6072,10 @@ wistia-player:not(:defined) {
   font-size: 3rem;
 }
 
+.calendar-text .upside-card-description {
+  line-height: 1.4;
+}
+
 /* ==========================================
    PHONE CARD / TECH CARD
    ========================================== */
@@ -5515,12 +6088,16 @@ wistia-player:not(:defined) {
 
 .phone-card-content {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   height: 100%;
+  gap: 40px;
 }
 
 .phone-text-side {
   flex: 1;
+  text-align: left;
 }
 
 .phone-visual-side {
@@ -5798,7 +6375,8 @@ wistia-player:not(:defined) {
   padding: 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .telegram-text-side .upside-card-title {
@@ -5808,12 +6386,14 @@ wistia-player:not(:defined) {
 .telegram-visual-side {
   flex: 1;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .telegram-iphone {
   position: absolute;
-  top: 20px;
+  top: 30px;
   right: 20px;
   width: 350px;
 }
@@ -5838,10 +6418,10 @@ wistia-player:not(:defined) {
 /* Telegram message bubbles overlay - base positioning */
 .telegram-messages {
   position: absolute;
-  top: 16%;
+  top: 12%;
   left: 6%;
   right: 6%;
-  bottom: 54%;
+  bottom: 56%;
   flex-direction: column;
   justify-content: flex-end;
   gap: 5px;
@@ -5960,19 +6540,390 @@ wistia-player:not(:defined) {
 @media (max-width: 600px) {
   .upside-section {
     padding: 80px 16px;
+    overflow-x: hidden;
   }
 
-  .upside-headline {
-    font-size: 2rem;
+  .upside-container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .upside-bento-grid {
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .upside-subheadline {
-    font-size: 1rem;
+    font-size: 1.125rem;
+    letter-spacing: -0.07em;
+    line-height: 1.4;
     margin-bottom: 40px;
   }
 
   .upside-card-row {
     grid-template-columns: 1fr;
+    max-width: 100%;
+    overflow: visible;
+    min-height: auto;
+    flex: none;
+  }
+
+  /* Constrain ALL upside cards on mobile */
+  .upside-card {
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+  }
+
+  .upside-column-left,
+  .upside-column-right {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Reduce text sizes on mobile to prevent overflow */
+  .upside-card-title {
+    font-size: 2rem;
+    line-height: 1.1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .upside-card-description {
+    font-size: 1.125rem;
+    letter-spacing: -0.07em;
+    line-height: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Constrain telegram card on mobile */
+  .upside-card-telegram {
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-height: 450px;
+  }
+
+  /* Stack telegram card content vertically */
+  .telegram-card-content {
+    flex-direction: column;
+    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 450px;
+  }
+
+  /* Text section - left aligned, proper sizing */
+  .telegram-text-side {
+    padding: 32px 16px 8px 16px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 1;
+    flex-basis: auto;
+  }
+
+  .telegram-text-side .upside-card-title {
+    font-size: 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .telegram-text-side .upside-card-description {
+    font-size: 1.125rem;
+    letter-spacing: -0.07em;
+    line-height: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Phone/integrations card on mobile */
+  .upside-card-phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .upside-card-phone .upside-card-icon {
+    display: none;
+  }
+
+  .phone-card-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-visual-side {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    order: 1;
+  }
+
+  .integrations-grid {
+    grid-template-columns: repeat(2, 90px);
+    grid-template-rows: repeat(2, 90px);
+    gap: 10px;
+    transform: scale(1);
+  }
+
+  .integration-icon {
+    padding: 16px;
+  }
+
+  .integration-icon img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .integration-icon-center {
+    width: 80px;
+    height: 80px;
+  }
+
+  .phone-text-side {
+    width: 100%;
+    text-align: center;
+    order: 2;
+  }
+
+  .phone-text-side .upside-card-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Calendar card on mobile - ensure proper sizing and spacing */
+  .upside-card-calendar {
+    min-height: auto;
+    height: auto;
+  }
+
+  .calendar-text {
+    margin-top: 16px;
+  }
+
+  .calendar-text .upside-card-title {
+    font-size: 2rem;
+  }
+
+  .calendar-text .upside-card-description {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Calendar UI mobile adjustments */
+  .calendar-ui {
+    padding: 32px 24px 24px 24px;
+  }
+
+  .calendar-month {
+    font-size: 1.5rem;
+    margin-left: 8px;
+  }
+
+  .calendar-nav {
+    gap: 12px;
+    margin-right: 8px;
+  }
+
+  .calendar-nav-arrow {
+    font-size: 2rem;
+  }
+
+  .calendar-days-header span {
+    font-size: 0.8rem;
+  }
+
+  .calendar-grid span {
+    font-size: 1rem;
+    padding: 2px;
+  }
+
+  /* Contract and ownership cards on mobile */
+  .upside-card-contract,
+  .upside-card-ownership {
+    position: relative;
+    padding: 24px;
+    min-height: 250px;
+    height: auto;
+  }
+
+  .upside-card-contract .upside-card-title,
+  .upside-card-ownership .upside-card-title {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .upside-card-contract .upside-card-description,
+  .upside-card-ownership .upside-card-description {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Visual section - fixed height container to clip iPhone */
+  .telegram-visual-side {
+    height: 350px;
+    min-height: 350px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* iPhone - centered, top visible, bottom clipped by card */
+  .telegram-iphone {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    width: 240px;
+    max-width: calc(100% - 48px);
+  }
+
+  /* Messages - ensure they fit inside phone on mobile */
+  .telegram-messages {
+    top: 18%;
+    left: 8%;
+    right: 8%;
+    bottom: 40%;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  .telegram-msg {
+    max-width: 65%;
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
+
+/* ==========================================
+   RESPONSIVE - UPSIDE SECTION (VERY SMALL SCREENS)
+   ========================================== */
+
+@media (max-width: 375px) {
+  /* Further reduce section padding on very small screens */
+  .upside-section {
+    padding: 60px 12px;
+  }
+
+  /* Further reduce card padding */
+  .upside-card {
+    padding: 20px;
+  }
+
+  /* Aggressive text size reductions */
+  .upside-card-title {
+    font-size: 1.5rem;
+  }
+
+  .upside-card-description {
+    font-size: 0.9375rem;
+  }
+
+  /* Integration grid - further reduce for very small screens */
+  .integrations-grid {
+    grid-template-columns: repeat(2, 75px);
+    grid-template-rows: repeat(2, 75px);
+    gap: 6px;
+  }
+
+  .integration-icon {
+    padding: 12px;
+  }
+
+  .integration-icon img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .integration-icon-center {
+    width: 65px;
+    height: 65px;
+  }
+
+  /* Telegram iPhone - smaller on very small screens, stay centered */
+  .telegram-iphone {
+    width: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Calendar text sizes */
+  .calendar-text .upside-card-title {
+    font-size: 1.5rem;
+  }
+
+  .calendar-text .upside-card-description {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  /* Contract and ownership cards */
+  .upside-card-contract .upside-card-title,
+  .upside-card-ownership .upside-card-title {
+    font-size: 1.25rem;
+  }
+
+  .upside-card-contract .upside-card-description,
+  .upside-card-ownership .upside-card-description {
+    font-size: 0.875rem;
+  }
+
+  /* Phone card text */
+  .phone-text-side .upside-card-title {
+    font-size: 1.25rem;
+  }
+
+  /* Telegram card text */
+  .telegram-text-side .upside-card-title {
+    font-size: 1.5rem;
+  }
+
+  .telegram-text-side .upside-card-description {
+    font-size: 1rem;
+  }
+
+  /* Calendar UI very small screen adjustments */
+  .calendar-ui {
+    padding: 24px 16px 16px 16px;
+  }
+
+  .calendar-month {
+    font-size: 1.25rem;
+    margin-left: 4px;
+  }
+
+  .calendar-nav {
+    gap: 8px;
+    margin-right: 4px;
+  }
+
+  .calendar-nav-arrow {
+    font-size: 1.5rem;
+  }
+
+  .calendar-days-header span {
+    font-size: 0.7rem;
+  }
+
+  .calendar-grid span {
+    font-size: 0.875rem;
+    padding: 1px;
   }
 }
 
@@ -6000,7 +6951,7 @@ wistia-player:not(:defined) {
 
 .results-headline {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1.1;
@@ -6011,14 +6962,15 @@ wistia-player:not(:defined) {
 
 .results-subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.05em;
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
   text-align: center;
+  line-height: 1.4;
   max-width: 800px;
   margin: 0 auto 64px;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 /* Carousel Wrapper - Full width */
@@ -6050,6 +7002,13 @@ wistia-player:not(:defined) {
 .results-carousel-wrapper::after {
   right: 0;
   background: linear-gradient(to left, var(--bg-page) 0%, var(--bg-page) 20%, transparent 100%);
+}
+
+@media (max-width: 600px) {
+  .results-carousel-wrapper::before,
+  .results-carousel-wrapper::after {
+    display: none;
+  }
 }
 
 .results-carousel-wrapper:active {
@@ -6107,12 +7066,10 @@ wistia-player:not(:defined) {
     padding: 80px 0;
   }
 
-  .results-headline {
-    font-size: 3rem;
-  }
-
   .results-subheadline {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
+    letter-spacing: -0.07em;
+    line-height: 1.4;
     margin-bottom: 40px;
   }
 
@@ -6126,12 +7083,10 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 600px) {
-  .results-headline {
-    font-size: 2rem;
-  }
-
   .results-subheadline {
-    font-size: 1rem;
+    font-size: 1.125rem;
+    letter-spacing: -0.07em;
+    line-height: 1.4;
   }
 
   .screenshot-item {
@@ -6230,7 +7185,7 @@ wistia-player:not(:defined) {
   height: 48px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+  border-radius: 4px;
   color: #ffffff;
   cursor: pointer;
   display: flex;

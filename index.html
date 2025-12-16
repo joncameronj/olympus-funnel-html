@@ -42,32 +42,73 @@
       <div class="header-logo">
         <img src="/assets/Etho Logo.svg" alt="Etho" width="80" height="32">
       </div>
+
+      <!-- Desktop nav (hidden on mobile) -->
       <nav class="header-nav">
         <a href="#problem" class="header-nav-link">Problem</a>
-        <a href="#compare" class="header-nav-link">Compare</a>
         <a href="#product" class="header-nav-link">Product</a>
+        <a href="#results" class="header-nav-link">Proof</a>
         <a href="#features" class="header-nav-link">Features</a>
         <a href="#process" class="header-nav-link">Process</a>
+        <a href="#compare" class="header-nav-link">Compare</a>
         <a href="#pricing" class="header-nav-link">Pricing</a>
       </nav>
-      <a href="/calendar.html" class="header-cta">Book Demo</a>
+
+      <!-- Desktop CTA (hidden on mobile) -->
+      <a href="/calendar.html" class="header-cta header-cta-desktop">Book Demo</a>
+
+      <!-- Mobile: CTA + Hamburger (hidden on desktop) -->
+      <div class="header-mobile-actions">
+        <a href="/calendar.html" class="header-cta">Book Demo</a>
+        <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-header">
+      <div class="header-logo">
+        <img src="/assets/Etho Logo.svg" alt="Etho" width="80" height="32">
+      </div>
+      <button class="mobile-menu-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav">
+      <a href="#problem" class="mobile-menu-link">Problem</a>
+      <a href="#product" class="mobile-menu-link">Product</a>
+      <a href="#compare" class="mobile-menu-link">Compare</a>
+      <a href="#results" class="mobile-menu-link">Proof</a>
+      <a href="#features" class="mobile-menu-link">Features</a>
+      <a href="#process" class="mobile-menu-link">Process</a>
+      <a href="#pricing" class="mobile-menu-link">Pricing</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="/calendar.html" class="mobile-menu-cta">Book Your Demo</a>
+    </div>
+  </div>
 
   <!-- Hero Section -->
   <main class="hero">
 
     <!-- Pre-Video Headline -->
     <p class="pre-video-headline">
-      For Practitioners Who Want Grow Faster & Scale Smarter
+      For Practitioners Are Done With Agencies & Guesswork
     </p>
 
     <!-- Headline -->
-    <h1 class="headline">The <q>Presold</q> Patient System</h1>
+    <h1 class="headline">How We Install Predictable <q>Presold</q> Patient Flow.</h1>
 
     <!-- Subheadline -->
     <p class="subheadline">
-      Olympus is the only AI software designed to attract patients who are ready to invest in their health... so you never have to think about marketing again.
+      Olympus plugs into your practice in just 7 days or less. Runs on autopilot. You focus on care. Olympus handles growth.
     </p>
 
     <!-- CTA Button -->
@@ -137,11 +178,96 @@
     </div>
   </section>
 
+  <!-- Results Carousel Section -->
+  <section class="results-section">
+    <div class="results-container">
+      <h2 class="results-headline">The results that built Olympus.</h2>
+      <p class="results-subheadline">These screenshots are from Etho agency clients — the practitioners we worked with before Olympus existed. The systems and frameworks that drove these wins are now inside the platform.</p>
+    </div>
+
+    <div class="results-carousel-wrapper">
+      <div class="results-carousel" data-carousel="results">
+        <div class="results-track">
+          <div class="screenshot-item" data-index="0">
+            <img src="/assets/testimonials/Result 1.svg" alt="Client result screenshot 1" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="1">
+            <img src="/assets/testimonials/Result 2.svg" alt="Client result screenshot 2" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="2">
+            <img src="/assets/testimonials/Result 3.svg" alt="Client result screenshot 3" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="3">
+            <img src="/assets/testimonials/Result 4.svg" alt="Client result screenshot 4" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="4">
+            <img src="/assets/testimonials/Result 5.svg" alt="Client result screenshot 5" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="5">
+            <img src="/assets/testimonials/Result 6.svg" alt="Client result screenshot 6" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="6">
+            <img src="/assets/testimonials/Result 7.svg" alt="Client result screenshot 7" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="7">
+            <img src="/assets/testimonials/Result 8.svg" alt="Client result screenshot 8" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="8">
+            <img src="/assets/testimonials/Result 9.svg" alt="Client result screenshot 9" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="9">
+            <img src="/assets/testimonials/Result 10.svg" alt="Client result screenshot 10" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="10">
+            <img src="/assets/testimonials/Result 11.svg" alt="Client result screenshot 11" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="11">
+            <img src="/assets/testimonials/Result 12.svg" alt="Client result screenshot 12" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="12">
+            <img src="/assets/testimonials/Result 13.svg" alt="Client result screenshot 13" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="13">
+            <img src="/assets/testimonials/Result 14.svg" alt="Client result screenshot 14" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="14">
+            <img src="/assets/testimonials/Result 15.svg" alt="Client result screenshot 15" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="15">
+            <img src="/assets/testimonials/Result 16.svg" alt="Client result screenshot 16" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="16">
+            <img src="/assets/testimonials/Result 17.svg" alt="Client result screenshot 17" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="17">
+            <img src="/assets/testimonials/Result 18.svg" alt="Client result screenshot 18" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="18">
+            <img src="/assets/testimonials/Result 19.svg" alt="Client result screenshot 19" loading="lazy">
+          </div>
+          <div class="screenshot-item" data-index="19">
+            <img src="/assets/testimonials/Result 20.svg" alt="Client result screenshot 20" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-container">
+      <button class="see-more-results-btn" id="seeMoreResultsBtn" aria-haspopup="dialog">
+        See More Results
+      </button>
+    </div>
+
+    <div class="results-container">
+      <p class="results-disclaimer">All screenshots from Etho agency engagements (2023-2024). Individual results vary.</p>
+    </div>
+  </section>
+
   <!-- Problem Bento Section -->
   <section id="problem" class="problem-bento-section">
     <div class="problem-bento-container">
       <div class="problem-bento-header">
-        <h2 class="problem-bento-headline">What if the model itself was the <br><span class="problem-bento-headline-red">problem?</span></h2>
+        <h1 class="problem-bento-headline">What if the model itself was the <span class="problem-bento-headline-red">problem?</span></h1>
         <p class="problem-bento-subheadline">More <span class="problem-bento-subheadline-highlight">competition.</span> Higher <span class="problem-bento-subheadline-highlight">ad costs.</span> Slower <span class="problem-bento-subheadline-highlight">timelines.</span> Tighter <span class="problem-bento-subheadline-highlight">margins.</span> The math stopped working years ago. No one offered you a better option. <span class="problem-bento-subheadline-highlight">Until now.</span></p>
       </div>
 
@@ -306,6 +432,72 @@
         </div>
       </div>
 
+      <!-- Olympus Agents Section -->
+      <div class="agents-section-inner">
+        <div class="agents-header">
+          <h2 class="agents-headline">One brain. Seven agents. Zero prompting. No payroll.</h2>
+          <p class="agents-subheadline">Olympus is your "marketing director" that comes with its own trained AI employees. The platform that replaces a $40k/mo internal department - all without hiring, training or managing staff.</p>
+        </div>
+        <div class="agents-container">
+          <!-- Left: Master Olympus Card -->
+          <div class="agents-master-card">
+            <img src="olympus-icons/Olympus Horizontal Lockup - DARK.svg" alt="Olympus" class="agents-master-logo">
+            <p class="agents-master-desc">Master agent that manages all of your subagents to help your practice grow faster & scale smarter.</p>
+            <div class="agents-master-count">7</div>
+            <p class="agents-master-label">agents at your command</p>
+          </div>
+
+          <!-- Right: Agent Cards Grid -->
+          <div class="agents-grid">
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="system-solid-126-verified-hover-verified"></div>
+              <div class="agent-icon-light lottie-container" data-animation="system-solid-126-verified-hover-verified"></div>
+              <h3 class="agent-title">Brand.</h3>
+              <p class="agent-subtitle">Develops your brand, through your content and feedback</p>
+            </div>
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="system-solid-121-bulb-hover-bulb"></div>
+              <div class="agent-icon-light lottie-container" data-animation="system-solid-121-bulb-hover-bulb"></div>
+              <h3 class="agent-title">Think.</h3>
+              <p class="agent-subtitle">Deep market intelligence, brainstorming and creating offers</p>
+            </div>
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="system-solid-114-edit-pencil-rename-hover-pinch"></div>
+              <div class="agent-icon-light lottie-container" data-animation="system-solid-114-edit-pencil-rename-hover-pinch"></div>
+              <h3 class="agent-title">Write.</h3>
+              <p class="agent-subtitle">Writes sales copy for everything, at the <b>same time</b></p>
+            </div>
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="system-solid-169-view-in-ar-hover-ar"></div>
+              <div class="agent-icon-light lottie-container" data-animation="system-solid-169-view-in-ar-hover-ar"></div>
+              <h3 class="agent-title">Build.</h3>
+              <p class="agent-subtitle">Builds sales pages, funnels and nurture sequences <b>in seconds</b></p>
+            </div>
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="create-icon"></div>
+              <div class="agent-icon-light lottie-container" data-animation="create-icon"></div>
+              <h3 class="agent-title">Create.</h3>
+              <p class="agent-subtitle">Creates ad creative and no-touch sales video assets</p>
+            </div>
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="system-solid-33-speed-hover-speed"></div>
+              <div class="agent-icon-light lottie-container" data-animation="system-solid-33-speed-hover-speed"></div>
+              <h3 class="agent-title">Drive.</h3>
+              <p class="agent-subtitle">Installs, launches, manages and optimizes practice ads</p>
+            </div>
+            <div class="agent-card">
+              <div class="agent-icon-dark lottie-container" data-animation="system-solid-10-analytics-hover-analytics"></div>
+              <div class="agent-icon-light lottie-container" data-animation="system-solid-10-analytics-hover-analytics"></div>
+              <h3 class="agent-title">Measure.</h3>
+              <p class="agent-subtitle">Data scientist proactively fix constraints with real-time data</p>
+            </div>
+            <div class="agent-card agent-card-tagline">
+              <p class="agents-tagline-text">AI without prompting.<br><span class="agents-tagline-highlight">Results without hiring.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Speed Stat Section -->
       <div class="speed-stat-section">
         <h1 class="speed-stat-headline">From months to minutes.</h1>
@@ -443,6 +635,9 @@
           <!-- Card 6: Wide bottom - Tech -->
           <div class="upside-card upside-card-wide upside-card-phone">
             <div class="phone-card-content">
+              <div class="upside-card-icon">
+                <img class="olympus-icon-light" src="olympus-icons/olympus-line-light.svg" alt="Olympus" style="width: 64px; height: 64px;">
+              </div>
               <div class="phone-text-side">
                 <h3 class="upside-card-title">We handle connecting the tech to Olympus. <br><br><span class="theme-text">You focus on patients.</span></h3>
               </div>
@@ -513,157 +708,6 @@
             <div class="upside-card-lottie lottie-container" data-animation="system-solid-92-visability-hover-pinch"></div>
             <h3 class="upside-card-title"><span class="text-muted-70">No hidden fees.<br>No pressure calls.<br></span>No bullshit.</h3>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Results Carousel Section -->
-  <section class="results-section">
-    <div class="results-container">
-      <h2 class="results-headline">The results that built Olympus.</h2>
-      <p class="results-subheadline">These screenshots are from Etho agency clients — the practitioners we worked with before Olympus existed. The systems and frameworks that drove these wins are now inside the platform.</p>
-    </div>
-
-    <div class="results-carousel-wrapper">
-      <div class="results-carousel" data-carousel="results">
-        <div class="results-track">
-          <div class="screenshot-item" data-index="0">
-            <img src="/assets/testimonials/Result 1.svg" alt="Client result screenshot 1" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="1">
-            <img src="/assets/testimonials/Result 2.svg" alt="Client result screenshot 2" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="2">
-            <img src="/assets/testimonials/Result 3.svg" alt="Client result screenshot 3" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="3">
-            <img src="/assets/testimonials/Result 4.svg" alt="Client result screenshot 4" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="4">
-            <img src="/assets/testimonials/Result 5.svg" alt="Client result screenshot 5" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="5">
-            <img src="/assets/testimonials/Result 6.svg" alt="Client result screenshot 6" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="6">
-            <img src="/assets/testimonials/Result 7.svg" alt="Client result screenshot 7" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="7">
-            <img src="/assets/testimonials/Result 8.svg" alt="Client result screenshot 8" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="8">
-            <img src="/assets/testimonials/Result 9.svg" alt="Client result screenshot 9" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="9">
-            <img src="/assets/testimonials/Result 10.svg" alt="Client result screenshot 10" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="10">
-            <img src="/assets/testimonials/Result 11.svg" alt="Client result screenshot 11" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="11">
-            <img src="/assets/testimonials/Result 12.svg" alt="Client result screenshot 12" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="12">
-            <img src="/assets/testimonials/Result 13.svg" alt="Client result screenshot 13" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="13">
-            <img src="/assets/testimonials/Result 14.svg" alt="Client result screenshot 14" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="14">
-            <img src="/assets/testimonials/Result 15.svg" alt="Client result screenshot 15" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="15">
-            <img src="/assets/testimonials/Result 16.svg" alt="Client result screenshot 16" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="16">
-            <img src="/assets/testimonials/Result 17.svg" alt="Client result screenshot 17" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="17">
-            <img src="/assets/testimonials/Result 18.svg" alt="Client result screenshot 18" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="18">
-            <img src="/assets/testimonials/Result 19.svg" alt="Client result screenshot 19" loading="lazy">
-          </div>
-          <div class="screenshot-item" data-index="19">
-            <img src="/assets/testimonials/Result 20.svg" alt="Client result screenshot 20" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="results-container">
-      <button class="see-more-results-btn" id="seeMoreResultsBtn" aria-haspopup="dialog">
-        See More Results
-      </button>
-    </div>
-
-    <div class="results-container">
-      <p class="results-disclaimer">All screenshots from Etho agency engagements (2023-2024). Individual results vary.</p>
-    </div>
-  </section>
-
-  <!-- Olympus Agents Section -->
-  <section class="agents-section">
-    <div class="agents-header">
-      <h2 class="agents-headline">One brain. Seven agents. Zero prompting. No payroll.</h2>
-      <p class="agents-subheadline">Olympus is your "marketing director" that comes with its own trained AI employees. The platform that replaces a $40k/mo internal department - all without hiring, training or managing staff.</p>
-    </div>
-    <div class="agents-container">
-      <!-- Left: Master Olympus Card -->
-      <div class="agents-master-card">
-        <img src="olympus-icons/Olympus Horizontal Lockup - DARK.svg" alt="Olympus" class="agents-master-logo">
-        <p class="agents-master-desc">Master agent that manages all of your subagents to help your practice grow faster & scale smarter.</p>
-        <div class="agents-master-count">7</div>
-        <p class="agents-master-label">agents at your command</p>
-      </div>
-
-      <!-- Right: Agent Cards Grid -->
-      <div class="agents-grid">
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="system-solid-126-verified-hover-verified"></div>
-          <div class="agent-icon-light lottie-container" data-animation="system-solid-126-verified-hover-verified"></div>
-          <h3 class="agent-title">Brand</h3>
-          <p class="agent-subtitle">Develops your brand, through your content and feedback</p>
-        </div>
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="system-solid-121-bulb-hover-bulb"></div>
-          <div class="agent-icon-light lottie-container" data-animation="system-solid-121-bulb-hover-bulb"></div>
-          <h3 class="agent-title">Think</h3>
-          <p class="agent-subtitle">Deep market intelligence, brainstorming and creating offers</p>
-        </div>
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="system-solid-114-edit-pencil-rename-hover-pinch"></div>
-          <div class="agent-icon-light lottie-container" data-animation="system-solid-114-edit-pencil-rename-hover-pinch"></div>
-          <h3 class="agent-title">Write</h3>
-          <p class="agent-subtitle">Writes sales copy for everything, at the <b>same time</b></p>
-        </div>
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="system-solid-169-view-in-ar-hover-ar"></div>
-          <div class="agent-icon-light lottie-container" data-animation="system-solid-169-view-in-ar-hover-ar"></div>
-          <h3 class="agent-title">Build</h3>
-          <p class="agent-subtitle">Builds sales pages, funnels and nurture sequences <b>in seconds</b></p>
-        </div>
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="create-icon"></div>
-          <div class="agent-icon-light lottie-container" data-animation="create-icon"></div>
-          <h3 class="agent-title">Create</h3>
-          <p class="agent-subtitle">Creates ad creative and no-touch sales video assets</p>
-        </div>
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="system-solid-33-speed-hover-speed"></div>
-          <div class="agent-icon-light lottie-container" data-animation="system-solid-33-speed-hover-speed"></div>
-          <h3 class="agent-title">Drive</h3>
-          <p class="agent-subtitle">Installs, launches, manages and optimizes practice ads</p>
-        </div>
-        <div class="agent-card">
-          <div class="agent-icon-dark lottie-container" data-animation="system-solid-10-analytics-hover-analytics"></div>
-          <div class="agent-icon-light lottie-container" data-animation="system-solid-10-analytics-hover-analytics"></div>
-          <h3 class="agent-title">Measure</h3>
-          <p class="agent-subtitle">Data scientist proactively fix constraints with real-time data</p>
-        </div>
-        <div class="agent-card agent-card-tagline">
-          <p class="agents-tagline-text">AI without prompting.<br><span class="agents-tagline-highlight">Results without hiring.</span></p>
         </div>
       </div>
     </div>
@@ -1136,19 +1180,28 @@
         <div class="feature-graphic content-carousel-graphic">
           <div class="content-carousel">
             <div class="creative-card">
-              <div class="creative-label">Creative 1</div>
+              <img src="assets/content/Morpheus Meme.jpg" alt="Creative content" class="creative-image">
             </div>
             <div class="creative-card">
-              <div class="creative-label">Creative 2</div>
+              <img src="assets/content/Detox.jpeg" alt="Creative content" class="creative-image">
             </div>
             <div class="creative-card">
-              <div class="creative-label">Creative 3</div>
+              <img src="assets/content/ARE YOU A REAL DOCTOR_ v2.jpg" alt="Creative content" class="creative-image">
             </div>
             <div class="creative-card">
-              <div class="creative-label">Creative 4</div>
+              <img src="assets/content/Squint Neuropathy.png" alt="Creative content" class="creative-image">
             </div>
             <div class="creative-card">
-              <div class="creative-label">Creative 5</div>
+              <img src="assets/content/CONMAN.jpg" alt="Creative content" class="creative-image">
+            </div>
+            <div class="creative-card">
+              <img src="assets/content/Hydra Neuropathy.jpeg" alt="Creative content" class="creative-image">
+            </div>
+            <div class="creative-card">
+              <img src="assets/content/Deliver.jpeg" alt="Creative content" class="creative-image">
+            </div>
+            <div class="creative-card">
+              <img src="assets/content/Reversing Neuropathy 2.png" alt="Creative content" class="creative-image">
             </div>
           </div>
         </div>
@@ -1625,13 +1678,19 @@
   <!-- From the Founder Section -->
   <section class="founder-section">
     <div class="founder-container">
-      <h2 class="founder-headline">From the founder</h2>
-      <blockquote class="founder-quote">
-        <p>"I built and shut down a $500K/month agency to create Olympus. After 4 years and $41 million in results, I knew the model was broken — not the people, not the work, but the infrastructure. Olympus is everything I wish we could've given our agency clients. Now it's yours."</p>
-      </blockquote>
-      <div class="founder-attribution">
-        <span class="founder-dash">—</span>
-        <span class="founder-name">JonCameron Johnson</span><span class="founder-title">, Founder</span>
+      <div class="founder-photo">
+        <img src="assets/images/joncameron-headshot.jpg" alt="JonCameron Johnson" />
+      </div>
+      <div class="founder-divider"></div>
+      <div class="founder-content">
+        <h2 class="founder-headline">A word from our founder</h2>
+        <div class="founder-quote">
+          <p>"I built and shut down a $500K/month agency to create Olympus. After 4 years and $41 million in results, I knew the model was broken — not the people, not the work, but the infrastructure. Olympus is everything I wish we could've given our agency clients. Now it's yours."</p>
+        </div>
+        <div class="founder-attribution">
+          <span class="founder-name">JonCameron Johnson</span>
+          <span class="founder-title">Founder & CEO</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1693,10 +1752,11 @@
 
         <!-- Card 3: Velocity - Right -->
         <div class="cb-card cb-card-velocity">
+          <h3><span class="highlight-black">Rapid launch</span> campaigns with Olympus <span class="highlight-black">to find ROI faster</span>.</h3>
           <div class="cb-velocity-stack">
             <div class="cb-velocity-row live">
               <span class="cb-velocity-day">Day 7</span>
-              <span class="cb-velocity-status">Live.</span>
+              <span class="cb-velocity-status"><span class="recording-indicator"></span>Live.</span>
             </div>
             <div class="cb-velocity-row next">
               <span class="cb-velocity-day">Day 8</span>
@@ -1710,17 +1770,93 @@
               <span class="cb-velocity-day">Day 10</span>
               <span class="cb-velocity-status">Next.</span>
             </div>
-            <div class="cb-velocity-row next fade-more">
-              <span class="cb-velocity-day">Day 11</span>
-              <span class="cb-velocity-status">Next...</span>
-            </div>
           </div>
           <div class="cb-campaign-stack">
-            <div class="cb-campaign-card"><span class="cb-check">✓</span> Campaign Launched</div>
-            <div class="cb-campaign-card"><span class="cb-check">✓</span> Campaign Launched</div>
-            <div class="cb-campaign-card"><span class="cb-check">✓</span> Campaign Launched</div>
-            <div class="cb-campaign-card"><span class="cb-check">✓</span> Campaign Launched</div>
-            <div class="cb-campaign-card"><span class="cb-check">✓</span> Campaign Launched</div>
+            <div class="cb-campaign-card">
+              <div class="cb-campaign-card-content">
+                <span class="cb-check">✓</span> Campaign Launched
+              </div>
+              <div class="cb-campaign-logo">
+                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_1144_522)">
+                    <path d="M4.44788 25.4932C4.4427 25.5039 4.43646 25.5146 4.43128 25.5254C6.20633 21.8192 8.49851 18.3397 11.2721 15.2012C11.3135 15.1542 11.3536 15.1063 11.3951 15.0596C11.4713 14.9741 11.5487 14.8896 11.6256 14.8047C11.5839 14.8509 11.5421 14.897 11.5006 14.9434C16.1863 9.71027 21.941 5.7604 28.2321 3.23925C33.0074 1.31488 37.9709 0.26776 42.9205 0.0429646C50.2622 -0.303619 57.7632 1.14524 64.7496 4.5664C64.9812 4.67924 65.2123 4.79329 65.442 4.91015C65.4652 4.92201 65.4882 4.93439 65.5114 4.94629C68.824 6.63836 71.9432 8.74875 74.7828 11.2549C74.7993 11.2694 74.8162 11.2833 74.8326 11.2979C75.0852 11.5214 75.3356 11.7478 75.5836 11.9775C75.6093 12.0013 75.6351 12.025 75.6608 12.0488C75.7624 12.1434 75.8637 12.2384 75.9645 12.334C75.8973 12.2704 75.829 12.2078 75.7614 12.1445C75.9259 12.2983 76.0888 12.4535 76.2506 12.6094C76.1553 12.5174 76.0605 12.425 75.9645 12.334C76.0872 12.4501 76.2086 12.5673 76.3297 12.6846C80.7346 16.9486 84.14 22.0027 86.4518 27.4854C86.4355 27.4468 86.4203 27.4077 86.4039 27.3691C86.423 27.4138 86.4407 27.4592 86.4596 27.5039C86.5459 27.7088 86.6313 27.914 86.7145 28.1201C86.7975 28.3245 86.8788 28.5293 86.9586 28.7344C86.9832 28.7978 87.0076 28.8613 87.0319 28.9248C88.8159 33.572 89.7787 38.3862 89.9684 43.1846C89.9745 43.3316 89.9784 43.4788 89.983 43.626C89.988 43.7946 89.9926 43.9632 89.9957 44.1318C90.1356 51.0395 88.688 58.0556 85.4987 64.6211C83.7624 68.213 81.5411 71.591 78.8639 74.6484C79.29 74.1607 79.7066 73.6617 80.1139 73.1523C79.6748 73.7014 79.2252 74.2387 78.7643 74.7627C78.7977 74.7248 78.8306 74.6864 78.8639 74.6484C78.8215 74.6969 78.7795 74.7457 78.7369 74.7939C78.7237 74.809 78.7102 74.8238 78.6969 74.8389C78.6068 74.9406 78.5166 75.0425 78.4254 75.1436C78.306 75.2762 78.1858 75.408 78.0651 75.5391C73.6265 80.3536 68.267 84.041 62.4254 86.4893C62.5173 86.4507 62.6101 86.4141 62.7018 86.375C62.5951 86.4208 62.4874 86.4639 62.3805 86.5088C62.2702 86.5549 62.1601 86.6013 62.0494 86.6465C57.4017 88.556 52.5715 89.6298 47.7457 89.9209C47.7262 89.9221 47.7067 89.9236 47.6871 89.9248C47.4019 89.9416 47.1168 89.9564 46.8317 89.9678C39.6341 90.2677 32.2901 88.8437 25.4352 85.5254C21.7445 83.7477 18.2792 81.4577 15.1539 78.6885C15.1235 78.6616 15.0934 78.6344 15.0631 78.6074C15.0538 78.5991 15.0441 78.5913 15.0348 78.583C14.8268 78.3978 14.6216 78.21 14.4176 78.0215C14.4188 78.0226 14.4203 78.0233 14.4215 78.0244C14.419 78.0221 14.4162 78.0199 14.4137 78.0176C14.3509 77.9595 14.2876 77.9021 14.2252 77.8437C14.1562 77.779 14.0878 77.7136 14.0192 77.6484C14.0568 77.6841 14.0947 77.7194 14.1324 77.7549C13.9563 77.5892 13.782 77.422 13.609 77.2539C13.745 77.3864 13.8817 77.5179 14.0192 77.6484C13.8792 77.5158 13.7402 77.3823 13.6022 77.248C9.0195 72.7927 5.52204 67.4813 3.22132 61.7217C1.16855 56.6115 0.117768 51.287 0.00549701 45.9951C-0.153843 39.0864 1.27753 32.0661 4.44788 25.4932Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1144_522">
+                      <rect width="90" height="90" fill="white" transform="translate(90 89.9998) rotate(-180)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="cb-campaign-card">
+              <div class="cb-campaign-card-content">
+                <span class="cb-check">✓</span> Campaign Launched
+              </div>
+              <div class="cb-campaign-logo">
+                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_1144_522)">
+                    <path d="M4.44788 25.4932C4.4427 25.5039 4.43646 25.5146 4.43128 25.5254C6.20633 21.8192 8.49851 18.3397 11.2721 15.2012C11.3135 15.1542 11.3536 15.1063 11.3951 15.0596C11.4713 14.9741 11.5487 14.8896 11.6256 14.8047C11.5839 14.8509 11.5421 14.897 11.5006 14.9434C16.1863 9.71027 21.941 5.7604 28.2321 3.23925C33.0074 1.31488 37.9709 0.26776 42.9205 0.0429646C50.2622 -0.303619 57.7632 1.14524 64.7496 4.5664C64.9812 4.67924 65.2123 4.79329 65.442 4.91015C65.4652 4.92201 65.4882 4.93439 65.5114 4.94629C68.824 6.63836 71.9432 8.74875 74.7828 11.2549C74.7993 11.2694 74.8162 11.2833 74.8326 11.2979C75.0852 11.5214 75.3356 11.7478 75.5836 11.9775C75.6093 12.0013 75.6351 12.025 75.6608 12.0488C75.7624 12.1434 75.8637 12.2384 75.9645 12.334C75.8973 12.2704 75.829 12.2078 75.7614 12.1445C75.9259 12.2983 76.0888 12.4535 76.2506 12.6094C76.1553 12.5174 76.0605 12.425 75.9645 12.334C76.0872 12.4501 76.2086 12.5673 76.3297 12.6846C80.7346 16.9486 84.14 22.0027 86.4518 27.4854C86.4355 27.4468 86.4203 27.4077 86.4039 27.3691C86.423 27.4138 86.4407 27.4592 86.4596 27.5039C86.5459 27.7088 86.6313 27.914 86.7145 28.1201C86.7975 28.3245 86.8788 28.5293 86.9586 28.7344C86.9832 28.7978 87.0076 28.8613 87.0319 28.9248C88.8159 33.572 89.7787 38.3862 89.9684 43.1846C89.9745 43.3316 89.9784 43.4788 89.983 43.626C89.988 43.7946 89.9926 43.9632 89.9957 44.1318C90.1356 51.0395 88.688 58.0556 85.4987 64.6211C83.7624 68.213 81.5411 71.591 78.8639 74.6484C79.29 74.1607 79.7066 73.6617 80.1139 73.1523C79.6748 73.7014 79.2252 74.2387 78.7643 74.7627C78.7977 74.7248 78.8306 74.6864 78.8639 74.6484C78.8215 74.6969 78.7795 74.7457 78.7369 74.7939C78.7237 74.809 78.7102 74.8238 78.6969 74.8389C78.6068 74.9406 78.5166 75.0425 78.4254 75.1436C78.306 75.2762 78.1858 75.408 78.0651 75.5391C73.6265 80.3536 68.267 84.041 62.4254 86.4893C62.5173 86.4507 62.6101 86.4141 62.7018 86.375C62.5951 86.4208 62.4874 86.4639 62.3805 86.5088C62.2702 86.5549 62.1601 86.6013 62.0494 86.6465C57.4017 88.556 52.5715 89.6298 47.7457 89.9209C47.7262 89.9221 47.7067 89.9236 47.6871 89.9248C47.4019 89.9416 47.1168 89.9564 46.8317 89.9678C39.6341 90.2677 32.2901 88.8437 25.4352 85.5254C21.7445 83.7477 18.2792 81.4577 15.1539 78.6885C15.1235 78.6616 15.0934 78.6344 15.0631 78.6074C15.0538 78.5991 15.0441 78.5913 15.0348 78.583C14.8268 78.3978 14.6216 78.21 14.4176 78.0215C14.4188 78.0226 14.4203 78.0233 14.4215 78.0244C14.419 78.0221 14.4162 78.0199 14.4137 78.0176C14.3509 77.9595 14.2876 77.9021 14.2252 77.8437C14.1562 77.779 14.0878 77.7136 14.0192 77.6484C14.0568 77.6841 14.0947 77.7194 14.1324 77.7549C13.9563 77.5892 13.782 77.422 13.609 77.2539C13.745 77.3864 13.8817 77.5179 14.0192 77.6484C13.8792 77.5158 13.7402 77.3823 13.6022 77.248C9.0195 72.7927 5.52204 67.4813 3.22132 61.7217C1.16855 56.6115 0.117768 51.287 0.00549701 45.9951C-0.153843 39.0864 1.27753 32.0661 4.44788 25.4932Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1144_522">
+                      <rect width="90" height="90" fill="white" transform="translate(90 89.9998) rotate(-180)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="cb-campaign-card">
+              <div class="cb-campaign-card-content">
+                <span class="cb-check">✓</span> Campaign Launched
+              </div>
+              <div class="cb-campaign-logo">
+                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_1144_522)">
+                    <path d="M4.44788 25.4932C4.4427 25.5039 4.43646 25.5146 4.43128 25.5254C6.20633 21.8192 8.49851 18.3397 11.2721 15.2012C11.3135 15.1542 11.3536 15.1063 11.3951 15.0596C11.4713 14.9741 11.5487 14.8896 11.6256 14.8047C11.5839 14.8509 11.5421 14.897 11.5006 14.9434C16.1863 9.71027 21.941 5.7604 28.2321 3.23925C33.0074 1.31488 37.9709 0.26776 42.9205 0.0429646C50.2622 -0.303619 57.7632 1.14524 64.7496 4.5664C64.9812 4.67924 65.2123 4.79329 65.442 4.91015C65.4652 4.92201 65.4882 4.93439 65.5114 4.94629C68.824 6.63836 71.9432 8.74875 74.7828 11.2549C74.7993 11.2694 74.8162 11.2833 74.8326 11.2979C75.0852 11.5214 75.3356 11.7478 75.5836 11.9775C75.6093 12.0013 75.6351 12.025 75.6608 12.0488C75.7624 12.1434 75.8637 12.2384 75.9645 12.334C75.8973 12.2704 75.829 12.2078 75.7614 12.1445C75.9259 12.2983 76.0888 12.4535 76.2506 12.6094C76.1553 12.5174 76.0605 12.425 75.9645 12.334C76.0872 12.4501 76.2086 12.5673 76.3297 12.6846C80.7346 16.9486 84.14 22.0027 86.4518 27.4854C86.4355 27.4468 86.4203 27.4077 86.4039 27.3691C86.423 27.4138 86.4407 27.4592 86.4596 27.5039C86.5459 27.7088 86.6313 27.914 86.7145 28.1201C86.7975 28.3245 86.8788 28.5293 86.9586 28.7344C86.9832 28.7978 87.0076 28.8613 87.0319 28.9248C88.8159 33.572 89.7787 38.3862 89.9684 43.1846C89.9745 43.3316 89.9784 43.4788 89.983 43.626C89.988 43.7946 89.9926 43.9632 89.9957 44.1318C90.1356 51.0395 88.688 58.0556 85.4987 64.6211C83.7624 68.213 81.5411 71.591 78.8639 74.6484C79.29 74.1607 79.7066 73.6617 80.1139 73.1523C79.6748 73.7014 79.2252 74.2387 78.7643 74.7627C78.7977 74.7248 78.8306 74.6864 78.8639 74.6484C78.8215 74.6969 78.7795 74.7457 78.7369 74.7939C78.7237 74.809 78.7102 74.8238 78.6969 74.8389C78.6068 74.9406 78.5166 75.0425 78.4254 75.1436C78.306 75.2762 78.1858 75.408 78.0651 75.5391C73.6265 80.3536 68.267 84.041 62.4254 86.4893C62.5173 86.4507 62.6101 86.4141 62.7018 86.375C62.5951 86.4208 62.4874 86.4639 62.3805 86.5088C62.2702 86.5549 62.1601 86.6013 62.0494 86.6465C57.4017 88.556 52.5715 89.6298 47.7457 89.9209C47.7262 89.9221 47.7067 89.9236 47.6871 89.9248C47.4019 89.9416 47.1168 89.9564 46.8317 89.9678C39.6341 90.2677 32.2901 88.8437 25.4352 85.5254C21.7445 83.7477 18.2792 81.4577 15.1539 78.6885C15.1235 78.6616 15.0934 78.6344 15.0631 78.6074C15.0538 78.5991 15.0441 78.5913 15.0348 78.583C14.8268 78.3978 14.6216 78.21 14.4176 78.0215C14.4188 78.0226 14.4203 78.0233 14.4215 78.0244C14.419 78.0221 14.4162 78.0199 14.4137 78.0176C14.3509 77.9595 14.2876 77.9021 14.2252 77.8437C14.1562 77.779 14.0878 77.7136 14.0192 77.6484C14.0568 77.6841 14.0947 77.7194 14.1324 77.7549C13.9563 77.5892 13.782 77.422 13.609 77.2539C13.745 77.3864 13.8817 77.5179 14.0192 77.6484C13.8792 77.5158 13.7402 77.3823 13.6022 77.248C9.0195 72.7927 5.52204 67.4813 3.22132 61.7217C1.16855 56.6115 0.117768 51.287 0.00549701 45.9951C-0.153843 39.0864 1.27753 32.0661 4.44788 25.4932Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1144_522">
+                      <rect width="90" height="90" fill="white" transform="translate(90 89.9998) rotate(-180)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="cb-campaign-card">
+              <div class="cb-campaign-card-content">
+                <span class="cb-check">✓</span> Campaign Launched
+              </div>
+              <div class="cb-campaign-logo">
+                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_1144_522)">
+                    <path d="M4.44788 25.4932C4.4427 25.5039 4.43646 25.5146 4.43128 25.5254C6.20633 21.8192 8.49851 18.3397 11.2721 15.2012C11.3135 15.1542 11.3536 15.1063 11.3951 15.0596C11.4713 14.9741 11.5487 14.8896 11.6256 14.8047C11.5839 14.8509 11.5421 14.897 11.5006 14.9434C16.1863 9.71027 21.941 5.7604 28.2321 3.23925C33.0074 1.31488 37.9709 0.26776 42.9205 0.0429646C50.2622 -0.303619 57.7632 1.14524 64.7496 4.5664C64.9812 4.67924 65.2123 4.79329 65.442 4.91015C65.4652 4.92201 65.4882 4.93439 65.5114 4.94629C68.824 6.63836 71.9432 8.74875 74.7828 11.2549C74.7993 11.2694 74.8162 11.2833 74.8326 11.2979C75.0852 11.5214 75.3356 11.7478 75.5836 11.9775C75.6093 12.0013 75.6351 12.025 75.6608 12.0488C75.7624 12.1434 75.8637 12.2384 75.9645 12.334C75.8973 12.2704 75.829 12.2078 75.7614 12.1445C75.9259 12.2983 76.0888 12.4535 76.2506 12.6094C76.1553 12.5174 76.0605 12.425 75.9645 12.334C76.0872 12.4501 76.2086 12.5673 76.3297 12.6846C80.7346 16.9486 84.14 22.0027 86.4518 27.4854C86.4355 27.4468 86.4203 27.4077 86.4039 27.3691C86.423 27.4138 86.4407 27.4592 86.4596 27.5039C86.5459 27.7088 86.6313 27.914 86.7145 28.1201C86.7975 28.3245 86.8788 28.5293 86.9586 28.7344C86.9832 28.7978 87.0076 28.8613 87.0319 28.9248C88.8159 33.572 89.7787 38.3862 89.9684 43.1846C89.9745 43.3316 89.9784 43.4788 89.983 43.626C89.988 43.7946 89.9926 43.9632 89.9957 44.1318C90.1356 51.0395 88.688 58.0556 85.4987 64.6211C83.7624 68.213 81.5411 71.591 78.8639 74.6484C79.29 74.1607 79.7066 73.6617 80.1139 73.1523C79.6748 73.7014 79.2252 74.2387 78.7643 74.7627C78.7977 74.7248 78.8306 74.6864 78.8639 74.6484C78.8215 74.6969 78.7795 74.7457 78.7369 74.7939C78.7237 74.809 78.7102 74.8238 78.6969 74.8389C78.6068 74.9406 78.5166 75.0425 78.4254 75.1436C78.306 75.2762 78.1858 75.408 78.0651 75.5391C73.6265 80.3536 68.267 84.041 62.4254 86.4893C62.5173 86.4507 62.6101 86.4141 62.7018 86.375C62.5951 86.4208 62.4874 86.4639 62.3805 86.5088C62.2702 86.5549 62.1601 86.6013 62.0494 86.6465C57.4017 88.556 52.5715 89.6298 47.7457 89.9209C47.7262 89.9221 47.7067 89.9236 47.6871 89.9248C47.4019 89.9416 47.1168 89.9564 46.8317 89.9678C39.6341 90.2677 32.2901 88.8437 25.4352 85.5254C21.7445 83.7477 18.2792 81.4577 15.1539 78.6885C15.1235 78.6616 15.0934 78.6344 15.0631 78.6074C15.0538 78.5991 15.0441 78.5913 15.0348 78.583C14.8268 78.3978 14.6216 78.21 14.4176 78.0215C14.4188 78.0226 14.4203 78.0233 14.4215 78.0244C14.419 78.0221 14.4162 78.0199 14.4137 78.0176C14.3509 77.9595 14.2876 77.9021 14.2252 77.8437C14.1562 77.779 14.0878 77.7136 14.0192 77.6484C14.0568 77.6841 14.0947 77.7194 14.1324 77.7549C13.9563 77.5892 13.782 77.422 13.609 77.2539C13.745 77.3864 13.8817 77.5179 14.0192 77.6484C13.8792 77.5158 13.7402 77.3823 13.6022 77.248C9.0195 72.7927 5.52204 67.4813 3.22132 61.7217C1.16855 56.6115 0.117768 51.287 0.00549701 45.9951C-0.153843 39.0864 1.27753 32.0661 4.44788 25.4932Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1144_522">
+                      <rect width="90" height="90" fill="white" transform="translate(90 89.9998) rotate(-180)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="cb-campaign-card">
+              <div class="cb-campaign-card-content">
+                <span class="cb-check">✓</span> Campaign Launched
+              </div>
+              <div class="cb-campaign-logo">
+                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_1144_522)">
+                    <path d="M4.44788 25.4932C4.4427 25.5039 4.43646 25.5146 4.43128 25.5254C6.20633 21.8192 8.49851 18.3397 11.2721 15.2012C11.3135 15.1542 11.3536 15.1063 11.3951 15.0596C11.4713 14.9741 11.5487 14.8896 11.6256 14.8047C11.5839 14.8509 11.5421 14.897 11.5006 14.9434C16.1863 9.71027 21.941 5.7604 28.2321 3.23925C33.0074 1.31488 37.9709 0.26776 42.9205 0.0429646C50.2622 -0.303619 57.7632 1.14524 64.7496 4.5664C64.9812 4.67924 65.2123 4.79329 65.442 4.91015C65.4652 4.92201 65.4882 4.93439 65.5114 4.94629C68.824 6.63836 71.9432 8.74875 74.7828 11.2549C74.7993 11.2694 74.8162 11.2833 74.8326 11.2979C75.0852 11.5214 75.3356 11.7478 75.5836 11.9775C75.6093 12.0013 75.6351 12.025 75.6608 12.0488C75.7624 12.1434 75.8637 12.2384 75.9645 12.334C75.8973 12.2704 75.829 12.2078 75.7614 12.1445C75.9259 12.2983 76.0888 12.4535 76.2506 12.6094C76.1553 12.5174 76.0605 12.425 75.9645 12.334C76.0872 12.4501 76.2086 12.5673 76.3297 12.6846C80.7346 16.9486 84.14 22.0027 86.4518 27.4854C86.4355 27.4468 86.4203 27.4077 86.4039 27.3691C86.423 27.4138 86.4407 27.4592 86.4596 27.5039C86.5459 27.7088 86.6313 27.914 86.7145 28.1201C86.7975 28.3245 86.8788 28.5293 86.9586 28.7344C86.9832 28.7978 87.0076 28.8613 87.0319 28.9248C88.8159 33.572 89.7787 38.3862 89.9684 43.1846C89.9745 43.3316 89.9784 43.4788 89.983 43.626C89.988 43.7946 89.9926 43.9632 89.9957 44.1318C90.1356 51.0395 88.688 58.0556 85.4987 64.6211C83.7624 68.213 81.5411 71.591 78.8639 74.6484C79.29 74.1607 79.7066 73.6617 80.1139 73.1523C79.6748 73.7014 79.2252 74.2387 78.7643 74.7627C78.7977 74.7248 78.8306 74.6864 78.8639 74.6484C78.8215 74.6969 78.7795 74.7457 78.7369 74.7939C78.7237 74.809 78.7102 74.8238 78.6969 74.8389C78.6068 74.9406 78.5166 75.0425 78.4254 75.1436C78.306 75.2762 78.1858 75.408 78.0651 75.5391C73.6265 80.3536 68.267 84.041 62.4254 86.4893C62.5173 86.4507 62.6101 86.4141 62.7018 86.375C62.5951 86.4208 62.4874 86.4639 62.3805 86.5088C62.2702 86.5549 62.1601 86.6013 62.0494 86.6465C57.4017 88.556 52.5715 89.6298 47.7457 89.9209C47.7262 89.9221 47.7067 89.9236 47.6871 89.9248C47.4019 89.9416 47.1168 89.9564 46.8317 89.9678C39.6341 90.2677 32.2901 88.8437 25.4352 85.5254C21.7445 83.7477 18.2792 81.4577 15.1539 78.6885C15.1235 78.6616 15.0934 78.6344 15.0631 78.6074C15.0538 78.5991 15.0441 78.5913 15.0348 78.583C14.8268 78.3978 14.6216 78.21 14.4176 78.0215C14.4188 78.0226 14.4203 78.0233 14.4215 78.0244C14.419 78.0221 14.4162 78.0199 14.4137 78.0176C14.3509 77.9595 14.2876 77.9021 14.2252 77.8437C14.1562 77.779 14.0878 77.7136 14.0192 77.6484C14.0568 77.6841 14.0947 77.7194 14.1324 77.7549C13.9563 77.5892 13.782 77.422 13.609 77.2539C13.745 77.3864 13.8817 77.5179 14.0192 77.6484C13.8792 77.5158 13.7402 77.3823 13.6022 77.248C9.0195 72.7927 5.52204 67.4813 3.22132 61.7217C1.16855 56.6115 0.117768 51.287 0.00549701 45.9951C-0.153843 39.0864 1.27753 32.0661 4.44788 25.4932Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1144_522">
+                      <rect width="90" height="90" fill="white" transform="translate(90 89.9998) rotate(-180)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1739,7 +1875,7 @@
 
         <!-- Card 5: Bottom Right -->
         <div class="cb-card cb-card-strip">
-          <p>Same expense. <span class="anxiety">Anxiety</span> or <span class="certainty">certainty</span>. You choose.</p>
+          <p><span class="cb-muted-text">Same expense.</span> <span class="anxiety">Anxiety</span> <span class="cb-muted-text">or</span> <span class="certainty">certainty</span>.<br>You choose.</p>
         </div>
 
       </div>
@@ -1756,7 +1892,7 @@
 
       <!-- Revenue Calculator -->
       <div class="revenue-calculator">
-        <label for="revenue-input" class="revenue-label">What is your current <u>monthly</u> revenue?</label>
+        <label for="revenue-input" class="revenue-label"><span class="revenue-label-muted">What is your current</span> <span class="revenue-label-primary">monthly revenue?</span></label>
         <div class="revenue-input-row">
           <div class="revenue-input-wrapper">
             <span class="revenue-currency-symbol">$</span>
@@ -2282,7 +2418,7 @@
       const cards = carousel.querySelectorAll('.creative-card');
       if (cards.length === 0) return;
 
-      const cardWidth = 140; // Card width in px
+      const cardWidth = 250; // Card width in px
       const gap = 12; // Gap between cards
       const slideDistance = cardWidth + gap; // Total distance to slide per step
       let currentOffset = 0;
@@ -4158,6 +4294,52 @@
           openLightbox(img.src, index);
         }
       });
+    });
+  })();
+  </script>
+
+  <!-- Mobile Menu Toggle -->
+  <script>
+  (function() {
+    var hamburger = document.querySelector('.hamburger');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var closeBtn = document.querySelector('.mobile-menu-close');
+
+    if (!hamburger || !mobileMenu) return;
+
+    function openMenu() {
+      mobileMenu.classList.add('is-open');
+      hamburger.classList.add('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('is-open');
+      hamburger.classList.remove('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
+
+    hamburger.addEventListener('click', openMenu);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking a nav link
+    var navLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+        closeMenu();
+      }
     });
   })();
   </script>
