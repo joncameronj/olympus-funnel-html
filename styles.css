@@ -68,7 +68,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; line-height: 1.5; }
+html { -webkit-text-size-adjust: 100%; line-height: 1.5; overflow-x: hidden; }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -76,7 +76,7 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   transition: background-color 0.3s, color 0.3s;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -267,11 +267,11 @@ body.menu-open {
 
 .mobile-menu-link {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 400;
   color: var(--text-primary);
   text-decoration: none;
-  padding: 16px 0;
+  padding: 12px 0;
   letter-spacing: -0.03em;
   transition: opacity 0.2s ease;
 }
@@ -1122,7 +1122,7 @@ wistia-player:not(:defined) {
   }
 
   .headline {
-    font-size: 48px;
+    font-size: 3.5rem;
     margin-top: 16px;
     margin-bottom: 24px;
   }
@@ -1455,6 +1455,12 @@ wistia-player:not(:defined) {
   }
 }
 
+@media (max-width: 768px) {
+  .agents-section-inner {
+    margin-top: 120px;
+  }
+}
+
 /* Features Section */
 .features-section {
   max-width: 1300px;
@@ -1583,6 +1589,12 @@ wistia-player:not(:defined) {
 
   .gauge-label {
     font-size: 0.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-section {
+    padding-top: 120px;
   }
 }
 
@@ -2043,6 +2055,10 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 768px) {
+  .how-it-works-section {
+    margin-top: 120px;
+  }
+
   .how-it-works-subheadline {
     font-size: 1.125rem;
   }
@@ -2237,6 +2253,12 @@ wistia-player:not(:defined) {
   }
 }
 
+@media (max-width: 768px) {
+  .faq-section {
+    margin-top: 120px;
+  }
+}
+
 /* ========================================
    From the Founder Section
    ======================================== */
@@ -2282,8 +2304,12 @@ wistia-player:not(:defined) {
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   margin: 0 0 24px 0;
+}
+
+[data-theme="light"] .founder-headline {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .founder-quote {
@@ -2321,10 +2347,11 @@ wistia-player:not(:defined) {
 }
 
 .founder-title {
-  font-family: 'Instrument Serif', serif;
+  font-family: 'Inter', sans-serif;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.07em;
+  text-transform: uppercase;
   background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2363,7 +2390,8 @@ wistia-player:not(:defined) {
   }
 
   .founder-headline {
-    font-size: 26px;
+    font-size: 40px;
+    line-height: 1;
   }
 
   .founder-quote p {
@@ -2375,7 +2403,8 @@ wistia-player:not(:defined) {
   }
 
   .founder-title {
-    font-size: 24px;
+    font-size: 1rem;
+    font-weight: 500;
   }
 
   .founder-attribution {
@@ -3057,6 +3086,12 @@ wistia-player:not(:defined) {
   }
 }
 
+@media (max-width: 768px) {
+  .pricing-section {
+    padding-top: 120px;
+  }
+}
+
 /* CTA Section */
 .cta-section {
   max-width: 1250px;
@@ -3146,6 +3181,12 @@ wistia-player:not(:defined) {
   .cta-section-button {
     font-size: 1rem;
     padding: 14px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-section {
+    padding-top: 120px;
   }
 }
 
@@ -3767,6 +3808,10 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 768px) {
+  .problem-bento-section {
+    padding-top: 120px;
+  }
+
   .problem-section {
     padding: 60px 16px;
   }
@@ -3803,6 +3848,10 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 768px) {
+  .solution-section {
+    padding-top: 120px;
+  }
+
   .solution-headline {
     font-size: 56px;
   }
@@ -4407,6 +4456,10 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 768px) {
+  .solution-cards-headline-section {
+    margin-top: 120px;
+  }
+
   .solution-subheadline {
     font-size: 1.125rem;
     letter-spacing: -0.08em;
@@ -4535,7 +4588,7 @@ wistia-player:not(:defined) {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
   paint-order: stroke fill;
   --item-scale: 0.5;
-  --item-blur: 8px;
+  --item-blur: 0px;
   --item-opacity: 0.2;
   filter: blur(var(--item-blur));
   opacity: var(--item-opacity);
