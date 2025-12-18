@@ -3,284 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>You're Booked! | Olympus</title>
-  <meta name="description" content="Your strategy call has been confirmed.">
+  <title>Your Call Is Confirmed | Olympus</title>
+  <meta name="description" content="Your strategy call has been confirmed. Here's everything you need to know before we talk.">
   <meta name="color-scheme" content="dark light">
 
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="//fast.wistia.com">
+
+  <!-- Favicon -->
+  <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-dark.ico" type="image/x-icon">
+
   <!-- Preload fonts -->
-  <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="/styles.css">
-
-  <style>
-    /* OlympusAI Design System */
-    :root {
-      --bg-page: rgb(10, 10, 10);
-      --bg-card: rgb(15, 15, 15);
-      --border-input: rgb(25, 25, 25);
-      --text-primary: rgb(255, 255, 255);
-      --text-muted: rgb(155, 155, 155);
-      --btn-bg: #FFFFFF;
-      --btn-text: #000000;
-      --success: #22c55e;
-    }
-
-    [data-theme="light"] {
-      --bg-page: rgb(255, 255, 255);
-      --bg-card: rgb(250, 250, 250);
-      --border-input: rgb(245, 245, 245);
-      --text-primary: rgb(0, 0, 0);
-      --text-muted: rgb(135, 135, 135);
-      --btn-bg: #000000;
-      --btn-text: #FFFFFF;
-    }
-
-    @font-face {
-      font-family: 'TASA Orbiter';
-      src: url('/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf') format('opentype');
-      font-weight: 500;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'TASA Orbiter';
-      src: url('/fonts/tasa-orbiter/TASAOrbiterDisplay-SemiBold-BF64891cba47942.otf') format('opentype');
-      font-weight: 600;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Inter';
-      src: url('/fonts/inter/Inter-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Inter';
-      src: url('/fonts/inter/Inter-Medium.ttf') format('truetype');
-      font-weight: 500;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'JetBrains Mono';
-      src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-display: swap;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; line-height: 1.5; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-page);
-      color: var(--text-primary);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      width: 40px;
-      height: 40px;
-      border-radius: 4px;
-      border: 1px solid var(--border-input);
-      background: var(--bg-card);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .theme-toggle svg { width: 20px; height: 20px; stroke: var(--text-primary); fill: none; }
-    .theme-toggle .sun { display: none; }
-    .theme-toggle .moon { display: block; }
-    [data-theme="light"] .theme-toggle .sun { display: block; }
-    [data-theme="light"] .theme-toggle .moon { display: none; }
-
-    .page-header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid var(--border-input);
-    }
-
-    .logo {
-      font-family: 'TASA Orbiter', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: -0.05em;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .confirmation-section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      background: var(--success);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 32px;
-      animation: scaleIn 0.5s ease-out;
-    }
-
-    @keyframes scaleIn {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    .success-icon svg {
-      width: 40px;
-      height: 40px;
-      stroke: #fff;
-      stroke-width: 3;
-      fill: none;
-    }
-
-    .confirmation-title {
-      font-family: 'TASA Orbiter', sans-serif;
-      font-size: clamp(2.5rem, 4vw, 3rem);
-      font-weight: 500;
-      letter-spacing: -0.05em;
-      margin-bottom: 16px;
-    }
-
-    .confirmation-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      max-width: 450px;
-      margin-bottom: 40px;
-      line-height: 1.6;
-    }
-
-    .booking-details {
-      background: var(--bg-card);
-      border-radius: 4px;
-      padding: 24px 32px;
-      margin-bottom: 40px;
-      text-align: left;
-    }
-
-    .booking-details h3 {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: -0.08em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .booking-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .booking-item:last-child { margin-bottom: 0; }
-
-    .booking-item svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--text-muted);
-      fill: none;
-    }
-
-    .booking-item span {
-      font-size: 0.875rem;
-      color: var(--text-primary);
-    }
-
-    .next-steps {
-      max-width: 450px;
-    }
-
-    .next-steps h3 {
-      font-family: 'TASA Orbiter', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      letter-spacing: -0.05em;
-      margin-bottom: 16px;
-    }
-
-    .next-steps ul {
-      list-style: none;
-      text-align: left;
-    }
-
-    .next-steps li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .next-steps li .num {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 24px;
-      height: 24px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-input);
-      color: var(--text-primary);
-      border-radius: 4px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .footer {
-      padding: 40px 20px;
-      text-align: center;
-      border-top: 1px solid var(--border-input);
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 16px;
-    }
-
-    .footer-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover { color: var(--text-primary); }
-
-    .footer-copy {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-  </style>
 </head>
 <body>
   <!-- Header -->
@@ -342,91 +80,519 @@
     </div>
   </div>
 
-  <main class="confirmation-section">
-    <div class="success-icon">
-      <svg viewBox="0 0 24 24">
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
-    </div>
+  <!-- SECTION 1: Confirmation Header -->
+  <section class="confirmation-hero">
+    <div class="confirmation-hero-container">
+      <span class="confirmation-badge">CALL CONFIRMED</span>
+      <h1 class="confirmation-headline">Your Call Is Confirmed</h1>
+      <p class="confirmation-subheadline">Here's everything you need to know before we talk.</p>
 
-    <h1 class="confirmation-title">You're All Set.</h1>
-    <p class="confirmation-subtitle">Your strategy call has been booked. Check your email for the calendar invite and meeting details.</p>
-
-    <div class="booking-details">
-      <h3>Booking Details</h3>
-      <div class="booking-item">
-        <svg viewBox="0 0 24 24" stroke-width="2">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-        <span id="booking-date">Loading...</span>
-      </div>
-      <div class="booking-item">
-        <svg viewBox="0 0 24 24" stroke-width="2">
-          <circle cx="12" cy="12" r="10"></circle>
-          <polyline points="12 6 12 12 16 14"></polyline>
-        </svg>
-        <span id="booking-time">Loading...</span>
+      <div class="confirmation-intro">
+        <p>If you've made it to this page, it means you've taken the next step.</p>
+        <p>Our job between now and your call is simple: help you do your research and make this decision as efficient as possible.</p>
+        <p>You're going to receive emails from us. They're not fluff. They're designed to answer the questions you're already thinking about.</p>
+        <p>Below, you'll find everything else — common questions answered, results from practitioners like you, and what to expect on our call.</p>
+        <p>We won't harass you. We won't bullshit you. We'll just help you figure out if this is right for you.</p>
       </div>
     </div>
+  </section>
 
-    <div class="next-steps">
-      <h3>What Happens Next</h3>
-      <ul>
-        <li><span class="num">1</span> Check your inbox for a calendar invite with the meeting link</li>
-        <li><span class="num">2</span> Add the event to your calendar so you don't forget</li>
-        <li><span class="num">3</span> Come prepared with questions about your business goals</li>
-      </ul>
+  <!-- SECTION 2: Pre-Call Preparation -->
+  <section class="preparation-section">
+    <div class="preparation-container">
+      <div class="preparation-grid">
+        <!-- Call Reminder Card -->
+        <div class="preparation-card">
+          <h3 class="preparation-card-title">Call Reminder</h3>
+          <p class="preparation-card-text">We will contact you via text or email the day of your call to confirm. We will also confirm <strong>the night</strong> prior.</p>
+          <p class="preparation-card-text">At the time of your call you will receive a <strong>Zoom meeting link</strong> to join.</p>
+          <p class="preparation-card-text">The goal is for us to get absolute clarity on your goals, targets, and whether we can actually help.</p>
+        </div>
+
+        <!-- How to Prepare Card -->
+        <div class="preparation-card">
+          <h3 class="preparation-card-title">How to Prepare</h3>
+          <p class="preparation-card-text">Come prepared with your numbers. Revenue, ad spend (if any), and your goals.</p>
+          <p class="preparation-card-text">Bring any decision makers to this call. This will save everyone time.</p>
+          <p class="preparation-card-text">If you haven't already watched the full demo, make sure to watch it. It will make our time more efficient. <a href="/" class="preparation-link">Watch here.</a></p>
+        </div>
+      </div>
+
+      <!-- Commitment Cards -->
+      <div class="commitment-grid">
+        <!-- Our Commitment -->
+        <div class="commitment-card">
+          <h3 class="commitment-card-title">Our Commitment</h3>
+          <p class="commitment-card-text"><strong>We commit</strong> to show up on time and to show up prepared.</p>
+          <p class="commitment-card-text"><strong>Our team will</strong> show up without distractions — you will have their full attention for your entire call.</p>
+          <p class="commitment-card-text"><strong>We commit</strong> to telling you the truth and giving you honest feedback on your business.</p>
+        </div>
+
+        <!-- Your Commitment -->
+        <div class="commitment-card">
+          <h3 class="commitment-card-title">Your Commitment</h3>
+          <p class="commitment-card-text"><strong>We ask that</strong> you please commit to doing the same on your end.</p>
+          <p class="commitment-card-text"><strong>All that we ask</strong> in return is that you show up with an open mind, ready to learn and ready to implement.</p>
+          <p class="commitment-card-text"><strong>Please agree</strong> to respect our time as well by being fully present for our conversation.</p>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
 
+  <!-- SECTION 3: Common Questions (FAQ) -->
+  <section class="faq-section">
+    <h2 class="faq-headline">Questions You Probably Have</h2>
+    <p class="faq-subheadline">We answer these now so you don't have to wonder.</p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What exactly does Olympus do?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Olympus compresses what takes agencies 93 days into 54 seconds to 20 minutes.</p>
+          <p>Six agents handle the thinking, writing, building, creating, driving, and measuring of your marketing — so you're not paying an agency to figure it out slowly on your dime.</p>
+          <p>It's not a tool. It's a system built on $41M+ in verified results from cash-based healthcare practices.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>How is this different from hiring an agency?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Agencies charge you $5K-$15K/month to run 4-8 campaigns a year.</p>
+          <p>That's not enough volume to find what works — it's gambling with slow feedback loops.</p>
+          <p>Olympus lets you test hundreds of campaigns annually. Speed creates certainty. Volume negates luck.</p>
+          <p>You're not renting someone else's attention. You're building your own marketing engine.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>How is this different from using ChatGPT myself?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>ChatGPT doesn't know your market. It doesn't understand patient psychology, conversion frameworks, or how to build campaigns that actually run.</p>
+          <p>Olympus is trained on the SELECT Codex — proven frameworks from $41M+ in verified results. It's not a chatbot. It's a system built specifically for cash-based practitioners.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>How much of my time does this require?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Less than you're spending now chasing agencies, reviewing creative that misses the mark, or trying to DIY.</p>
+          <p>Most practitioners spend 2-4 hours in the first week during onboarding, then 30 minutes to an hour per week managing their marketing engine.</p>
+          <p>The system does the heavy lifting. You make the decisions.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What's the investment?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>We have three tiers starting at $1,500/month after a one-time onboarding fee.</p>
+          <p>The exact tier depends on your goals, your current setup, and how fast you want to move.</p>
+          <p>We'll cover this in detail on the call. No surprises. No hidden fees. No bullshit.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What kind of results should I expect?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>That depends on your market, your offer, and your execution.</p>
+          <p>We don't make guarantees because marketing isn't magic — it's math.</p>
+          <p>What we can tell you: practitioners using Olympus are testing more, learning faster, and making data-driven decisions instead of guessing.</p>
+          <p>The ones who execute see results. The ones who don't, don't. That's the truth.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What if it doesn't work for me?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Then we'll know why.</p>
+          <p>Olympus gives you the data to understand what's working and what's not.</p>
+          <p>If after honest effort it's not producing, you'll have clarity — not confusion. That's worth something.</p>
+          <p>Most people fail at marketing because they're guessing in the dark. At minimum, you'll have the lights on.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What happens on the call?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>We'll talk about where you are, where you want to be, and whether Olympus is the right fit.</p>
+          <p>No pressure. No bullshit.</p>
+          <p>If it's not right for you, we'll tell you. We'd rather have clarity than a bad-fit client.</p>
+          <p>Come with your questions. We'll answer all of them.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>I've been burned by agencies before. Why is this different?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>Because you're not hiring us to do your marketing for you.</p>
+          <p>You're getting a system that lets you own your marketing — with the speed and intelligence to actually compete.</p>
+          <p>Agencies rent you their attention. Olympus gives you the engine.</p>
+          <p>When you leave an agency, you leave with nothing. When you use Olympus, you build assets you keep.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Do I need to be tech-savvy to use this?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <p>No.</p>
+          <p>If you can send an email and click buttons, you can use Olympus.</p>
+          <p>We handle the onboarding. We walk you through setup. The system is designed for practitioners, not developers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4A: Video Testimonials -->
+  <section class="video-testimonials-section">
+    <div class="video-testimonials-container">
+      <h2 class="video-testimonials-headline">Full Partner Experiences</h2>
+      <p class="video-testimonials-subheadline">Hear directly from practitioners who've been through the process.</p>
+
+      <div class="video-testimonials-grid">
+        <!-- Video 1: Rob DeMartino -->
+        <div class="video-testimonial-card">
+          <div class="video-testimonial-player">
+            <div class="video-testimonial-poster">
+              <img src="/assets/images/rob-demartino.webp" alt="Rob DeMartino" class="video-testimonial-poster-img">
+              <div class="video-testimonial-play">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/>
+                  <path d="M19 16L34 24L19 32V16Z" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-testimonial-info">
+            <h3 class="video-testimonial-title">I Actually Prefer Funnel Patients Over Referrals</h3>
+            <div class="video-testimonial-speakers">
+              <span class="video-testimonial-speaker">JONCAMERON Johnson — FOUNDER OF ETHO</span>
+              <span class="video-testimonial-speaker">ROB DeMartino — FOUNDER OF SUPERIOR HEALTH SOLUTIONS</span>
+            </div>
+            <span class="video-testimonial-duration">23:45</span>
+          </div>
+          <blockquote class="video-testimonial-quote">
+            "The funniest part is I would actually prefer a patient who went through the funnel rather than a referral. Referrals come in trusting me but have no idea why or what I do. Funnel patients are educated BY ME - we're already on the same page, we're in the red zone... my job is just to connect dots and not screw it up."
+          </blockquote>
+        </div>
+
+        <!-- Video 2: Chris Cormier -->
+        <div class="video-testimonial-card">
+          <div class="video-testimonial-player">
+            <div class="video-testimonial-poster">
+              <img src="/assets/images/chris-cormier.webp" alt="Chris Cormier" class="video-testimonial-poster-img">
+              <div class="video-testimonial-play">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/>
+                  <path d="M19 16L34 24L19 32V16Z" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-testimonial-info">
+            <h3 class="video-testimonial-title">Never Got a Patient Through Ads (Until This)</h3>
+            <div class="video-testimonial-speakers">
+              <span class="video-testimonial-speaker">JONCAMERON Johnson — FOUNDER OF ETHO</span>
+              <span class="video-testimonial-speaker">CHRIS Cormier — FOUNDER OF THE NERVE HEALTH INSTITUTE</span>
+            </div>
+            <span class="video-testimonial-duration">33:55</span>
+          </div>
+          <blockquote class="video-testimonial-quote">
+            "We never got a patient through advertising before - nothing ever worked. Everything was organic referrals. Now I get patients coming in saying 'I just heard about you on Facebook' and they end up being some of the best patients ever. I was missing opportunities without running ads for those people."
+          </blockquote>
+        </div>
+
+        <!-- Video 3: Blythe Landry -->
+        <div class="video-testimonial-card">
+          <div class="video-testimonial-player">
+            <div class="video-testimonial-poster">
+              <img src="/assets/images/blythe-landry.webp" alt="Blythe Landry" class="video-testimonial-poster-img">
+              <div class="video-testimonial-play">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/>
+                  <path d="M19 16L34 24L19 32V16Z" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-testimonial-info">
+            <h3 class="video-testimonial-title">From Lost to Completely Life Changing Results</h3>
+            <div class="video-testimonial-speakers">
+              <span class="video-testimonial-speaker">BLYTHE Landry — LCSW & M.Ed.</span>
+            </div>
+            <span class="video-testimonial-duration">4:09</span>
+          </div>
+          <blockquote class="video-testimonial-quote">
+            "We were extremely limited in our ability to know the exact steps to take to get to the next level. At crossroads, we'd tried everything. In 3.5 months, I have a completely new layout, new website, several new clients at much higher rates. It's completely life changing, and I don't say that lightly."
+          </blockquote>
+        </div>
+
+        <!-- Video 4: Kevin Linderman -->
+        <div class="video-testimonial-card">
+          <div class="video-testimonial-player">
+            <div class="video-testimonial-poster">
+              <div class="video-testimonial-initials">KL</div>
+              <div class="video-testimonial-play">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/>
+                  <path d="M19 16L34 24L19 32V16Z" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-testimonial-info">
+            <h3 class="video-testimonial-title">From 10 Failed Agencies to $135K Weeks</h3>
+            <div class="video-testimonial-speakers">
+              <span class="video-testimonial-speaker">JONCAMERON Johnson — FOUNDER OF ETHO</span>
+              <span class="video-testimonial-speaker">KEVIN Linderman — FOUNDER OF DR. KEVIN'S WELLNESS</span>
+            </div>
+            <span class="video-testimonial-duration">12:07</span>
+          </div>
+          <blockquote class="video-testimonial-quote">
+            "I fired like, ten companies. Ten. They all had one trick ponies that would work and then stop. When things went bad with Etho's system, they actually dug in, fixed the problem, and it's been great ever since. Now patients walk in already knowing what we do... I could almost just sit down and tell them how much it is."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4B: Text Testimonials -->
+  <section class="text-testimonials-section">
+    <div class="text-testimonials-container">
+      <h2 class="text-testimonials-headline">Results From Practitioners Like You</h2>
+      <p class="text-testimonials-subheadline">Not cherry-picked highlights. The real spectrum.</p>
+      <p class="text-testimonials-intro">We don't just show you the home runs. We show you the full picture — wins, struggles, and everything in between. That way you know what's actually possible.</p>
+
+      <div class="testimonial-bento-grid">
+        <!-- Chris Cormier -->
+        <div class="testimonial-bento-card">
+          <div class="testimonial-bento-quote-mark"><q></q></div>
+          <blockquote class="testimonial-bento-quote">I thought I was doing all the right stuff, but I just needed the right person to help see my vision and get it to market. I had worked with at least a dozen other companies and consultants. No one could get it right, but that's literally what Etho has been able to do. If you're looking for someone to work their tail off to help you win, Etho is the right choice.</blockquote>
+          <div class="testimonial-bento-author">
+            <img src="/assets/images/chris-cormier.webp" alt="Chris Cormier" class="testimonial-bento-image">
+            <div class="testimonial-bento-divider"></div>
+            <div class="testimonial-bento-info">
+              <h3 class="testimonial-bento-name">Chris Cormier, D.C.</h3>
+              <p class="testimonial-bento-position">Nerve Health Institute & Bodychargers.com</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rob DeMartino -->
+        <div class="testimonial-bento-card">
+          <div class="testimonial-bento-quote-mark"><q></q></div>
+          <blockquote class="testimonial-bento-quote">I worked with 13 other companies and noone could produce what Etho has. Pre-sold patients are on another level. They come in already understanding my methods and trust me from the start. No more stress-filled salesy consult. Just genuine conversations about care. My practice flows smoothly, and I can finally dedicate myself fully to "doctoring".</blockquote>
+          <div class="testimonial-bento-author">
+            <img src="/assets/images/rob-demartino.webp" alt="Rob DeMartino" class="testimonial-bento-image">
+            <div class="testimonial-bento-divider"></div>
+            <div class="testimonial-bento-info">
+              <h3 class="testimonial-bento-name">Rob DeMartino, D.C.</h3>
+              <p class="testimonial-bento-position">Superior Health Solutions & Beyond Functional Medicine</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blythe Landry - Wide card -->
+        <div class="testimonial-bento-card testimonial-bento-card-wide">
+          <div class="testimonial-bento-quote-mark"><q></q></div>
+          <blockquote class="testimonial-bento-quote">We're seeing patients who are actually ready to invest in their health. No more tire-kickers. Olympus pre-qualifies everyone.</blockquote>
+          <div class="testimonial-bento-author">
+            <img src="/assets/images/blythe-landry.webp" alt="Blythe Landry" class="testimonial-bento-image">
+            <div class="testimonial-bento-divider"></div>
+            <div class="testimonial-bento-info">
+              <h3 class="testimonial-bento-name">Blythe Landry</h3>
+              <p class="testimonial-bento-position">Blythe Landry Coaching</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Carousel -->
+      <div class="results-carousel-wrapper">
+        <div class="results-carousel" data-carousel="results">
+          <div class="results-track">
+            <div class="screenshot-item" data-index="0">
+              <img src="/assets/testimonials/Result 1.svg" alt="Client result screenshot 1" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="1">
+              <img src="/assets/testimonials/Result 2.svg" alt="Client result screenshot 2" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="2">
+              <img src="/assets/testimonials/Result 3.svg" alt="Client result screenshot 3" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="3">
+              <img src="/assets/testimonials/Result 4.svg" alt="Client result screenshot 4" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="4">
+              <img src="/assets/testimonials/Result 5.svg" alt="Client result screenshot 5" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="5">
+              <img src="/assets/testimonials/Result 6.svg" alt="Client result screenshot 6" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="6">
+              <img src="/assets/testimonials/Result 7.svg" alt="Client result screenshot 7" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="7">
+              <img src="/assets/testimonials/Result 8.svg" alt="Client result screenshot 8" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="8">
+              <img src="/assets/testimonials/Result 9.svg" alt="Client result screenshot 9" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="9">
+              <img src="/assets/testimonials/Result 10.svg" alt="Client result screenshot 10" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="10">
+              <img src="/assets/testimonials/Result 11.svg" alt="Client result screenshot 11" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="11">
+              <img src="/assets/testimonials/Result 12.svg" alt="Client result screenshot 12" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="12">
+              <img src="/assets/testimonials/Result 13.svg" alt="Client result screenshot 13" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="13">
+              <img src="/assets/testimonials/Result 14.svg" alt="Client result screenshot 14" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="14">
+              <img src="/assets/testimonials/Result 15.svg" alt="Client result screenshot 15" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="15">
+              <img src="/assets/testimonials/Result 16.svg" alt="Client result screenshot 16" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="16">
+              <img src="/assets/testimonials/Result 17.svg" alt="Client result screenshot 17" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="17">
+              <img src="/assets/testimonials/Result 18.svg" alt="Client result screenshot 18" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="18">
+              <img src="/assets/testimonials/Result 19.svg" alt="Client result screenshot 19" loading="lazy">
+            </div>
+            <div class="screenshot-item" data-index="19">
+              <img src="/assets/testimonials/Result 20.svg" alt="Client result screenshot 20" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="testimonials-disclaimer">The testimonials and results presented on this website or in our materials reflect the experiences and opinions of individual clients. Results may vary and are not guaranteed. Many factors influence success, including but not limited to market conditions, individual effort, and adherence to the strategies provided.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: Final CTA -->
+  <section class="final-cta-section">
+    <div class="final-cta-container">
+      <h2 class="final-cta-headline">See You On The Call</h2>
+      <p class="final-cta-subheadline">If you have questions before then, reply to any of our emails.</p>
+      <p class="final-cta-text">We'll answer.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="footer">
+    <div class="footer-logo">
+      <img src="/olympus-icons/olympus-line-dark.svg" alt="Olympus" class="logo-dark" width="32" height="32">
+      <img src="/olympus-icons/olympus-line-light.svg" alt="Olympus" class="logo-light" width="32" height="32">
+    </div>
     <nav class="footer-links">
       <a href="/terms.html">Terms of Service</a>
       <a href="/cookies.html">Cookie Policy</a>
     </nav>
-    <p class="footer-copy">&copy; 2024 OLYMPUS. ALL RIGHTS RESERVED.</p>
+    <p class="footer-legal">ETHO CARES HEALTH & LEGAL REGIONS</p>
+    <p class="footer-disclaimer">This website is operated and maintained by Etho LLC and/or its subsidiaries ("Etho"). Use of this site constitutes acceptance of the Terms of Service. Content and testimonials are for informational purposes only.</p>
+    <div class="footer-olympus-ghost">Olympus</div>
   </footer>
 
-  <!-- Theme Detection -->
+  <!-- Theme Detection Script -->
   <script>
     (function() {
+      const favicon = document.getElementById('favicon');
       const html = document.documentElement;
-      const savedTheme = localStorage.getItem('theme');
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      if (savedTheme) {
-        html.setAttribute('data-theme', savedTheme);
-      } else if (!systemDark) {
-        html.setAttribute('data-theme', 'light');
+      function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        favicon.href = theme === 'dark'
+          ? '/olympus-icons/olympus-line-dark.ico'
+          : '/olympus-icons/olympus-line-light.ico';
       }
+
+      // Initialize theme based on system preference
+      setTheme(systemDark ? 'dark' : 'light');
 
       // Listen for system theme changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem('theme')) {
-          html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
+        setTheme(e.matches ? 'dark' : 'light');
       });
     })();
+  </script>
 
-    // Display booking details
-    (function() {
-      const booking = JSON.parse(sessionStorage.getItem('booking') || '{}');
-
-      if (booking.startTime) {
-        const date = new Date(booking.startTime);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-
-        document.getElementById('booking-date').textContent = date.toLocaleDateString('en-US', options);
-        document.getElementById('booking-time').textContent = date.toLocaleTimeString('en-US', timeOptions);
-      } else {
-        document.getElementById('booking-date').textContent = 'Check your email for details';
-        document.getElementById('booking-time').textContent = 'Check your email for details';
-      }
-    })();
+  <!-- FAQ Accordion -->
+  <script>
+    document.querySelectorAll('.faq-question').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        item.classList.toggle('open');
+      });
+    });
   </script>
 
   <!-- Mobile Menu Toggle -->
@@ -470,6 +636,75 @@
         closeMenu();
       }
     });
+  })();
+  </script>
+
+  <!-- Results Carousel -->
+  <script>
+  (function() {
+    var carousel = document.querySelector('[data-carousel="results"]');
+    if (!carousel) return;
+
+    var track = carousel.querySelector('.results-track');
+    if (!track) return;
+
+    var wrapper = carousel.closest('.results-carousel-wrapper');
+    var items = track.querySelectorAll('.screenshot-item');
+    if (items.length === 0) return;
+
+    var itemWidth = items[0].offsetWidth + 16;
+    var scrollSpeed = 0.5;
+    var scrollPosition = 0;
+    var animationId = null;
+    var isHovered = false;
+
+    // Clone items for infinite scroll
+    items.forEach(function(item) {
+      var clone = item.cloneNode(true);
+      track.appendChild(clone);
+    });
+
+    function animate() {
+      if (!isHovered) {
+        scrollPosition += scrollSpeed;
+        if (scrollPosition >= itemWidth * items.length) {
+          scrollPosition = 0;
+        }
+        track.style.transform = 'translateX(-' + scrollPosition + 'px)';
+      }
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function startCarousel() {
+      if (!animationId) {
+        animationId = requestAnimationFrame(animate);
+      }
+    }
+
+    function stopCarousel() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    }
+
+    if (wrapper) {
+      wrapper.addEventListener('mouseenter', function() { isHovered = true; });
+      wrapper.addEventListener('mouseleave', function() { isHovered = false; });
+    }
+
+    // Start carousel when visible
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          startCarousel();
+        } else {
+          stopCarousel();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(carousel);
   })();
   </script>
 
