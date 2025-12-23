@@ -2362,6 +2362,87 @@ wistia-player:not(:defined) {
 }
 
 /* ========================================
+   FAQ Video Section
+   ======================================== */
+
+.faq-video-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.faq-video-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.faq-video-headline {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.faq-video-subheadline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.faq-video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.faq-video-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-video-header {
+  background: var(--bg-elevated);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.faq-video-title {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.faq-video-player {
+  padding: 16px;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .faq-video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-video-headline {
+    font-size: 2rem;
+  }
+}
+
+/* ========================================
    From the Founder Section
    ======================================== */
 
@@ -3934,7 +4015,7 @@ wistia-player:not(:defined) {
 }
 
 .stats-story-section .problem-bento-headline {
-  color: #000000;
+  color: var(--text-primary);
 }
 
 .stats-story-section .problem-bento-subheadline {
@@ -3949,6 +4030,11 @@ wistia-player:not(:defined) {
   min-height: 350px;
 }
 
+.stats-top-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .stats-main-number {
   font-family: 'Acid Grotesk', sans-serif;
   font-size: 10rem;
@@ -3959,10 +4045,12 @@ wistia-player:not(:defined) {
 }
 
 .stats-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .stats-label strong {
@@ -3970,10 +4058,12 @@ wistia-player:not(:defined) {
 }
 
 .stats-tagline {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .stats-tagline strong {
@@ -4022,8 +4112,9 @@ wistia-player:not(:defined) {
 }
 
 .stat-cta {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.125rem;
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 2rem;
+  line-height: 1.1;
   color: #000000;
   align-self: flex-end;
 }
@@ -4040,6 +4131,14 @@ wistia-player:not(:defined) {
 
   .stats-main-number {
     font-size: 6rem;
+  }
+
+  .stats-label {
+    font-size: 1.5rem;
+  }
+
+  .stats-tagline {
+    font-size: 1.5rem;
   }
 
   .stat-percent {
@@ -7997,6 +8096,13 @@ wistia-player:not(:defined) {
   color: rgb(160, 160, 160);
   line-height: 1.4;
   margin-bottom: 40px;
+}
+
+.confirmation-video {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .confirmation-intro {
