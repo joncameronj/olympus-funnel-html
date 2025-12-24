@@ -723,7 +723,7 @@ body.menu-open {
 /* Subheadline */
 .subheadline {
   font-family: 'Inter', sans-serif;
-  font-size: 1.375rem;
+  font-size: 1.8rem;
   font-weight: 500;
   letter-spacing: -0.07em;
   color: rgb(160, 160, 160);
@@ -1202,7 +1202,7 @@ wistia-player:not(:defined) {
   }
 
   .subheadline {
-    font-size: 22px;
+    font-size: 28px;
     letter-spacing: -0.07em;
     line-height: 1.4;
     margin-bottom: 24px;
@@ -1912,7 +1912,7 @@ wistia-player:not(:defined) {
 }
 
 .how-it-works-headline-gradient {
-  background: radial-gradient(circle at 0% 100%, #FFFFFF 0%, #7EFFFF 20%, #0077FF 40%, #4400CC 67%, #540081 100%);
+  background: radial-gradient(circle at 100% 0%, #FFFFFF 0%, #7EFFFF 20%, #0077FF 40%, #4400CC 67%, #540081 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -2404,31 +2404,40 @@ wistia-player:not(:defined) {
 }
 
 .faq-video-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  background: rgba(155, 155, 155, 0.1);
+  border-radius: 4px;
+  padding: 24px;
   overflow: hidden;
 }
 
-.faq-video-header {
-  background: var(--bg-elevated);
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border-subtle);
+[data-theme="light"] .faq-video-card {
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .faq-video-title {
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.03em;
   color: var(--text-primary);
+  line-height: 1.2;
   text-align: center;
-  margin: 0;
+  margin: 0 0 8px;
+}
+
+.faq-video-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  color: var(--text-muted);
+  line-height: 1.4;
+  text-align: center;
+  margin: 0 0 16px;
 }
 
 .faq-video-player {
-  padding: 16px;
-  border-radius: 0;
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -2464,8 +2473,8 @@ wistia-player:not(:defined) {
 }
 
 .founder-photo img {
-  width: 180px;
-  height: 180px;
+  width: 234px;
+  height: 234px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -2562,8 +2571,8 @@ wistia-player:not(:defined) {
   }
 
   .founder-photo img {
-    width: 150px;
-    height: 150px;
+    width: 195px;
+    height: 195px;
   }
 
   .founder-divider {
@@ -4019,7 +4028,7 @@ wistia-player:not(:defined) {
 }
 
 .stats-story-section .problem-bento-subheadline {
-  color: rgb(100, 100, 100);
+  color: rgb(160, 160, 160);
 }
 
 /* Dark card styling */
@@ -4072,7 +4081,7 @@ wistia-player:not(:defined) {
 
 /* Light card styling */
 .stats-card-light {
-  background: #ffffff !important;
+  background: var(--bg-card);
 }
 
 .stats-percentages {
@@ -5263,11 +5272,55 @@ wistia-player:not(:defined) {
   height: 48px;
   border-radius: 8px;
   background: #333;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.cb-dot.animate {
+  animation: dotFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: var(--delay);
+}
+
+.cb-dot.winner.animate {
+  animation: 
+    dotFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    winnerHighlight 0.5s ease-in-out forwards 1.5s,
+    winnerPulse 2s ease-in-out infinite 2s;
+  animation-delay: var(--delay), 1.5s, 2s;
+}
+
+@keyframes dotFadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes winnerHighlight {
+  0% {
+    background: #333;
+    box-shadow: none;
+  }
+  100% {
+    background: #22c55e;
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.5);
+  }
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.8);
+    transform: scale(1.05);
+  }
 }
 
 .cb-dot.winner {
-  background: #22c55e;
-  box-shadow: 0 0 24px rgba(34, 197, 94, 0.5);
+  background: #333; /* Starts gray */
+  box-shadow: none;
 }
 
 /* ========== CARD 2: EFFICIENCY ========== */
@@ -6381,7 +6434,7 @@ wistia-player:not(:defined) {
 
 /* Animations only when 'animate' class present (viewport-triggered) */
 .upside-card-calendar.animate .calendar-grid span.day-passed {
-  animation: dayPass 0.5s ease-out forwards;
+  animation: dayPass 0.125s ease-out forwards;
 }
 
 .upside-card-calendar.animate .calendar-grid span.day-launch {
@@ -7323,7 +7376,6 @@ wistia-player:not(:defined) {
   margin-bottom: 40px;
   padding: 80px 0;
   background: var(--bg-page);
-  overflow: hidden;
 }
 
 [data-theme="light"] .results-section {
@@ -7360,42 +7412,16 @@ wistia-player:not(:defined) {
   line-height: 1.2;
 }
 
-/* Carousel Wrapper - Full width */
+/* Carousel Wrapper - Full viewport width (edge to edge) */
 .results-carousel-wrapper {
-  width: 100%;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
   overflow: hidden;
   cursor: grab;
   -webkit-user-select: none;
   user-select: none;
-  position: relative;
-}
-
-.results-carousel-wrapper::before,
-.results-carousel-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 400px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.results-carousel-wrapper::before {
-  left: 0;
-  background: linear-gradient(to right, var(--bg-page) 0%, var(--bg-page) 20%, transparent 100%);
-}
-
-.results-carousel-wrapper::after {
-  right: 0;
-  background: linear-gradient(to left, var(--bg-page) 0%, var(--bg-page) 20%, transparent 100%);
-}
-
-@media (max-width: 600px) {
-  .results-carousel-wrapper::before,
-  .results-carousel-wrapper::after {
-    display: none;
-  }
 }
 
 .results-carousel-wrapper:active {
@@ -7409,7 +7435,7 @@ wistia-player:not(:defined) {
 .results-track {
   display: flex;
   gap: 16px;
-  padding: 20px 0;
+  padding: 20px 40px;
   will-change: transform;
 }
 
@@ -8395,13 +8421,42 @@ wistia-player:not(:defined) {
 .video-testimonial-quote {
   font-family: 'Inter', sans-serif;
   font-size: 0.9375rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.video-testimonial-quote .quote-highlight {
+  display: block;
+  margin-top: 12px;
+  color: #000000;
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.3em;
+  font-weight: 500;
   font-style: italic;
-  margin: 0;
-  flex-grow: 1;
+}
+
+.video-testimonial-stars {
+  display: flex;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.video-testimonial-stars svg {
+  height: 20px;
+  width: auto;
+}
+
+/* Magenta/Pink gradient stars */
+.video-testimonial-stars.stars-pink svg {
+  fill: url(#star-gradient-pink);
+}
+
+/* Cyan/Purple gradient stars */
+.video-testimonial-stars.stars-blue svg {
+  fill: url(#star-gradient-blue);
 }
 
 /* Text Testimonials Section */

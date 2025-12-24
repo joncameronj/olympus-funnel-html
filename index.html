@@ -126,11 +126,11 @@
     </div>
 
     <!-- Results Section -->
-    <section class="results-section">
+    <section class="results-section" id="hero-results">
       <p class="results-eyebrow">OLYMPUS WAS BUILT FROM</p>
       <p class="results-amount">
-        <span class="results-amount-desktop">$41,000,000<span class="results-plus">+</span></span>
-        <span class="results-amount-mobile">$41M<span class="results-plus">+</span></span>
+        <span class="results-amount-desktop"><span class="count-number" data-count-from="1000000" data-count-to="41000000" data-format="desktop">$1,000,000+</span></span>
+        <span class="results-amount-mobile"><span class="count-number" data-count-from="1" data-count-to="41" data-format="mobile">$1M+</span></span>
       </p>
       <p class="results-tagline">results generated for healthcare practices</p>
     </section>
@@ -227,7 +227,7 @@
     <div class="problem-bento-container">
       <div class="problem-bento-header">
         <h2 class="problem-bento-headline">We've heard your story before.</h2>
-        <p class="problem-bento-subheadline">250+ sales calls from our agency days. Same frustrations. Same broken promises. Same patterns.</p>
+        <p class="problem-bento-subheadline">Same frustrations. Same broken promises. Same patterns.</p>
       </div>
 
       <div class="problem-bento-grid">
@@ -244,15 +244,15 @@
         <div class="problem-bento-card stats-card-light">
           <div class="stats-percentages">
             <div class="stats-row">
-              <div class="stat-item"><span class="stat-percent">72%</span><span class="stat-desc">burned by agencies</span></div>
-              <div class="stat-item"><span class="stat-percent">68%</span><span class="stat-desc">want predictable leads</span></div>
+              <div class="stat-item"><span class="stat-percent" data-target="72">0%</span><span class="stat-desc">burned by agencies</span></div>
+              <div class="stat-item"><span class="stat-percent" data-target="68">0%</span><span class="stat-desc">want predictable leads</span></div>
             </div>
             <div class="stats-row">
-              <div class="stat-item"><span class="stat-percent">64%</span><span class="stat-desc">stuck at a plateau</span></div>
-              <div class="stat-item"><span class="stat-percent">56%</span><span class="stat-desc">poor lead quality</span></div>
+              <div class="stat-item"><span class="stat-percent" data-target="64">0%</span><span class="stat-desc">stuck at a plateau</span></div>
+              <div class="stat-item"><span class="stat-percent" data-target="56">0%</span><span class="stat-desc">poor lead quality</span></div>
             </div>
             <div class="stats-row">
-              <div class="stat-item"><span class="stat-percent">40%</span><span class="stat-desc">confused on digital ads</span></div>
+              <div class="stat-item"><span class="stat-percent" data-target="40">0%</span><span class="stat-desc">confused on digital ads</span></div>
               <div class="stat-item stat-cta">You're not the problem. <strong>So what is?</strong></div>
             </div>
           </div>
@@ -1714,16 +1714,16 @@
           <h3>1-in-10 campaigns win.</h3>
           <p>That's not pessimism. That's the math.</p>
           <div class="cb-dots-row">
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot"></div>
-            <div class="cb-dot winner"></div>
+            <div class="cb-dot" style="--delay: 0.1s"></div>
+            <div class="cb-dot" style="--delay: 0.2s"></div>
+            <div class="cb-dot" style="--delay: 0.3s"></div>
+            <div class="cb-dot" style="--delay: 0.4s"></div>
+            <div class="cb-dot" style="--delay: 0.5s"></div>
+            <div class="cb-dot" style="--delay: 0.6s"></div>
+            <div class="cb-dot" style="--delay: 0.7s"></div>
+            <div class="cb-dot" style="--delay: 0.8s"></div>
+            <div class="cb-dot" style="--delay: 0.9s"></div>
+            <div class="cb-dot winner" style="--delay: 1.0s"></div>
           </div>
         </div>
 
@@ -4372,6 +4372,159 @@
         closeMenu();
       }
     });
+  })();
+  </script>
+
+  <!-- Count-Up Animation -->
+  <script>
+  (function() {
+    var heroResults = document.getElementById('hero-results');
+    if (!heroResults) return;
+
+    var countElements = heroResults.querySelectorAll('.count-number');
+    var hasAnimated = false;
+    var duration = 2000; // 2 seconds
+
+    function formatNumber(num, format) {
+      if (format === 'desktop') {
+        return '$' + num.toLocaleString() + '+';
+      } else {
+        return '$' + num + 'M+';
+      }
+    }
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animateCount(element) {
+      var from = parseInt(element.dataset.countFrom, 10);
+      var to = parseInt(element.dataset.countTo, 10);
+      var format = element.dataset.format;
+      var startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var easedProgress = easeInOutCubic(progress);
+        var current = Math.floor(from + (to - from) * easedProgress);
+
+        element.textContent = formatNumber(current, format);
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function startAnimation() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      countElements.forEach(function(el) {
+        animateCount(el);
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          startAnimation();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(heroResults);
+  })();
+  </script>
+
+  <!-- Stats Percentage Count-Up -->
+  <script>
+  (function() {
+    var statsSection = document.querySelector('.stats-story-section');
+    if (!statsSection) return;
+
+    var percentElements = statsSection.querySelectorAll('.stat-percent');
+    var hasAnimated = false;
+    var duration = 1500; // 1.5 seconds
+
+    function easeOutQuad(t) {
+      return t * (2 - t);
+    }
+
+    function animatePercent(element) {
+      var target = parseInt(element.dataset.target, 10);
+      var startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var easedProgress = easeOutQuad(progress);
+        var current = Math.floor(easedProgress * target);
+
+        element.textContent = current + '%';
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function startAnimation() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      percentElements.forEach(function(el) {
+        animatePercent(el);
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          startAnimation();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(statsSection);
+  })();
+  </script>
+
+  <!-- Comparison Dots Animation -->
+  <script>
+  (function() {
+    var compareSection = document.getElementById('compare');
+    if (!compareSection) return;
+
+    var dots = compareSection.querySelectorAll('.cb-dot');
+    var hasAnimated = false;
+
+    function startDotsAnimation() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      dots.forEach(function(dot) {
+        dot.classList.add('animate');
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          startDotsAnimation();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(compareSection);
   })();
   </script>
 </body>
