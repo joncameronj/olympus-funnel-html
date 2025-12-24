@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookie Policy | Olympus</title>
   <meta name="description" content="Cookie policy for Olympus.">
-  <meta name="color-scheme" content="dark light">
+  <meta name="color-scheme" content="light">
 
   <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
@@ -231,13 +231,14 @@
 
       <!-- Desktop nav (hidden on mobile) -->
       <nav class="header-nav">
+        <a href="/#results" class="header-nav-link">Proof</a>
         <a href="/#problem" class="header-nav-link">Problem</a>
         <a href="/#product" class="header-nav-link">Product</a>
-        <a href="/#compare" class="header-nav-link">Compare</a>
-        <a href="/#results" class="header-nav-link">Proof</a>
         <a href="/#features" class="header-nav-link">Features</a>
         <a href="/#process" class="header-nav-link">Process</a>
+        <a href="/#compare" class="header-nav-link">Compare</a>
         <a href="/#pricing" class="header-nav-link">Pricing</a>
+        <a href="/#faq" class="header-nav-link">FAQ</a>
       </nav>
 
       <!-- Desktop CTA (hidden on mobile) -->
@@ -268,13 +269,14 @@
       </button>
     </div>
     <nav class="mobile-menu-nav">
+      <a href="/#results" class="mobile-menu-link">Proof</a>
       <a href="/#problem" class="mobile-menu-link">Problem</a>
       <a href="/#product" class="mobile-menu-link">Product</a>
-      <a href="/#compare" class="mobile-menu-link">Compare</a>
-      <a href="/#results" class="mobile-menu-link">Proof</a>
       <a href="/#features" class="mobile-menu-link">Features</a>
       <a href="/#process" class="mobile-menu-link">Process</a>
+      <a href="/#compare" class="mobile-menu-link">Compare</a>
       <a href="/#pricing" class="mobile-menu-link">Pricing</a>
+      <a href="/#faq" class="mobile-menu-link">FAQ</a>
     </nav>
     <div class="mobile-menu-footer">
       <a href="/calendar.html" class="mobile-menu-cta">Book Your Demo</a>
@@ -366,25 +368,22 @@
     <p class="footer-copy">&copy; 2024 OLYMPUS. ALL RIGHTS RESERVED.</p>
   </footer>
 
-  <!-- Theme Detection -->
+  <!-- Theme Detection (light theme only for now) -->
   <script>
     (function() {
       const html = document.documentElement;
-      const savedTheme = localStorage.getItem('theme');
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // const savedTheme = localStorage.getItem('theme');
+      // const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      if (savedTheme) {
-        html.setAttribute('data-theme', savedTheme);
-      } else if (!systemDark) {
-        html.setAttribute('data-theme', 'light');
-      }
+      // Force light theme for now (dark theme assets pending)
+      html.setAttribute('data-theme', 'light');
 
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem('theme')) {
-          html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
-      });
+      // Listen for system theme changes (disabled for now)
+      // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      //   if (!localStorage.getItem('theme')) {
+      //     html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      //   }
+      // });
     })();
   </script>
 

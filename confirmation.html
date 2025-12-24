@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Call Is Confirmed | Olympus</title>
   <meta name="description" content="Your strategy call has been confirmed. Here's everything you need to know before we talk.">
-  <meta name="color-scheme" content="dark light">
+  <meta name="color-scheme" content="light">
 
   <!-- DNS Prefetch -->
   <link rel="dns-prefetch" href="//fast.wistia.com">
@@ -14,7 +14,7 @@
   <script src="https://fast.wistia.com/player.js" async></script>
 
   <!-- Favicon -->
-  <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-dark.ico" type="image/x-icon">
+  <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-light.ico" type="image/x-icon">
 
   <!-- Preload fonts -->
   <link rel="preload" href="/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf" as="font" type="font/otf" crossorigin>
@@ -33,21 +33,15 @@
 
       <!-- Desktop nav (hidden on mobile) -->
       <nav class="header-nav">
-        <a href="/#problem" class="header-nav-link">Problem</a>
-        <a href="/#product" class="header-nav-link">Product</a>
-        <a href="/#compare" class="header-nav-link">Compare</a>
-        <a href="/#results" class="header-nav-link">Proof</a>
-        <a href="/#features" class="header-nav-link">Features</a>
-        <a href="/#process" class="header-nav-link">Process</a>
-        <a href="/#pricing" class="header-nav-link">Pricing</a>
+        <a href="#prepare" class="header-nav-link">Prepare</a>
+        <a href="#questions" class="header-nav-link">Questions</a>
+        <a href="#testimonials" class="header-nav-link">Testimonials</a>
+        <a href="#results" class="header-nav-link">Results</a>
+        <a href="#faq" class="header-nav-link">FAQ</a>
       </nav>
 
-      <!-- Desktop CTA (hidden on mobile) -->
-      <a href="/calendar.html" class="header-cta header-cta-desktop">Book Demo</a>
-
-      <!-- Mobile: CTA + Hamburger (hidden on desktop) -->
+      <!-- Mobile: Hamburger only (hidden on desktop) -->
       <div class="header-mobile-actions">
-        <a href="/calendar.html" class="header-cta">Book Demo</a>
         <button class="hamburger" aria-label="Open menu" aria-expanded="false">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -70,17 +64,12 @@
       </button>
     </div>
     <nav class="mobile-menu-nav">
-      <a href="/#problem" class="mobile-menu-link">Problem</a>
-      <a href="/#product" class="mobile-menu-link">Product</a>
-      <a href="/#compare" class="mobile-menu-link">Compare</a>
-      <a href="/#results" class="mobile-menu-link">Proof</a>
-      <a href="/#features" class="mobile-menu-link">Features</a>
-      <a href="/#process" class="mobile-menu-link">Process</a>
-      <a href="/#pricing" class="mobile-menu-link">Pricing</a>
+      <a href="#prepare" class="mobile-menu-link">Prepare</a>
+      <a href="#questions" class="mobile-menu-link">Questions</a>
+      <a href="#testimonials" class="mobile-menu-link">Testimonials</a>
+      <a href="#results" class="mobile-menu-link">Results</a>
+      <a href="#faq" class="mobile-menu-link">FAQ</a>
     </nav>
-    <div class="mobile-menu-footer">
-      <a href="/calendar.html" class="mobile-menu-cta">Book Your Demo</a>
-    </div>
   </div>
 
   <!-- SECTION 1: Confirmation Header -->
@@ -106,7 +95,7 @@
   </section>
 
   <!-- SECTION 2: Pre-Call Preparation -->
-  <section class="preparation-section">
+  <section id="prepare" class="preparation-section">
     <div class="preparation-container">
       <div class="preparation-grid">
         <!-- Call Reminder Card -->
@@ -129,7 +118,7 @@
   </section>
 
   <!-- SECTION 3B: FAQ Video Breakout -->
-  <section class="faq-video-section">
+  <section id="questions" class="faq-video-section">
     <div class="faq-video-container">
       <h2 class="faq-video-headline">Quick Answers</h2>
       <p class="faq-video-subheadline">Watch these short videos for the most common questions.</p>
@@ -283,7 +272,7 @@
   </section>
 
   <!-- SECTION 4A: Video Testimonials -->
-  <section class="video-testimonials-section">
+  <section id="testimonials" class="video-testimonials-section">
     <div class="video-testimonials-container">
       <h2 class="video-testimonials-headline">Client Experiences</h2>
       <p class="video-testimonials-subheadline">Hear directly from practitioners who've been through the process.</p>
@@ -353,7 +342,7 @@
   </section>
 
   <!-- Results Carousel Section -->
-  <section class="results-section">
+  <section id="results" class="results-section">
     <div class="results-container">
       <h2 class="results-headline">The results that built Olympus.</h2>
       <p class="results-subheadline">These screenshots are from Etho agency clients — the practitioners we worked with before Olympus existed. The systems and frameworks that drove these wins are now inside the platform.</p>
@@ -446,7 +435,7 @@
   </section>
 
   <!-- FAQ Section -->
-  <section class="faq-section">
+  <section id="faq" class="faq-section">
     <h2 class="faq-headline">Frequently asked questions.</h2>
     <div class="faq-list">
       <div class="faq-item">
@@ -614,12 +603,12 @@
     <div class="footer-olympus-ghost">Olympus</div>
   </footer>
 
-  <!-- Theme Detection Script -->
+  <!-- Theme Detection Script (light theme only for now) -->
   <script>
     (function() {
       const favicon = document.getElementById('favicon');
       const html = document.documentElement;
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
       function setTheme(theme) {
         html.setAttribute('data-theme', theme);
@@ -628,13 +617,13 @@
           : '/olympus-icons/olympus-line-light.ico';
       }
 
-      // Initialize theme based on system preference
-      setTheme(systemDark ? 'dark' : 'light');
+      // Force light theme for now (dark theme assets pending)
+      setTheme('light');
 
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        setTheme(e.matches ? 'dark' : 'light');
-      });
+      // Listen for system theme changes (disabled for now)
+      // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      //   setTheme(e.matches ? 'dark' : 'light');
+      // });
     })();
   </script>
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Olympus · The "Presold" Patient System</title>
   <meta name="description" content="AI-powered patient acquisition that delivers presold patients ready to book.">
-  <meta name="color-scheme" content="dark light">
+  <meta name="color-scheme" content="light">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Olympus · The "Presold" Patient System">
@@ -21,7 +21,7 @@
   <link rel="dns-prefetch" href="//app.cal.com">
 
   <!-- Favicon -->
-  <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-dark.ico" type="image/x-icon">
+  <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-light.ico" type="image/x-icon">
 
   <!-- Preload fonts -->
   <link rel="preload" href="/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf" as="font" type="font/otf" crossorigin>
@@ -45,13 +45,14 @@
 
       <!-- Desktop nav (hidden on mobile) -->
       <nav class="header-nav">
+        <a href="#results" class="header-nav-link">Proof</a>
         <a href="#problem" class="header-nav-link">Problem</a>
         <a href="#product" class="header-nav-link">Product</a>
-        <a href="#results" class="header-nav-link">Proof</a>
         <a href="#features" class="header-nav-link">Features</a>
         <a href="#process" class="header-nav-link">Process</a>
         <a href="#compare" class="header-nav-link">Compare</a>
         <a href="#pricing" class="header-nav-link">Pricing</a>
+        <a href="#faq" class="header-nav-link">FAQ</a>
       </nav>
 
       <!-- Desktop CTA (hidden on mobile) -->
@@ -82,13 +83,14 @@
       </button>
     </div>
     <nav class="mobile-menu-nav">
+      <a href="#results" class="mobile-menu-link">Proof</a>
       <a href="#problem" class="mobile-menu-link">Problem</a>
       <a href="#product" class="mobile-menu-link">Product</a>
-      <a href="#compare" class="mobile-menu-link">Compare</a>
-      <a href="#results" class="mobile-menu-link">Proof</a>
       <a href="#features" class="mobile-menu-link">Features</a>
       <a href="#process" class="mobile-menu-link">Process</a>
+      <a href="#compare" class="mobile-menu-link">Compare</a>
       <a href="#pricing" class="mobile-menu-link">Pricing</a>
+      <a href="#faq" class="mobile-menu-link">FAQ</a>
     </nav>
     <div class="mobile-menu-footer">
       <a href="/calendar.html" class="mobile-menu-cta">Book Your Demo</a>
@@ -136,7 +138,7 @@
   </main>
 
   <!-- Results Carousel Section -->
-  <section class="results-section">
+  <section id="results" class="results-section">
     <div class="results-container">
       <h2 class="results-headline">The results that built Olympus.</h2>
       <p class="results-subheadline">These screenshots are from Etho agency clients — the practitioners we worked with before Olympus existed. The systems and frameworks that drove these wins are now inside the platform.</p>
@@ -396,7 +398,7 @@
   </svg>
 
   <!-- Solution Section -->
-  <section class="solution-section">
+  <section id="product" class="solution-section">
     <div class="solution-container">
       <h1 class="solution-headline">Introducing <span class="shiny-text">Olympus.</span></h1>
       <p class="solution-subheadline">The autonomous AI platform for practitioners to go from idea to pre-sold patients in <strong>minutes, not months.</strong></p>
@@ -730,7 +732,7 @@
   </section>
 
   <!-- Features Grid -->
-  <section class="features-section">
+  <section id="features" class="features-section">
     <h2 class="features-headline">Your superhuman marketing team, <span class="features-headline-gradient">blazing fast.</span></h2>
     <p class="features-subheadline">You get pro results without needing pro skills because the software does the work. You get the control without the heavy lifting.</p>
     <div class="features-grid">
@@ -1619,7 +1621,7 @@
   </section>
 
   <!-- How It Works Section -->
-  <section class="how-it-works-section">
+  <section id="process" class="how-it-works-section">
     <div class="how-it-works-header">
       <h2 class="how-it-works-headline">Launch in 3 steps.<br><span class="how-it-works-headline-gradient">Live in 60 minutes.</span></h2>
       <p class="how-it-works-subheadline">Point Olympus to your brand. It builds everything. You launch.</p>
@@ -1698,7 +1700,7 @@
   </section>
 
   <!-- Comparison Section: Agency vs Olympus (Bento Layout) -->
-  <section class="comparison-section">
+  <section id="compare" class="comparison-section">
     <div class="comparison-container">
       <div class="comparison-header">
         <h1 class="comparison-headline">Let's do the math.</h1>
@@ -1885,7 +1887,7 @@
   </section>
 
   <!-- Pricing Section -->
-  <section class="pricing-section">
+  <section id="pricing" class="pricing-section">
     <div class="pricing-container">
 
       <!-- Header -->
@@ -2155,7 +2157,7 @@
   </section>
 
   <!-- FAQ Section -->
-  <section class="faq-section">
+  <section id="faq" class="faq-section">
     <h2 class="faq-headline">Frequently asked questions.</h2>
     <div class="faq-list">
       <div class="faq-item">
@@ -2328,12 +2330,12 @@
     <div class="footer-olympus-ghost">Olympus</div>
   </footer>
 
-  <!-- Theme Detection Script -->
+  <!-- Theme Detection Script (light theme only for now) -->
   <script>
     (function() {
       const favicon = document.getElementById('favicon');
       const html = document.documentElement;
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      // const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
       function setTheme(theme) {
         html.setAttribute('data-theme', theme);
@@ -2342,13 +2344,13 @@
           : '/olympus-icons/olympus-line-light.ico';
       }
 
-      // Initialize theme based on system preference
-      setTheme(systemDark ? 'dark' : 'light');
+      // Force light theme for now (dark theme assets pending)
+      setTheme('light');
 
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        setTheme(e.matches ? 'dark' : 'light');
-      });
+      // Listen for system theme changes (disabled for now)
+      // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      //   setTheme(e.matches ? 'dark' : 'light');
+      // });
     })();
   </script>
 
@@ -2411,7 +2413,7 @@
     })();
   </script>
 
-  <!-- Content Carousel Auto-Play -->
+  <!-- Content Carousel Auto-Play (continuous smooth scroll) -->
   <script>
     (function() {
       const carousel = document.querySelector('.content-carousel');
@@ -2420,64 +2422,87 @@
       const cards = carousel.querySelectorAll('.creative-card');
       if (cards.length === 0) return;
 
-      const cardWidth = 250; // Card width in px
-      const gap = 12; // Gap between cards
-      const slideDistance = cardWidth + gap; // Total distance to slide per step
-      let currentOffset = 0;
-      let animationInterval;
+      // Configuration
+      const speed = 0.8; // Pixels per frame (higher = faster)
+      const cardWidth = window.innerWidth < 768 ? 200 : 250;
+      const gap = 12;
+      const slideDistance = cardWidth + gap;
 
-      function slideCarousel() {
-        currentOffset -= slideDistance;
+      let currentOffset = 0;
+      let isRunning = false;
+      let animationId = null;
+      let isPaused = false;
+
+      // Disable CSS transition for smooth RAF animation
+      carousel.style.transition = 'none';
+
+      function animate() {
+        if (!isRunning || isPaused) return;
+
+        currentOffset -= speed;
         carousel.style.transform = 'translateX(' + currentOffset + 'px)';
 
-        // When first card is completely off screen, reset
-        setTimeout(function() {
-          if (Math.abs(currentOffset) >= slideDistance) {
-            // Move first card to the end
-            const firstCard = carousel.firstElementChild;
-            carousel.appendChild(firstCard);
+        // When first card is completely off screen, move it to end
+        if (Math.abs(currentOffset) >= slideDistance) {
+          const firstCard = carousel.firstElementChild;
+          carousel.appendChild(firstCard);
+          currentOffset += slideDistance;
+        }
 
-            // Reset position without transition
-            carousel.style.transition = 'none';
-            currentOffset += slideDistance;
-            carousel.style.transform = 'translateX(' + currentOffset + 'px)';
-
-            // Re-enable transition
-            setTimeout(function() {
-              carousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            }, 50);
-          }
-        }, 600); // Match transition duration
+        animationId = requestAnimationFrame(animate);
       }
 
-      // Start auto-play (cycle every 2 seconds)
-      function startAutoPlay() {
-        animationInterval = setInterval(slideCarousel, 2000);
+      function startAnimation() {
+        if (isRunning) return;
+        isRunning = true;
+        isPaused = false;
+        animationId = requestAnimationFrame(animate);
       }
 
-      // Stop auto-play
-      function stopAutoPlay() {
-        if (animationInterval) {
-          clearInterval(animationInterval);
+      function stopAnimation() {
+        isRunning = false;
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
         }
       }
 
-      // Use Intersection Observer to start/stop when visible
+      function pauseAnimation() {
+        isPaused = true;
+      }
+
+      function resumeAnimation() {
+        if (isRunning && isPaused) {
+          isPaused = false;
+          animationId = requestAnimationFrame(animate);
+        }
+      }
+
+      // Lazy load: Start animation when section comes into view
       const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            startAutoPlay();
+            startAnimation();
           } else {
-            stopAutoPlay();
+            stopAnimation();
           }
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.1, rootMargin: '50px' });
 
-      observer.observe(carousel);
+      observer.observe(carousel.closest('.feature-card') || carousel);
 
-      // Pause on hover
-      carousel.addEventListener('mouseenter', stopAutoPlay);
-      carousel.addEventListener('mouseleave', startAutoPlay);
+      // Pause on hover (desktop only)
+      carousel.addEventListener('mouseenter', pauseAnimation);
+      carousel.addEventListener('mouseleave', resumeAnimation);
+
+      // Handle visibility change (tab switch)
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          pauseAnimation();
+        } else {
+          resumeAnimation();
+        }
+      });
     })();
   </script>
 
