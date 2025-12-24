@@ -5253,12 +5253,12 @@ wistia-player:not(:defined) {
 }
 
 .cb-card-probability .cb-dot {
-  background: #d1d5db;
+  background: #333;
 }
 
 .cb-card-probability .cb-dot.winner {
-  background: #10b981;
-  box-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 0 0 80px rgba(16, 185, 129, 0.4);
+  background: #333;
+  box-shadow: none;
 }
 
 .cb-dots-row {
