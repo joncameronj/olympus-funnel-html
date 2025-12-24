@@ -104,24 +104,29 @@ function extractBookingData(payload) {
     email: responses.email || attendee.email || 'Not provided',
     phone: responses.phone || responses.Phone || responses['phone-number'] || 'Not provided',
 
-    // Custom form fields - adjust these keys based on your actual Cal.com form field names
-    practiceDescription: responses['Quick description of your practice?'] ||
+    // Custom form fields - matched to Cal.com form field names
+    practiceDescription: responses['Quick description of your practice'] ||
+                         responses['Quick description of your practice?'] ||
                          responses.practice_description ||
                          responses.practiceDescription ||
                          'Not provided',
-    website: responses['Website you want Olympus to grow?'] ||
+    website: responses['What website do you want Olympus to grow?'] ||
+             responses['Website you want Olympus to grow?'] ||
              responses.website ||
              'Not provided',
     goals: responses['What do you want Olympus to help you achieve?'] ||
            responses.goals ||
            'Not provided',
-    budget: responses['Roughly how much goes toward marketing each month?'] ||
+    budget: responses['Roughly how much goes towards growth & marketing each month?'] ||
+            responses['Roughly how much goes toward marketing each month?'] ||
             responses.budget ||
             'Not provided',
-    challenges: responses['Biggest marketing challenges?'] ||
+    challenges: responses['Biggest patient acquisition challenges?'] ||
+                responses['Biggest marketing challenges?'] ||
                 responses.challenges ||
                 'Not provided',
-    tier: responses['Tier most interested in?'] ||
+    tier: responses['Olympus tier most interested in?'] ||
+          responses['Tier most interested in?'] ||
           responses.tier ||
           'Not provided',
 
@@ -187,17 +192,17 @@ function formatRoamMessage(data) {
     });
   }
 
-  return `🔄 **NEW OLYMPUS DEMO APP.**
+  return `🔄 **NEW OLYMPUS DEMO BOOKED**
 
-**What's your name?** ${data.name}
-**What's your email?** ${data.email}
-**What's your phone number?** ${data.phone}
-**Quick description of your practice?** ${data.practiceDescription}
-**Website you want Olympus to grow?** ${data.website}
+**Name:** ${data.name}
+**Email:** ${data.email}
+**Phone:** ${data.phone}
+**Quick description of your practice:** ${data.practiceDescription}
+**What website do you want Olympus to grow?** ${data.website}
 **What do you want Olympus to help you achieve?** ${data.goals}
-**Roughly how much goes toward marketing each month?** ${data.budget}
-**Biggest marketing challenges?** ${data.challenges}
-**Tier most interested in?** ${data.tier}
+**Roughly how much goes towards growth & marketing each month?** ${data.budget}
+**Biggest patient acquisition challenges?** ${data.challenges}
+**Olympus tier most interested in?** ${data.tier}
 
 📅 **Booked:** ${bookingTime}`;
 }
@@ -285,8 +290,9 @@ async function getCallBookedStageId(token, pipelineId) {
   const pipeline = await response.json();
   const stages = pipeline.stages || pipeline.pipeline?.stages || [];
 
-  // Find the "Call Booked" stage (case-insensitive)
+  // Find the "Demo Call Booked" stage (case-insensitive)
   const callBookedStage = stages.find(stage =>
+    stage.name.toLowerCase().includes('demo call booked') ||
     stage.name.toLowerCase().includes('call booked') ||
     stage.name.toLowerCase().includes('booked')
   );
