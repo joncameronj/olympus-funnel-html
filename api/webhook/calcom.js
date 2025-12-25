@@ -82,14 +82,14 @@ export default async function handler(request) {
 
     const message = `🗓️ **NEW BOOKING**\n\n**Name:** ${bookingData.name}\n**Email:** ${bookingData.email}\n**Phone:** ${bookingData.phone}\n**Event:** ${bookingData.title}\n**Time:** ${bookingTime}`;
 
-    const roamResponse = await fetch('https://api.ro.am/v1/messages', {
+    const roamResponse = await fetch('https://api.ro.am/v1/groups.post', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        channel_id: channelId,
+        group_id: channelId,
         text: message,
       }),
     });
