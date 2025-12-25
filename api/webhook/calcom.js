@@ -101,21 +101,16 @@ export default async function handler(request) {
     }
 
     const message = `🗓️ **NEW OLYMPUS DEMO BOOKED**
-
-**Contact Info**
-• **Name:** ${bookingData.name}
-• **Email:** ${bookingData.email}
-• **Phone:** ${bookingData.phone}
-
-**Booking Questions**
-• **Quick description of your practice:** ${bookingData.practiceDescription}
-• **What do you want Olympus to help you achieve?** ${bookingData.goals}
-• **What website do you want Olympus to grow?** ${bookingData.website}
-• **Biggest patient acquisition challenges?** ${bookingData.challenges}
-• **Olympus tier most interested in?** ${bookingData.tier}
-• **Roughly how much monthly goes toward growth?** ${bookingData.budget}
-
-📅 **Scheduled:** ${bookingTime}`;
+**What's your name?** ${bookingData.name}
+**What's your email?** ${bookingData.email}
+**What's your phone number?** ${bookingData.phone}
+**Quick description of your practice?** ${bookingData.practiceDescription}
+**Website you want Olympus to grow?** ${bookingData.website}
+**What do you want Olympus to help you achieve?** ${bookingData.goals}
+**Roughly how much goes toward marketing each month?** ${bookingData.budget}
+**Biggest patient acquisition challenges?** ${bookingData.challenges}
+**Tier most interested in?** ${bookingData.tier}
+**Scheduled:** ${bookingTime}`;
 
     const roamResponse = await fetch('https://api.ro.am/v1/chat.sendMessage', {
       method: 'POST',
