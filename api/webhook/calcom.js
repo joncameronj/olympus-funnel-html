@@ -43,12 +43,32 @@ export default async function handler(request) {
     const responses = data.responses || {};
     const attendee = data.attendees?.[0] || {};
 
+    // Helper to get response value (handles different formats)
+    const getResponse = (keys) => {
+      for (const key of keys) {
+        if (responses[key]) {
+          const val = responses[key];
+          // Handle object format {value: "..."} or array format
+          if (typeof val === 'object' && val.value) return val.value;
+          if (Array.isArray(val)) return val.join(', ');
+          return val;
+        }
+      }
+      return 'Not provided';
+    };
+
     const bookingData = {
-      name: responses.name || attendee.name || 'Not provided',
-      email: responses.email || attendee.email || 'Not provided',
-      phone: responses.phone || responses.Phone || 'Not provided',
+      name: getResponse(['name', 'Your name']) || attendee.name || 'Not provided',
+      email: getResponse(['email', 'email_address', 'Email address']) || attendee.email || 'Not provided',
+      phone: getResponse(['phone', 'Phone Number', 'Phone']) || 'Not provided',
+      practiceDescription: getResponse(['Quick description of your practice', 'practice_description']),
+      goals: getResponse(['What do you want Olympus to help you achieve?', 'goals']),
+      website: getResponse(['What website do you want Olympus to grow?', 'website']),
+      challenges: getResponse(['Biggest patient acquisition challenges?', 'challenges']),
+      tier: getResponse(['Olympus tier most interested in?', 'tier']),
+      budget: getResponse(['Roughly how much monthly goes toward growth?', 'budget']),
       startTime: data.startTime,
-      title: data.title || 'Strategy Call',
+      title: data.title || 'Olympus Demo',
     };
 
     console.log('Processing booking for:', bookingData.email);
@@ -80,7 +100,22 @@ export default async function handler(request) {
       });
     }
 
-    const message = `🗓️ **NEW BOOKING**\n\n**Name:** ${bookingData.name}\n**Email:** ${bookingData.email}\n**Phone:** ${bookingData.phone}\n**Event:** ${bookingData.title}\n**Time:** ${bookingTime}`;
+    const message = `🗓️ **NEW OLYMPUS DEMO BOOKED**
+
+**Contact Info**
+• **Name:** ${bookingData.name}
+• **Email:** ${bookingData.email}
+• **Phone:** ${bookingData.phone}
+
+**Booking Questions**
+• **Quick description of your practice:** ${bookingData.practiceDescription}
+• **What do you want Olympus to help you achieve?** ${bookingData.goals}
+• **What website do you want Olympus to grow?** ${bookingData.website}
+• **Biggest patient acquisition challenges?** ${bookingData.challenges}
+• **Olympus tier most interested in?** ${bookingData.tier}
+• **Roughly how much monthly goes toward growth?** ${bookingData.budget}
+
+📅 **Scheduled:** ${bookingTime}`;
 
     const roamResponse = await fetch('https://api.ro.am/v1/chat.sendMessage', {
       method: 'POST',
