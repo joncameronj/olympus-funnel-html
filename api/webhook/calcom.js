@@ -43,30 +43,44 @@ export default async function handler(request) {
     const responses = data.responses || {};
     const attendee = data.attendees?.[0] || {};
 
-    // Helper to get response value (handles different formats)
-    const getResponse = (keys) => {
-      for (const key of keys) {
+    // Helper to get response value (handles different Cal.com formats)
+    const getResponse = (searchTerms) => {
+      // First, try direct key match
+      for (const key of searchTerms) {
         if (responses[key]) {
           const val = responses[key];
-          // Handle object format {value: "..."} or array format
-          if (typeof val === 'object' && val.value) return val.value;
-          if (Array.isArray(val)) return val.join(', ');
+          if (typeof val === 'object' && val.value !== undefined) return val.value;
+          if (Array.isArray(val)) return val.map(v => typeof v === 'object' ? v.value || v : v).join(', ');
           return val;
         }
       }
+
+      // Second, search through all responses by label
+      for (const [key, val] of Object.entries(responses)) {
+        if (typeof val === 'object' && val.label) {
+          const label = val.label.toLowerCase();
+          for (const term of searchTerms) {
+            if (label.includes(term.toLowerCase())) {
+              if (Array.isArray(val.value)) return val.value.join(', ');
+              return val.value || 'Not provided';
+            }
+          }
+        }
+      }
+
       return 'Not provided';
     };
 
     const bookingData = {
-      name: getResponse(['name', 'Your name']) || attendee.name || 'Not provided',
-      email: getResponse(['email', 'email_address', 'Email address']) || attendee.email || 'Not provided',
-      phone: getResponse(['phone', 'Phone Number', 'Phone', 'Phone number', 'phone_number', 'phoneNumber', 'location']) || attendee.phone || 'Not provided',
-      practiceDescription: getResponse(['Quick description of your practice', 'practice_description']),
-      goals: getResponse(['What do you want Olympus to help you achieve?', 'goals']),
-      website: getResponse(['What website do you want Olympus to grow?', 'website']),
-      challenges: getResponse(['Biggest patient acquisition challenges?', 'challenges']),
-      tier: getResponse(['Olympus tier most interested in?', 'tier']),
-      budget: getResponse(['Roughly how much monthly goes toward growth?', 'budget']),
+      name: getResponse(['name', 'your name']) || attendee.name || 'Not provided',
+      email: getResponse(['email', 'email address']) || attendee.email || 'Not provided',
+      phone: getResponse(['phone', 'phone number']) || attendee.phone || 'Not provided',
+      practiceDescription: getResponse(['description of your practice', 'practice']),
+      goals: getResponse(['help you achieve', 'olympus to help', 'goals']),
+      website: getResponse(['website', 'olympus to grow']),
+      challenges: getResponse(['challenges', 'patient acquisition']),
+      tier: getResponse(['tier', 'interested in']),
+      budget: getResponse(['how much', 'monthly', 'toward growth', 'marketing']),
       startTime: data.startTime,
       title: data.title || 'Olympus Demo',
     };
