@@ -1208,7 +1208,7 @@ wistia-player:not(:defined) {
   }
 
   .subheadline {
-    font-size: 28px;
+    font-size: 20px;
     letter-spacing: -0.07em;
     line-height: 1.4;
     margin-bottom: 24px;
@@ -1309,6 +1309,7 @@ wistia-player:not(:defined) {
 
 .agents-master-logo {
   width: 100%;
+  max-width: 320px;
   height: auto;
   margin-bottom: 24px;
 }
@@ -1515,11 +1516,31 @@ wistia-player:not(:defined) {
 @media (max-width: 1024px) {
   .agents-container {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .agents-master-card {
-    max-width: 400px;
-    margin: 0 auto 24px;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    padding: 40px;
+  }
+
+  .agents-master-count {
+    font-size: 320px;
+  }
+
+  .agents-master-desc {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .agents-master-card {
+    max-width: 100%;
+  }
+
+  .agents-master-count {
+    font-size: 240px;
   }
 }
 
@@ -1534,7 +1555,7 @@ wistia-player:not(:defined) {
   }
 
   .agents-master-count {
-    font-size: 280px;
+    font-size: 180px;
   }
 
   .agent-subtitle {

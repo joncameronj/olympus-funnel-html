@@ -137,7 +137,7 @@
   </div>
 
   <main class="calendar-section">
-    <h1 class="section-title">Select Your Preferred Time</h1>
+    <h1 class="section-title">Book Your Quick "Prove It" Demo</h1>
 
     <div id="cal-embed"></div>
   </main>
@@ -265,6 +265,23 @@
         setTimeout(function() {
           window.location.href = '/confirmation.html';
         }, 1500);
+      }
+    });
+
+    // Listen for booking errors
+    Cal("on", {
+      action: "bookingFailed",
+      callback: function(e) {
+        console.error('Cal.com booking failed:', e);
+        alert('Booking could not be completed. Please try a different time slot or refresh the page.');
+      }
+    });
+
+    // Debug: Log route changes to help diagnose stuck states
+    Cal("on", {
+      action: "__routeChanged",
+      callback: function(e) {
+        console.log('Cal.com route changed:', e.detail.data);
       }
     });
   </script>
