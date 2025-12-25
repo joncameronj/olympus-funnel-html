@@ -129,7 +129,7 @@ export default async function handler(request) {
       `**Tier most interested in?** ${bookingData.tier}`,
       `**Scheduled:** ${bookingTime}`,
     ];
-    const message = messageParts.join('\n');
+    const message = messageParts.join('\n\n');
 
     const roamResponse = await fetch('https://api.ro.am/v1/chat.sendMessage', {
       method: 'POST',
