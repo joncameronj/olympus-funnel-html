@@ -220,6 +220,7 @@
     Cal("on", {
       action: "bookingSuccessfulV2",
       callback: function(e) {
+        console.log('BOOKING SUCCESS EVENT FIRED', e);
         const data = e.detail.data;
 
         sessionStorage.setItem('booking', JSON.stringify({
@@ -279,11 +280,11 @@
       }
     });
 
-    // Debug: Log route changes to help diagnose stuck states
+    // Debug: Log ALL Cal.com events
     Cal("on", {
-      action: "__routeChanged",
+      action: "*",
       callback: function(e) {
-        console.log('Cal.com route changed:', e.detail.data);
+        console.log('CAL EVENT:', e.detail.action, e.detail);
       }
     });
   </script>
