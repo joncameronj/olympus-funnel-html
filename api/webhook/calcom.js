@@ -75,9 +75,9 @@ export default async function handler(request) {
       name: getResponse(['name', 'your name']) || attendee.name || 'Not provided',
       email: getResponse(['email', 'email address']) || attendee.email || 'Not provided',
       phone: getResponse(['phone', 'phone number']) || attendee.phone || 'Not provided',
-      practiceDescription: getResponse(['description of your practice', 'practice']),
+      practiceDescription: getResponse(['quick description', 'description of your practice', 'practice']),
       goals: getResponse(['help you achieve', 'olympus to help', 'goals']),
-      website: getResponse(['website', 'olympus to grow']),
+      website: getResponse(['website do you want', 'website you want', 'olympus to grow', 'website']),
       challenges: getResponse(['challenges', 'patient acquisition']),
       tier: getResponse(['tier', 'interested in']),
       budget: getResponse(['how much', 'monthly', 'toward growth', 'marketing']),
@@ -116,17 +116,20 @@ export default async function handler(request) {
       });
     }
 
-    const message = `🗓️ **NEW OLYMPUS DEMO BOOKED**
-**What's your name?** ${bookingData.name}
-**What's your email?** ${bookingData.email}
-**What's your phone number?** ${bookingData.phone}
-**Quick description of your practice?** ${bookingData.practiceDescription}
-**Website you want Olympus to grow?** ${bookingData.website}
-**What do you want Olympus to help you achieve?** ${bookingData.goals}
-**Roughly how much goes toward marketing each month?** ${bookingData.budget}
-**Biggest patient acquisition challenges?** ${bookingData.challenges}
-**Tier most interested in?** ${bookingData.tier}
-**Scheduled:** ${bookingTime}`;
+    const messageParts = [
+      '🗓️ **NEW OLYMPUS DEMO BOOKED**',
+      `**What's your name?** ${bookingData.name}`,
+      `**What's your email?** ${bookingData.email}`,
+      `**What's your phone number?** ${bookingData.phone}`,
+      `**Quick description of your practice?** ${bookingData.practiceDescription}`,
+      `**Website you want Olympus to grow?** ${bookingData.website}`,
+      `**What do you want Olympus to help you achieve?** ${bookingData.goals}`,
+      `**Roughly how much goes toward marketing each month?** ${bookingData.budget}`,
+      `**Biggest patient acquisition challenges?** ${bookingData.challenges}`,
+      `**Tier most interested in?** ${bookingData.tier}`,
+      `**Scheduled:** ${bookingTime}`,
+    ];
+    const message = messageParts.join('\n');
 
     const roamResponse = await fetch('https://api.ro.am/v1/chat.sendMessage', {
       method: 'POST',
