@@ -125,9 +125,12 @@ export default async function handler(request) {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        chat: channelId,
         text: message,
-        markdown: true,
+        sender: {
+          name: 'Olympus',
+          id: 'olympus-cal-webhook',
+        },
+        recipients: [channelId],
       }),
     });
 
