@@ -128,7 +128,7 @@ export default async function handler(request) {
         text: message,
         sender: {
           name: 'Olympus',
-          id: 'olympus-cal-webhook',
+          id: 'olympus',
         },
         recipients: [channelId],
       }),
