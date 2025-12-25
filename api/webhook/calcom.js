@@ -75,9 +75,9 @@ export default async function handler(request) {
       name: getResponse(['name', 'your name']) || attendee.name || 'Not provided',
       email: getResponse(['email', 'email address']) || attendee.email || 'Not provided',
       phone: getResponse(['phone', 'phone number']) || attendee.phone || 'Not provided',
-      practiceDescription: getResponse(['quick description', 'description of your practice', 'practice']),
-      goals: getResponse(['help you achieve', 'olympus to help', 'goals']),
-      website: getResponse(['website do you want', 'website you want', 'olympus to grow', 'website']),
+      practiceDescription: getResponse(['Quick description of your practice', 'quick description', 'description', 'practice']),
+      goals: getResponse(['What do you want Olympus to help you achieve', 'help you achieve', 'olympus to help', 'achieve', 'goals']),
+      website: getResponse(['What website do you want Olympus to grow', 'website do you want', 'website you want', 'olympus to grow', 'website']),
       challenges: getResponse(['challenges', 'patient acquisition']),
       tier: getResponse(['tier', 'interested in']),
       budget: getResponse(['how much', 'monthly', 'toward growth', 'marketing']),
@@ -112,7 +112,7 @@ export default async function handler(request) {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true,
-        timeZone: 'America/New_York'
+        timeZone: 'America/Phoenix'
       });
     }
 
