@@ -60,7 +60,7 @@ export default async function handler(request) {
     const bookingData = {
       name: getResponse(['name', 'Your name']) || attendee.name || 'Not provided',
       email: getResponse(['email', 'email_address', 'Email address']) || attendee.email || 'Not provided',
-      phone: getResponse(['phone', 'Phone Number', 'Phone']) || 'Not provided',
+      phone: getResponse(['phone', 'Phone Number', 'Phone', 'Phone number', 'phone_number', 'phoneNumber', 'location']) || attendee.phone || 'Not provided',
       practiceDescription: getResponse(['Quick description of your practice', 'practice_description']),
       goals: getResponse(['What do you want Olympus to help you achieve?', 'goals']),
       website: getResponse(['What website do you want Olympus to grow?', 'website']),
@@ -72,6 +72,8 @@ export default async function handler(request) {
     };
 
     console.log('Processing booking for:', bookingData.email);
+    console.log('Raw responses keys:', Object.keys(responses));
+    console.log('Raw responses:', JSON.stringify(responses, null, 2));
 
     // Send to Ro.am
     const apiKey = process.env.ROAM_API_KEY;
