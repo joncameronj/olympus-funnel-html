@@ -732,6 +732,11 @@ body.menu-open {
   margin: 0 auto 48px;
 }
 
+.subheadline strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
 /* Results Section */
 .results-section {
   text-align: center;
