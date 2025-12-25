@@ -58,21 +58,23 @@ export default async function handler(request) {
     const bookingData = extractBookingData(payload);
     console.log('Processing booking:', bookingData.email);
 
-    // Run Roam notification and GHL integration in parallel
-    const results = await Promise.allSettled([
-      sendRoamNotification(bookingData),
-      processGHLIntegration(bookingData),
-    ]);
+    // Send to Ro.am only (GHL disabled for now to debug)
+    let roamResult = { status: 'skipped' };
+    try {
+      await sendRoamNotification(bookingData);
+      roamResult = { status: 'sent' };
+      console.log('Roam notification sent successfully');
+    } catch (roamError) {
+      console.error('Roam error:', roamError.message);
+      roamResult = { status: 'failed', error: roamError.message };
+    }
 
-    // Log results
-    const [roamResult, ghlResult] = results;
-    console.log('Roam result:', roamResult.status, roamResult.reason?.message || 'success');
-    console.log('GHL result:', ghlResult.status, ghlResult.reason?.message || 'success');
+    // GHL integration disabled temporarily
+    // const ghlResult = await processGHLIntegration(bookingData);
 
     return new Response(JSON.stringify({
       success: true,
-      roam: roamResult.status === 'fulfilled' ? 'sent' : 'failed',
-      ghl: ghlResult.status === 'fulfilled' ? 'created' : 'failed',
+      roam: roamResult.status,
     }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
