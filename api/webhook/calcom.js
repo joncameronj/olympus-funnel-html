@@ -82,7 +82,7 @@ export default async function handler(request) {
 
     const message = `🗓️ **NEW BOOKING**\n\n**Name:** ${bookingData.name}\n**Email:** ${bookingData.email}\n**Phone:** ${bookingData.phone}\n**Event:** ${bookingData.title}\n**Time:** ${bookingTime}`;
 
-    const roamResponse = await fetch('https://api.ro.am/v0/chat.post', {
+    const roamResponse = await fetch('https://api.ro.am/v1/chat.sendMessage', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
