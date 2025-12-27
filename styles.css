@@ -1618,6 +1618,11 @@ wistia-player:not(:defined) {
   margin: 0 auto 64px;
 }
 
+.features-subheadline-highlight {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2567,9 +2572,9 @@ wistia-player:not(:defined) {
 
 .founder-title {
   font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.07em;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
   -webkit-background-clip: text;
@@ -2623,7 +2628,8 @@ wistia-player:not(:defined) {
 
   .founder-title {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 700;
+    letter-spacing: 0.05em;
   }
 
   .founder-attribution {
@@ -3457,10 +3463,12 @@ wistia-player:not(:defined) {
 
 .problem-bento-subheadline-highlight {
   color: #ffffff;
+  font-weight: 700;
 }
 
 [data-theme="light"] .problem-bento-subheadline-highlight {
   color: #000000;
+  font-weight: 700;
 }
 
 .problem-bento-headline-red {
@@ -4058,6 +4066,11 @@ wistia-player:not(:defined) {
   color: rgb(160, 160, 160);
 }
 
+.stats-story-section .problem-bento-subheadline strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
 /* Dark card styling */
 .stats-card-dark {
   display: flex;
@@ -4141,9 +4154,10 @@ wistia-player:not(:defined) {
 }
 
 .stat-desc {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Acid Grotesk', sans-serif;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: -0.05em;
   color: #000000;
 }
 
@@ -4610,10 +4624,12 @@ wistia-player:not(:defined) {
 
 .solution-cards-subheadline-highlight {
   color: #ffffff;
+  font-weight: 700;
 }
 
 [data-theme="light"] .solution-cards-subheadline-highlight {
   color: #000000;
+  font-weight: 700;
 }
 
 .solution-cards {
@@ -4974,10 +4990,12 @@ wistia-player:not(:defined) {
 
 .speed-stat-highlight {
   color: #ffffff;
+  font-weight: 700;
 }
 
 [data-theme="light"] .speed-stat-highlight {
   color: #000000;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
@@ -6146,6 +6164,7 @@ wistia-player:not(:defined) {
 
 .upside-subheadline .highlight {
   color: var(--text-primary);
+  font-weight: 700;
 }
 
 /* Bento Grid */
@@ -6879,7 +6898,7 @@ wistia-player:not(:defined) {
   flex-direction: column;
   justify-content: flex-end;
   gap: 5px;
-  padding: 6px;
+  padding: 11px 6px 6px 6px;
   overflow: hidden;
   pointer-events: none;
   z-index: 100;
@@ -7496,6 +7515,7 @@ wistia-player:not(:defined) {
   color: var(--text-muted);
   text-align: center;
   margin-top: 48px;
+  letter-spacing: -0.07em;
 }
 
 /* Results Section Responsive */
