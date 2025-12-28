@@ -35,41 +35,50 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="/styles.css">
 
-  <!-- Meta Pixel Code -->
+  <!-- Deferred Analytics (Meta Pixel, Google, Clarity) -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '2420520574852948');
-  fbq('track', 'PageView');
+  // Defer analytics loading to improve page performance
+  function loadAnalytics() {
+    // Meta Pixel
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2420520574852948');
+    fbq('track', 'PageView');
+
+    // Google gtag
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-10875986456';
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'AW-10875986456');
+
+    // Microsoft Clarity
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "u1ib0650d5");
+  }
+  // Load after page is idle or after 2 seconds
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadAnalytics, { timeout: 2000 });
+  } else {
+    setTimeout(loadAnalytics, 2000);
+  }
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=2420520574852948&ev=PageView&noscript=1"
   /></noscript>
-  <!-- End Meta Pixel Code -->
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10875986456"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-10875986456');
-  </script>
-
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "u1ib0650d5");
-  </script>
 </head>
 <body>
   <!-- Header -->
@@ -301,7 +310,7 @@
   <section id="problem" class="problem-bento-section">
     <div class="problem-bento-container">
       <div class="problem-bento-header">
-        <h1 class="problem-bento-headline">What if the model itself was the <span class="problem-bento-headline-red">problem?</span></h1>
+        <h2 class="problem-bento-headline">What if the model itself was the <span class="problem-bento-headline-red">problem?</span></h2>
         <p class="problem-bento-subheadline">More <span class="problem-bento-subheadline-highlight">competition.</span> Higher <span class="problem-bento-subheadline-highlight">ad costs.</span> Slower <span class="problem-bento-subheadline-highlight">timelines.</span> Tighter <span class="problem-bento-subheadline-highlight">margins.</span> <span class="problem-bento-subheadline-highlight">The math stopped working years ago.</span> <span class="problem-bento-subheadline-highlight">No one offered you a better option.</span> <span class="problem-bento-subheadline-highlight">Until now.</span></p>
       </div>
 
@@ -436,7 +445,7 @@
   <!-- Solution Section -->
   <section id="product" class="solution-section">
     <div class="solution-container">
-      <h1 class="solution-headline">Introducing <span class="shiny-text">Olympus.</span></h1>
+      <h2 class="solution-headline">Introducing <span class="shiny-text">Olympus.</span></h2>
       <p class="solution-subheadline">The autonomous AI platform for practitioners to go from idea to pre-sold patients in <strong>minutes, not months.</strong></p>
 
       <!-- Monitor Display -->
@@ -554,7 +563,7 @@
 
       <!-- Speed Stat Section -->
       <div class="speed-stat-section">
-        <h1 class="speed-stat-headline">From months to minutes.</h1>
+        <h2 class="speed-stat-headline">From months to minutes.</h2>
         <div class="speed-stat-container">
           <div class="speed-stat-number-blur">99</div>
           <div class="speed-stat-number-glow" aria-hidden="true">99</div>
@@ -617,7 +626,7 @@
   <!-- Upside Section -->
   <section class="upside-section">
     <div class="upside-container">
-      <h1 class="upside-headline">Built different. On purpose.</h1>
+      <h2 class="upside-headline">Built different. On purpose.</h2>
       <p class="upside-subheadline"><span class="highlight">No more choosing</span> between custom and fast. <span class="highlight">Olympus gives you both.</span> You own everything. You get <span class="highlight">ROI faster.</span> Our team handles the heavy lifting.</p>
 
       <div class="upside-bento-grid">
@@ -1665,7 +1674,7 @@
     <div class="how-it-works-steps">
       <div class="step-card">
         <div class="step-content">
-          <h1 class="step-title">Point.</h1>
+          <h2 class="step-title">Point.</h2>
           <p class="step-tagline">Your site & docs. That's it.</p>
           <p class="step-description">Show Olympus where to look. It reads your site, absorbs your docs, and captures your brand. No long questionnaires, no hours on the phone.</p>
         </div>
@@ -1688,7 +1697,7 @@
       </div>
       <div class="step-card">
         <div class="step-content">
-          <h1 class="step-title">Build.</h1>
+          <h2 class="step-title">Build.</h2>
           <p class="step-tagline">Olympus does the work.</p>
           <p class="step-description">Campaigns, funnels, ads, copy, email sequences - all generated from your brand in minutes. You don't write. You don't design. You don't think about marketing.</p>
         </div>
@@ -1711,7 +1720,7 @@
       </div>
       <div class="step-card">
         <div class="step-content">
-          <h1 class="step-title">Launch.</h1>
+          <h2 class="step-title">Launch.</h2>
           <p class="step-tagline">Review. Approve. Go live.</p>
           <p class="step-description">You review. You approve. Then you're done. Your staff handles fifteen minutes a day - and we don't leave until they're confident.</p>
         </div>
@@ -1739,7 +1748,7 @@
   <section id="compare" class="comparison-section">
     <div class="comparison-container">
       <div class="comparison-header">
-        <h1 class="comparison-headline">Let's do the math.</h1>
+        <h2 class="comparison-headline">Let's do the math.</h2>
         <p class="comparison-subheadline"><span class="comparison-subheadline-muted">Same ad spend.</span> <span class="comparison-subheadline-highlight">Wildly different outcomes.</span></p>
       </div>
 
@@ -1927,7 +1936,7 @@
     <div class="pricing-container">
 
       <!-- Header -->
-      <h1 class="pricing-headline">Pricing. Right here.<br><span class="pricing-headline-gradient">Wild concept. I know.</span></h1>
+      <h2 class="pricing-headline">Pricing. Right here.<br><span class="pricing-headline-gradient">Wild concept. I know.</span></h2>
       <p class="pricing-subheadline">You deserve price info right up front. The demo is just to see it in action and get your questions answered. Check below to see our recommended plan for you.</p>
 
       <!-- Revenue Calculator -->
@@ -3982,8 +3991,7 @@
   <!-- KPI Calculator -->
   <script src="/assets/js/kpi-calculator.js" defer></script>
 
-  <!-- Lottie Player for Animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <!-- Lottie Animations (uses library loaded above) -->
   <script>
     // Initialize animations
     document.addEventListener('DOMContentLoaded', function() {
