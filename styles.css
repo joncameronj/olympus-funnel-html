@@ -778,26 +778,29 @@ body.menu-open {
   font-size: 192px;
   font-weight: 400;
   letter-spacing: -0.03em;
-  background: url('/assets/images/43.jpg') center/cover no-repeat;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(137, 255, 243, 1) 15%, rgba(50, 169, 139, 1) 50%, rgba(22, 104, 101, 1) 80%, rgba(0, 51, 38, 1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
 .results-amount-mobile {
   display: none;
   font-size: 7rem;
-  background: url('/assets/images/43.jpg') center/cover no-repeat;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(137, 255, 243, 1) 15%, rgba(50, 169, 139, 1) 50%, rgba(22, 104, 101, 1) 80%, rgba(0, 51, 38, 1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
 .results-plus {
-  background: url('/assets/images/43.jpg') center/cover no-repeat;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(137, 255, 243, 1) 15%, rgba(50, 169, 139, 1) 50%, rgba(22, 104, 101, 1) 80%, rgba(0, 51, 38, 1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
 .results-tagline {
@@ -3213,6 +3216,12 @@ wistia-player:not(:defined) {
   letter-spacing: -0.02em;
   color: var(--text-primary);
   white-space: nowrap;
+}
+
+/* Enterprise card highlighted state - text should be white on dark background in light mode */
+[data-theme="light"] .pricing-card-enterprise.highlighted .enterprise-price,
+[data-theme="light"] .pricing-card-enterprise.highlighted .enterprise-description {
+  color: #ffffff;
 }
 
 /* Responsive Design */
