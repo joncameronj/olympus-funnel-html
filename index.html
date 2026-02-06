@@ -8,7 +8,7 @@
   <meta name="color-scheme" content="light">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Olympus · The "Presold" Patient System">
+  <meta property="og:title" content="Olympus · The Presold Patient System">
   <meta property="og:description" content="The AI growth tech that gets you pre-sold patients in minutes, not months.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="/assets/images/Olympus OpenGraph.png">
@@ -101,11 +101,11 @@
       </nav>
 
       <!-- Desktop CTA (hidden on mobile) -->
-      <a href="/calendar.html" class="header-cta header-cta-desktop">Book Demo</a>
+      <button class="header-cta header-cta-desktop" onclick="window.location.href='/calendar.html'">Book Demo</button>
 
       <!-- Mobile: CTA + Hamburger (hidden on desktop) -->
       <div class="header-mobile-actions">
-        <a href="/calendar.html" class="header-cta">Book Demo</a>
+        <button class="header-cta" onclick="window.location.href='/calendar.html'">Book Demo</button>
         <button class="hamburger" aria-label="Open menu" aria-expanded="false">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -159,7 +159,7 @@
     </p>
 
     <!-- CTA Button -->
-    <a href="/calendar.html" class="cta-button">Book Demo</a>
+    <button class="cta-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
 
     <!-- Wistia Video -->
     <div class="video-wrapper">
@@ -1979,64 +1979,87 @@
             <span class="price-amount">$1,500</span>
             <span class="price-period">/mo</span>
           </div>
-          <div class="pricing-card-implementation">Setup fee: <span class="implementation-amount">$5,000</span></div>
+          <div class="pricing-card-implementation">Implementation Fee: <span class="implementation-amount">$5,000</span></div>
           <ul class="pricing-card-features">
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="AI-generated ad copy, headlines, and marketing text for your campaigns">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>100 Copy Generations/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Custom AI-generated images for ads, social media, and marketing materials">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>100 AI Images/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="AI-powered video creation for ads and promotional content">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>30 AI Videos/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Maximum monthly advertising budget managed by Olympus">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>AI Media Buying Slow</span>
+              <span>$10K Ad Spend Cap</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Daily light analysis with deep multi-step campaign review once a week">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>AI Media Buying: Slow</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Run campaigns on Meta or Google">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>1 Ad Platform</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Number of active marketing offers you can run simultaneously">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>2 Offers Live</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Separate environments for organizing campaigns and assets">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>1 Workspace</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Number of users who can access your Olympus workspace">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>2 Team Members</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Cloud storage on platform for your images, videos, and creative assets">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>25GB Media Storage</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Get help and strategy clarity through our Telegram support channel">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>Telegram Support</span>
-            </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span>White Glove Setup</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
           </ul>
-          <a href="/calendar.html" class="pricing-card-button">Book Demo</a>
+          <button class="pricing-card-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
         </div>
 
         <!-- Alpha Card -->
@@ -2054,59 +2077,108 @@
             <span class="price-amount">$3,000</span>
             <span class="price-period">/mo</span>
           </div>
-          <div class="pricing-card-implementation">Setup Fee: <span class="implementation-amount">$10,000</span></div>
-          <p class="pricing-features-header">Everything in Lambda, plus:</p>
+          <div class="pricing-card-implementation">Implementation Fee: <span class="implementation-amount">$10,000</span></div>
           <ul class="pricing-card-features">
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="AI-generated ad copy, headlines, and marketing text for your campaigns">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>400 Copy Generations/month</span>
+              <span>600 Copy Generations/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Custom AI-generated images for ads, social media, and marketing materials">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>250 AI Images/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="AI-powered video creation for ads and promotional content">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>100 AI Videos/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Maximum monthly advertising budget managed by Olympus">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>AI Ads Manager High</span>
+              <span>$25K Ad Spend Cap</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Daily light analysis with deep multi-step campaign review every 3 days">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>AI Media Buying: High</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Run campaigns across Meta, Google, and emerging platforms like ChatGPT Ads">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>All Ad Platforms</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Number of active marketing offers you can run simultaneously">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>5 Offers Live</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Separate environments for organizing campaigns and assets">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>2 Workspaces</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Hands-on project work led by the Etho team each month">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>1 Etho-Led Project/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Monthly strategy sessions with our team to optimize your campaigns">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>1 Strategy Call/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Number of users who can access your Olympus workspace">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>5 Team Members</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Cloud storage on platform for your images, videos, and creative assets">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>100GB Media Storage</span>
+              <span>200GB Media Storage</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Faster response times for your support requests">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Priority Support</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Our team handles your complete account setup and onboarding">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>White Glove Setup</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
           </ul>
-          <a href="/calendar.html" class="pricing-card-button">Book Demo</a>
+          <button class="pricing-card-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
         </div>
 
         <!-- Sigma Card -->
@@ -2124,59 +2196,115 @@
             <span class="price-amount">$5,000</span>
             <span class="price-period">/mo</span>
           </div>
-          <div class="pricing-card-implementation">Setup Fee: <span class="implementation-amount">$20,000</span></div>
-          <p class="pricing-features-header">Everything in Alpha, plus:</p>
+          <div class="pricing-card-implementation">Implementation Fee: <span class="implementation-amount">$20,000</span></div>
           <ul class="pricing-card-features">
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="AI-generated ad copy, headlines, and marketing text for your campaigns">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>Unlimited Copy Generations</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Custom AI-generated images for ads, social media, and marketing materials">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>600 AI Images/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="AI-powered video creation for ads and promotional content">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>250 AI Videos/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Maximum monthly advertising budget managed by Olympus">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>AI Ads Manager Ultra</span>
+              <span>$75K Ad Spend Cap</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Deep multi-step campaign analysis every day">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>AI Media Buying: Ultra</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Run campaigns across Meta, Google, and emerging platforms like ChatGPT Ads">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>All Ad Platforms</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="No limit on the number of marketing offers you can run">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Unlimited Offers Live</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Separate environments for organizing campaigns and assets">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>3 Workspaces</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Hands-on project work led by the Etho team each month">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>2 Etho-Led Projects/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Monthly strategy sessions with our team to optimize your campaigns">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>2 Strategy Calls/month</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Number of users who can access your Olympus workspace">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>10 Team Members</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Cloud storage on platform for your images, videos, and creative assets">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>500GB Media Storage</span>
+              <span>1TB Media Storage</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Faster response times - your requests are always handled before lower tiers">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>Dedicated + Priority Support</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
-            <li class="pricing-feature">
-              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24">
-                <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <li class="pricing-feature" data-tooltip="Guaranteed 99.9% platform uptime with service credits if we fall short">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>99.9% SLA</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </li>
+            <li class="pricing-feature" data-tooltip="Our team handles your complete account setup and onboarding">
+              <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 14l4 4L19 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               <span>White Glove Setup</span>
+              <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
           </ul>
-          <a href="/calendar.html" class="pricing-card-button">Book Demo</a>
+          <button class="pricing-card-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
         </div>
 
       </div>
@@ -2203,153 +2331,176 @@
 
   <!-- FAQ Section -->
   <section id="faq" class="faq-section">
-    <h2 class="faq-headline">Frequently asked questions.</h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>I've tried ads before and they didn't work. Why would this be different?</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <h2 class="faq-headline">Mega FAQ to answer your questions</h2>
+    <div class="faq-categories">
+      <!-- Category 1: Getting Started -->
+      <div class="faq-category">
+        <button class="faq-category-button">
+          <span>Getting Started</span>
+          <svg class="faq-category-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <div class="faq-answer">
-          <p>Because you weren't running enough of them.</p>
-          <p>Here's what nobody tells you: one in ten campaigns wins. That's the reality. The agencies running four to eight campaigns a year for you? They're not marketing. They're gambling. And you're funding the lottery tickets.</p>
-          <p>The practitioners who win are the ones with volume and speed. They test more. They learn faster. They find what works before their competitors even finish their first campaign.</p>
-          <p>Olympus lets you test as many campaigns as you want. One a day if you need to. That's not hope. That's not luck. That's certainty through volume.</p>
-          <p>And here's the other thing - you don't provide cookie-cutter care. Why would you accept cookie-cutter marketing?</p>
-          <p>The agencies handing you templated campaigns are the same ones blaming your market when they fail. Olympus builds custom acquisition for your practice, your patients, your positioning.</p>
-          <p>Your ads didn't fail because ads don't work.</p>
-          <p>They failed because no one gave you the speed, volume, and customization required to find what actually works.</p>
+        <div class="faq-category-content">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How much of my time does this actually take?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Most of your involvement is upfront.</p>
+              <p>You provide the goals. The outcomes you want. The brand materials. Access to any documentation that helps Olympus understand your practice.</p>
+              <p>That's the foundation. Once it's in, Olympus takes over.</p>
+              <p>From there, it depends on who's operating it - you or your team. Whoever it is, we train them. We guide them. We're here when they get stuck.</p>
+              <p>But here's where it actually saves you time: instead of guessing what's working and what's not, Olympus sees the entire board. It's trained to break through bottlenecks.</p>
+              <p>So the decisions that used to take you weeks of wondering? Now they're clear. Fast. Obvious.</p>
+              <p>You're not spending more time on marketing.</p>
+              <p>You're spending less - and getting better decisions out of it.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What does my staff have to do? They're not marketers.</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Good. We don't need marketers.</p>
+              <p>Olympus does the thinking. You or your staff press a few buttons to approve or reject Olympus taking action on your behalf.</p>
+              <p>That's the job.</p>
+              <p>Fifteen minutes a day. Check the dashboard. Respond to leads. Approve the next move.</p>
+              <p>If they can check email, they can run Olympus.</p>
+              <p>We train them until they're confident. When they get stuck, we're there. Screen-share. Help desk. Whatever it takes.</p>
+              <p>This isn't a marketing job. It's a checklist.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What if I don't have any marketing materials to give you?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>That's fine.</p>
+              <p>All Olympus needs is your website and a few files - scripts, FAQs, anything that shows how you talk to patients.</p>
+              <p>Don't have those? We'll get on a 30-minute call and pull it out of you.</p>
+              <p>Olympus scrapes your site, captures your voice, and builds from there. It doesn't need a marketing department's worth of assets.</p>
+              <p>It needs you. For 30 minutes. Once.</p>
+              <p>Then it builds everything else.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Do I need to learn how to use this software?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>"Learn" is a strong word.</p>
+              <p>It's 15 minutes of training. Follow the dashboard. Press the buttons. Respond to leads.</p>
+              <p>Olympus does the thinking. You or your staff handle the doing. And the doing is simple.</p>
+              <p>If you're imagining some complex marketing platform with 47 tabs and a learning curve - that's not this.</p>
+              <p>This is: log in, see what needs attention, handle it, log out.</p>
+              <p>Fifteen minutes a day.</p>
+              <p>That's the point.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>How much of my time does this actually take?</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- Category 2: Results & Expectations -->
+      <div class="faq-category">
+        <button class="faq-category-button">
+          <span>Results & Expectations</span>
+          <svg class="faq-category-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <div class="faq-answer">
-          <p>Most of your involvement is upfront.</p>
-          <p>You provide the goals. The outcomes you want. The brand materials. Access to any documentation that helps Olympus understand your practice.</p>
-          <p>That's the foundation. Once it's in, Olympus takes over.</p>
-          <p>From there, it depends on who's operating it - you or your team. Whoever it is, we train them. We guide them. We're here when they get stuck.</p>
-          <p>But here's where it actually saves you time: instead of guessing what's working and what's not, Olympus sees the entire board. It's trained to break through bottlenecks.</p>
-          <p>So the decisions that used to take you weeks of wondering? Now they're clear. Fast. Obvious.</p>
-          <p>You're not spending more time on marketing.</p>
-          <p>You're spending less - and getting better decisions out of it.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>What does my staff have to do? They're not marketers.</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          <p>Good. We don't need marketers.</p>
-          <p>Olympus does the thinking. You or your staff press a few buttons to approve or reject Olympus taking action on your behalf.</p>
-          <p>That's the job.</p>
-          <p>Fifteen minutes a day. Check the dashboard. Respond to leads. Approve the next move.</p>
-          <p>If they can check email, they can run Olympus.</p>
-          <p>We train them until they're confident. When they get stuck, we're there. Screen-share. Help desk. Whatever it takes.</p>
-          <p>This isn't a marketing job. It's a checklist.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>Will this work for my specialty? My market is different.</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          <p>All markets are different.</p>
-          <p>Olympus has been trained on markets as small as 20,000 people and as large as multiple millions. It has the ability to handle and grow in both.</p>
-          <p>This is where it shines.</p>
-          <p>Before we launch anything, Olympus generates a 50+ page intelligence report on your market. Your competitors. Your patient psychographics. Your positioning.</p>
-          <p>Nothing is templated. Everything is configured for your practice, your specialty, your geography.</p>
-          <p>You're not getting someone else's leftovers.</p>
-          <p>You're getting a system built for the market you're actually in.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>How long until I see results?</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          <p>The average time for practitioners to get launched is seven days.</p>
-          <p>Olympus can complete an entire run-through of its processes in one hour or less.</p>
-          <p>Now - "results" means different things to different people.</p>
-          <p>If results means a complete funnel built and ready to go? That's days.</p>
-          <p>If results means market intelligence and copy you can actually use? That's hours.</p>
-          <p>If results means ROI - patients showing up and paying? That depends on your launch date plus your average patient start time from ads. For many practitioners, that's within 30 days of going live.</p>
-          <p>What I can tell you is this: Olympus removes the bottleneck of building, launching, and learning. The rest is execution.</p>
-          <p>And if you don't have clarity on what's working within 14 days, we rebuild it at no extra cost until you do.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>I already have a website and social media. Isn't that enough?</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          <p>No.</p>
-          <p>A website is a brochure. Social media is a hobby.</p>
-          <p>Neither of them is a patient acquisition system.</p>
-          <p>Here's the difference: a website waits for people to find you. Social media hopes people pay attention. A system goes out and brings patients to you - patients who already understand your value and are ready to invest in their health.</p>
-          <p>You can have the best website in the world. Beautiful. Professional. Award-winning.</p>
-          <p>And still have no predictable way to fill your calendar.</p>
-          <p>Olympus isn't a website. It's not social media management. It's a system that generates patients - campaigns, funnels, ads, copy, follow-up sequences - all working together.</p>
-          <p>That's the difference between having a presence and having a pipeline.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>What if I don't have any marketing materials to give you?</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          <p>That's fine.</p>
-          <p>All Olympus needs is your website and a few files - scripts, FAQs, anything that shows how you talk to patients.</p>
-          <p>Don't have those? We'll get on a 30-minute call and pull it out of you.</p>
-          <p>Olympus scrapes your site, captures your voice, and builds from there. It doesn't need a marketing department's worth of assets.</p>
-          <p>It needs you. For 30 minutes. Once.</p>
-          <p>Then it builds everything else.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">
-          <span>Do I need to learn how to use this software?</span>
-          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-            <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div class="faq-answer">
-          <p>"Learn" is a strong word.</p>
-          <p>It's 15 minutes of training. Follow the dashboard. Press the buttons. Respond to leads.</p>
-          <p>Olympus does the thinking. You or your staff handle the doing. And the doing is simple.</p>
-          <p>If you're imagining some complex marketing platform with 47 tabs and a learning curve - that's not this.</p>
-          <p>This is: log in, see what needs attention, handle it, log out.</p>
-          <p>Fifteen minutes a day.</p>
-          <p>That's the point.</p>
+        <div class="faq-category-content">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>I've tried ads before and they didn't work. Why would this be different?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Because you weren't running enough of them.</p>
+              <p>Here's what nobody tells you: one in ten campaigns wins. That's the reality. The agencies running four to eight campaigns a year for you? They're not marketing. They're gambling. And you're funding the lottery tickets.</p>
+              <p>The practitioners who win are the ones with volume and speed. They test more. They learn faster. They find what works before their competitors even finish their first campaign.</p>
+              <p>Olympus lets you test as many campaigns as you want. One a day if you need to. That's not hope. That's not luck. That's certainty through volume.</p>
+              <p>And here's the other thing - you don't provide cookie-cutter care. Why would you accept cookie-cutter marketing?</p>
+              <p>The agencies handing you templated campaigns are the same ones blaming your market when they fail. Olympus builds custom acquisition for your practice, your patients, your positioning.</p>
+              <p>Your ads didn't fail because ads don't work.</p>
+              <p>They failed because no one gave you the speed, volume, and customization required to find what actually works.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Will this work for my specialty? My market is different.</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>All markets are different.</p>
+              <p>Olympus has been trained on markets as small as 20,000 people and as large as multiple millions. It has the ability to handle and grow in both.</p>
+              <p>This is where it shines.</p>
+              <p>Before we launch anything, Olympus generates a 50+ page intelligence report on your market. Your competitors. Your patient psychographics. Your positioning.</p>
+              <p>Nothing is templated. Everything is configured for your practice, your specialty, your geography.</p>
+              <p>You're not getting someone else's leftovers.</p>
+              <p>You're getting a system built for the market you're actually in.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How long until I see results?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>The average time for practitioners to get launched is seven days.</p>
+              <p>Olympus can complete an entire run-through of its processes in one hour or less.</p>
+              <p>Now - "results" means different things to different people.</p>
+              <p>If results means a complete funnel built and ready to go? That's days.</p>
+              <p>If results means market intelligence and copy you can actually use? That's hours.</p>
+              <p>If results means ROI - patients showing up and paying? That depends on your launch date plus your average patient start time from ads. For many practitioners, that's within 30 days of going live.</p>
+              <p>What I can tell you is this: Olympus removes the bottleneck of building, launching, and learning. The rest is execution.</p>
+              <p>And if you don't have clarity on what's working within 14 days, we rebuild it at no extra cost until you do.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>I already have a website and social media. Isn't that enough?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>No.</p>
+              <p>A website is a brochure. Social media is a hobby.</p>
+              <p>Neither of them is a patient acquisition system.</p>
+              <p>Here's the difference: a website waits for people to find you. Social media hopes people pay attention. A system goes out and brings patients to you - patients who already understand your value and are ready to invest in their health.</p>
+              <p>You can have the best website in the world. Beautiful. Professional. Award-winning.</p>
+              <p>And still have no predictable way to fill your calendar.</p>
+              <p>Olympus isn't a website. It's not social media management. It's a system that generates patients - campaigns, funnels, ads, copy, follow-up sequences - all working together.</p>
+              <p>That's the difference between having a presence and having a pipeline.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2398,8 +2549,17 @@
     })();
   </script>
 
-  <!-- FAQ Accordion -->
+  <!-- FAQ Accordion (Nested) -->
   <script>
+    // Category-level accordion (top level)
+    document.querySelectorAll('.faq-category-button').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var category = this.closest('.faq-category');
+        category.classList.toggle('open');
+      });
+    });
+
+    // Question-level accordion (nested level)
     document.querySelectorAll('.faq-question').forEach(function(button) {
       button.addEventListener('click', function() {
         var item = this.closest('.faq-item');
@@ -4570,5 +4730,237 @@
     observer.observe(compareSection);
   })();
   </script>
+
+  <!-- Quiz Modal -->
+  <div class="quiz-modal" id="quiz-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="quiz-modal-backdrop"></div>
+    <div class="quiz-modal-container">
+      <!-- Close Button -->
+      <button class="quiz-close" aria-label="Close">&times;</button>
+
+      <!-- Quiz Content Wrapper -->
+      <div class="quiz-content-wrapper">
+        <!-- Header -->
+        <div class="quiz-header">
+          <img src="/olympus-icons/olympus-line-dark.svg" alt="Olympus" class="quiz-header-logo quiz-logo-dark">
+          <img src="/olympus-icons/olympus-line-light.svg" alt="Olympus" class="quiz-header-logo quiz-logo-light">
+          <h1 class="quiz-header-title">Let's get started</h1>
+          <p class="quiz-header-subtitle">Answer a few quick questions so we can customize your demo experience.</p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="quiz-progress-wrapper">
+          <div class="quiz-progress-text">
+            <span class="quiz-progress-step">Step <span id="quiz-current-step">1</span> of 9</span>
+            <span class="quiz-progress-percent"><span id="quiz-percent">11</span>%</span>
+          </div>
+          <div class="quiz-progress-segments">
+            <div class="quiz-progress-segment" data-step="1"></div>
+            <div class="quiz-progress-segment" data-step="2"></div>
+            <div class="quiz-progress-segment" data-step="3"></div>
+            <div class="quiz-progress-segment" data-step="4"></div>
+            <div class="quiz-progress-segment" data-step="5"></div>
+            <div class="quiz-progress-segment" data-step="6"></div>
+            <div class="quiz-progress-segment" data-step="7"></div>
+            <div class="quiz-progress-segment" data-step="8"></div>
+            <div class="quiz-progress-segment" data-step="9"></div>
+          </div>
+        </div>
+
+        <!-- Steps Container -->
+        <div class="quiz-steps">
+        <!-- Step 1: Name -->
+        <div class="quiz-step" data-step="1">
+          <h2 class="quiz-step-question">What's your name? <span class="quiz-required">*</span></h2>
+          <div class="quiz-input-row">
+            <div class="quiz-input-group">
+              <input type="text" class="quiz-input" data-field="firstName" placeholder="First name" autocomplete="given-name">
+            </div>
+            <div class="quiz-input-group">
+              <input type="text" class="quiz-input" data-field="lastName" placeholder="Last name" autocomplete="family-name">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Practice Description -->
+        <div class="quiz-step" data-step="2">
+          <h2 class="quiz-step-question">Quick description of your practice <span class="quiz-required">*</span></h2>
+          <p class="quiz-step-description">Help us understand what you do and who you serve.</p>
+          <div class="quiz-input-group">
+            <textarea class="quiz-textarea" data-field="practiceDescription" placeholder="Tell us about your practice, the services you offer, and your ideal patients..." rows="5"></textarea>
+          </div>
+        </div>
+
+        <!-- Step 3: Website -->
+        <div class="quiz-step" data-step="3">
+          <h2 class="quiz-step-question">Website you want Olympus to grow?</h2>
+          <p class="quiz-step-description">Optional - skip if you don't have one yet.</p>
+          <div class="quiz-input-group quiz-url-input">
+            <input type="url" class="quiz-input" data-field="website" placeholder="https://yourpractice.com" autocomplete="url">
+            <span class="quiz-url-status" aria-hidden="true">
+              <svg class="quiz-url-valid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <svg class="quiz-url-invalid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Step 4: Marketing Goals -->
+        <div class="quiz-step" data-step="4">
+          <h2 class="quiz-step-question">What do you want Olympus to help you achieve? <span class="quiz-required">*</span></h2>
+          <p class="quiz-step-description">Be specific about your growth goals.</p>
+          <div class="quiz-input-group">
+            <textarea class="quiz-textarea" data-field="currentSituation" placeholder="Example: I want to attract 20+ new patients per month who are pre-sold on my approach and ready to start treatment..." rows="5"></textarea>
+          </div>
+        </div>
+
+        <!-- Step 5: Marketing Spend -->
+        <div class="quiz-step" data-step="5">
+          <h2 class="quiz-step-question">Roughly how much goes towards growth & marketing each month? <span class="quiz-required">*</span></h2>
+          <div class="quiz-button-group" data-field="marketingSpend">
+            <button type="button" class="quiz-option-btn" data-value="none">Not investing yet</button>
+            <button type="button" class="quiz-option-btn" data-value="under-5k">Less than $5K/month</button>
+            <button type="button" class="quiz-option-btn" data-value="5k-15k">$5K - $15K/month</button>
+            <button type="button" class="quiz-option-btn" data-value="15k-30k">$15K - $30K/month</button>
+            <button type="button" class="quiz-option-btn" data-value="30k-plus">$30K+/month</button>
+            <button type="button" class="quiz-option-btn" data-value="not-sure">Not sure yet</button>
+          </div>
+        </div>
+
+        <!-- Step 6: Marketing Challenges -->
+        <div class="quiz-step" data-step="6">
+          <h2 class="quiz-step-question">Biggest marketing challenges? <span class="quiz-required">*</span></h2>
+          <p class="quiz-step-description">Select all that apply.</p>
+          <div class="quiz-checkbox-group">
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="low-leads" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">Not getting enough leads</span>
+            </label>
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="poor-quality" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">Leads are low quality</span>
+            </label>
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="no-system" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">No marketing system in place</span>
+            </label>
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="conversion" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">Poor conversion rates</span>
+            </label>
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="scaling" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">Can't scale marketing</span>
+            </label>
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="roi" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">Can't measure ROI</span>
+            </label>
+            <label class="quiz-checkbox">
+              <input type="checkbox" value="team" data-field="marketingChallenges">
+              <span class="quiz-checkbox-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span class="quiz-checkbox-label">Need marketing team</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 7: Tier Selection -->
+        <div class="quiz-step" data-step="7">
+          <h2 class="quiz-step-question">Tier most interested in? <span class="quiz-required">*</span></h2>
+          <p class="quiz-step-description">Choose based on your practice's annual revenue.</p>
+          <div class="quiz-tier-buttons" data-field="tier">
+            <button type="button" class="quiz-tier-btn" data-value="lambda">
+              <img src="/assets/images/lambda-logo.svg" alt="" class="quiz-tier-logo">
+              <span class="quiz-tier-name">Lambda</span>
+              <span class="quiz-tier-revenue">$0 - $500K/year</span>
+            </button>
+            <button type="button" class="quiz-tier-btn" data-value="alpha">
+              <img src="/assets/images/alpha-logo.svg" alt="" class="quiz-tier-logo">
+              <span class="quiz-tier-name">Alpha</span>
+              <span class="quiz-tier-revenue">$500K - $1.5M/year</span>
+            </button>
+            <button type="button" class="quiz-tier-btn" data-value="sigma">
+              <img src="/assets/images/sigma-logo.svg" alt="" class="quiz-tier-logo">
+              <span class="quiz-tier-name">Sigma</span>
+              <span class="quiz-tier-revenue">$1.5M+/year</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 8: Phone Number -->
+        <div class="quiz-step" data-step="8">
+          <h2 class="quiz-step-question">What's your phone number? <span class="quiz-required">*</span></h2>
+          <p class="quiz-step-description">We'll only use this to schedule your demo.</p>
+          <div class="quiz-phone-row">
+            <div class="quiz-input-group quiz-phone-code">
+              <select class="quiz-select" data-field="countryCode">
+                <option value="+1">US (+1)</option>
+                <option value="+1">CA (+1)</option>
+                <option value="+44">UK (+44)</option>
+                <option value="+61">AU (+61)</option>
+                <option value="+33">FR (+33)</option>
+                <option value="+49">DE (+49)</option>
+                <option value="+81">JP (+81)</option>
+                <option value="+86">CN (+86)</option>
+                <option value="+91">IN (+91)</option>
+                <option value="+55">BR (+55)</option>
+                <option value="+52">MX (+52)</option>
+                <option value="+34">ES (+34)</option>
+                <option value="+39">IT (+39)</option>
+                <option value="+31">NL (+31)</option>
+                <option value="+46">SE (+46)</option>
+                <option value="+47">NO (+47)</option>
+                <option value="+45">DK (+45)</option>
+                <option value="+41">CH (+41)</option>
+                <option value="+32">BE (+32)</option>
+                <option value="+353">IE (+353)</option>
+              </select>
+            </div>
+            <div class="quiz-input-group quiz-phone-number">
+              <input type="tel" class="quiz-input" data-field="phoneNumber" placeholder="(555) 123-4567" autocomplete="tel">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 9: Email -->
+        <div class="quiz-step" data-step="9">
+          <h2 class="quiz-step-question">Almost there! What's your email? <span class="quiz-required">*</span></h2>
+          <p class="quiz-step-description">We'll send your demo confirmation here.</p>
+          <div class="quiz-input-group">
+            <input type="email" class="quiz-input" data-field="email" placeholder="you@practice.com" autocomplete="email">
+          </div>
+        </div>
+      </div>
+
+        <!-- Navigation -->
+        <div class="quiz-nav">
+          <button class="quiz-back" style="visibility: hidden;"><svg class="quiz-back-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>Back</button>
+          <button class="quiz-next">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Modal Script -->
+  <script src="/assets/js/quiz.js"></script>
 </body>
 </html>
