@@ -1,0 +1,13 @@
+{
+  "name": "olympus-funnel-html",
+  "private": true,
+  "scripts": {
+    "build:css": "lightningcss --minify --bundle styles.css -o styles.min.css",
+    "build:js": "npx terser assets/js/pricing.js -o assets/js/pricing.min.js -c -m && npx terser assets/js/kpi-calculator.js -o assets/js/kpi-calculator.min.js -c -m && npx terser assets/js/tracking.js -o assets/js/tracking.min.js -c -m && npx terser assets/js/quiz.js -o assets/js/quiz.min.js -c -m",
+    "build": "npm run build:css && npm run build:js"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "^1.28.0",
+    "terser": "^5.37.0"
+  }
+}

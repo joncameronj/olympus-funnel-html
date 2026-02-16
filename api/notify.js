@@ -11,14 +11,6 @@ export const config = {
 };
 
 export default async function handler(request) {
-  // Only allow POST requests
-  if (request.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
   // CORS headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -31,18 +23,30 @@ export default async function handler(request) {
     return new Response(null, { status: 200, headers: corsHeaders });
   }
 
+  // Only allow POST requests
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+
   try {
     const body = await request.json();
-    const { type, data } = body;
+    const { type, data, message: rawMessage } = body;
 
     // Format message based on type
-    let message;
-    if (type === 'form_submission') {
+    let message = '';
+    if (typeof rawMessage === 'string' && rawMessage.trim()) {
+      message = rawMessage.trim();
+    } else if (type === 'form_submission') {
       message = formatFormSubmission(data);
     } else if (type === 'booking') {
       message = formatBooking(data);
+    } else if (type === 'segment_selection') {
+      message = formatSegmentSelection(data);
     } else {
-      message = `New event: ${type}\n${JSON.stringify(data, null, 2)}`;
+      message = `New event: ${type || 'unknown'}\n${JSON.stringify(data || body, null, 2)}`;
     }
 
     // Get environment variables
@@ -99,6 +103,8 @@ export default async function handler(request) {
 }
 
 function formatFormSubmission(data) {
+  data = data || {};
+
   const timestamp = new Date().toLocaleString('en-US', {
     weekday: 'short',
     month: 'short',
@@ -125,6 +131,8 @@ function formatFormSubmission(data) {
 }
 
 function formatBooking(data) {
+  data = data || {};
+
   let startTime = 'Not available';
   let endTime = 'Not available';
 
@@ -162,5 +170,44 @@ function formatBooking(data) {
 
 **Attendee**
 • Name: ${data.attendeeName || 'Check Cal.com'}
-• Email: ${data.attendeeEmail || 'Check Cal.com'}`;
+• Email: ${data.attendeeEmail || 'Check Cal.com'}
+
+**Routing**
+• Segment: ${data.segmentLabel || data.segment || 'Not provided'}
+• Revenue Range: ${data.revenueRange || 'Not provided'}
+• Tier: ${data.tier || 'Not provided'}
+• Calendar Owner: ${data.calendarOwner || 'Not provided'}
+• Calendar Number: ${data.calendarNumber || 'Not provided'}`;
+}
+
+function formatSegmentSelection(data) {
+  data = data || {};
+
+  const timestamp = new Date(data.selectedAt || Date.now()).toLocaleString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: 'America/New_York'
+  });
+
+  return `🧭 **Demo Segment Selected**
+
+**Selection**
+• Segment: ${data.segmentLabel || data.segment || 'Not provided'}
+• Revenue Range: ${data.revenueRange || 'Not provided'}
+• Tier: ${data.tier || 'Not provided'}
+• Calendar Number: ${data.calendarNumber || 'Not provided'}
+• Calendar Owner: ${data.calendarOwner || 'Not provided'}
+
+**Source**
+• Page: ${data.page || 'Unknown'}
+• Referrer: ${data.referrer || 'Direct'}
+• UTM Source: ${data.utm_source || 'Direct'}
+• UTM Medium: ${data.utm_medium || 'N/A'}
+• UTM Campaign: ${data.utm_campaign || 'N/A'}
+
+**Selected:** ${timestamp}`;
 }

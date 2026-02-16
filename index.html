@@ -11,7 +11,7 @@
   <meta property="og:title" content="Olympus · The Presold Patient System">
   <meta property="og:description" content="The AI growth tech that gets you pre-sold patients in minutes, not months.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/assets/images/Olympus OpenGraph.png">
+  <meta property="og:image" content="/assets/images/olympus-opengraph.webp">
 
   <!-- DNS Prefetch -->
   <link rel="dns-prefetch" href="//connect.facebook.net">
@@ -24,16 +24,32 @@
   <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-light.ico" type="image/x-icon">
 
   <!-- Preload fonts -->
-  <link rel="preload" href="/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  
-  <!-- Google Fonts - Instrument Serif Italic -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/styles.css">
+  <!-- Critical CSS (above-fold) -->
+  <style>
+    :root{--bg-page:rgb(10,10,10);--bg-card:rgb(15,15,15);--text-primary:rgb(255,255,255);--text-muted:rgb(155,155,155);--btn-primary-bg:#FFF;--btn-primary-text:#000}
+    [data-theme="light"]{--bg-page:rgb(255,255,255);--bg-card:rgb(250,250,250);--text-primary:rgb(0,0,0);--text-muted:rgb(135,135,135);--btn-primary-bg:#000;--btn-primary-text:#FFF}
+    @font-face{font-family:'Acid Grotesk';src:url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.woff2') format('woff2');font-weight:500;font-display:swap}
+    @font-face{font-family:'Inter';src:url('/fonts/inter/Inter-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-text-size-adjust:100%;line-height:1.5;overflow-x:clip}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-page);color:var(--text-primary);min-height:100vh;overflow-x:clip}
+    .header{width:100%;padding:16px 48px;position:sticky;top:0;z-index:1000;background:var(--bg-page)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;position:relative}
+    .header-logo{flex:0 0 auto}.header-logo img{height:28px;width:auto;display:block;filter:invert(1)}
+    [data-theme="light"] .header-logo img{filter:none}
+    .header-nav{display:flex;align-items:center;gap:32px;position:absolute;left:50%;transform:translateX(-50%);letter-spacing:-0.05em;font-weight:500}
+    .header-nav-link{font-family:'Acid Grotesk',sans-serif;font-size:14px;font-weight:500;color:var(--text-primary);text-decoration:none}
+    .header-cta{font-family:'Acid Grotesk',sans-serif;font-size:14px;font-weight:500;color:var(--btn-primary-text);background:var(--btn-primary-bg);text-decoration:none;padding:10px 20px;border-radius:4px;border:none;letter-spacing:-0.05em;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+    .header-mobile-actions{display:none;align-items:center;gap:12px}
+    .hero{max-width:1300px;margin:0 auto;padding:0 24px 16px;text-align:center}
+  </style>
+
+  <!-- Full Stylesheet (async) -->
+  <link rel="stylesheet" href="/styles.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/styles.min.css"></noscript>
 
   <!-- Deferred Analytics (Meta Pixel, Google, Clarity) -->
   <script>
@@ -101,11 +117,11 @@
       </nav>
 
       <!-- Desktop CTA (hidden on mobile) -->
-      <button class="header-cta header-cta-desktop" onclick="window.location.href='/calendar.html'">Book Demo</button>
+      <button class="header-cta header-cta-desktop" type="button" data-book-demo-trigger>Book Demo</button>
 
       <!-- Mobile: CTA + Hamburger (hidden on desktop) -->
       <div class="header-mobile-actions">
-        <button class="header-cta" onclick="window.location.href='/calendar.html'">Book Demo</button>
+        <button class="header-cta" type="button" data-book-demo-trigger>Book Demo</button>
         <button class="hamburger" aria-label="Open menu" aria-expanded="false">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -138,7 +154,7 @@
       <a href="#faq" class="mobile-menu-link">FAQ</a>
     </nav>
     <div class="mobile-menu-footer">
-      <a href="/calendar.html" class="mobile-menu-cta">Book Your Demo</a>
+      <a href="/calendar.html" class="mobile-menu-cta" data-book-demo-trigger>Book Your Demo</a>
     </div>
   </div>
 
@@ -151,7 +167,7 @@
     </p>
 
     <!-- Headline -->
-    <h1 class="headline">Install Patient Acquisition That Runs Itself in 7 Days</h1>
+    <h1 class="headline">Presold Patient Acquisition. Done Without You.</h1>
 
     <!-- Subheadline -->
     <p class="subheadline">
@@ -159,7 +175,7 @@
     </p>
 
     <!-- CTA Button -->
-    <button class="cta-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
+    <button class="cta-button" type="button" data-book-demo-trigger>Book Demo</button>
 
     <!-- Wistia Video -->
     <div class="video-wrapper">
@@ -193,64 +209,64 @@
       <div class="results-carousel" data-carousel="results">
         <div class="results-track">
           <div class="screenshot-item" data-index="0">
-            <img src="/assets/testimonials/Result 1.svg" alt="Client result screenshot 1" loading="lazy">
+            <img src="/assets/testimonials/Result 1.webp" alt="Client result screenshot 1" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="1">
-            <img src="/assets/testimonials/Result 2.svg" alt="Client result screenshot 2" loading="lazy">
+            <img src="/assets/testimonials/Result 2.webp" alt="Client result screenshot 2" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="2">
-            <img src="/assets/testimonials/Result 3.svg" alt="Client result screenshot 3" loading="lazy">
+            <img src="/assets/testimonials/Result 3.webp" alt="Client result screenshot 3" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="3">
-            <img src="/assets/testimonials/Result 4.svg" alt="Client result screenshot 4" loading="lazy">
+            <img src="/assets/testimonials/Result 4.webp" alt="Client result screenshot 4" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="4">
-            <img src="/assets/testimonials/Result 5.svg" alt="Client result screenshot 5" loading="lazy">
+            <img src="/assets/testimonials/Result 5.webp" alt="Client result screenshot 5" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="5">
-            <img src="/assets/testimonials/Result 6.svg" alt="Client result screenshot 6" loading="lazy">
+            <img src="/assets/testimonials/Result 6.webp" alt="Client result screenshot 6" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="6">
-            <img src="/assets/testimonials/Result 7.svg" alt="Client result screenshot 7" loading="lazy">
+            <img src="/assets/testimonials/Result 7.webp" alt="Client result screenshot 7" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="7">
-            <img src="/assets/testimonials/Result 8.svg" alt="Client result screenshot 8" loading="lazy">
+            <img src="/assets/testimonials/Result 8.webp" alt="Client result screenshot 8" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="8">
-            <img src="/assets/testimonials/Result 9.svg" alt="Client result screenshot 9" loading="lazy">
+            <img src="/assets/testimonials/Result 9.webp" alt="Client result screenshot 9" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="9">
-            <img src="/assets/testimonials/Result 10.svg" alt="Client result screenshot 10" loading="lazy">
+            <img src="/assets/testimonials/Result 10.webp" alt="Client result screenshot 10" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="10">
-            <img src="/assets/testimonials/Result 11.svg" alt="Client result screenshot 11" loading="lazy">
+            <img src="/assets/testimonials/Result 11.webp" alt="Client result screenshot 11" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="11">
-            <img src="/assets/testimonials/Result 12.svg" alt="Client result screenshot 12" loading="lazy">
+            <img src="/assets/testimonials/Result 12.webp" alt="Client result screenshot 12" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="12">
-            <img src="/assets/testimonials/Result 13.svg" alt="Client result screenshot 13" loading="lazy">
+            <img src="/assets/testimonials/Result 13.webp" alt="Client result screenshot 13" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="13">
-            <img src="/assets/testimonials/Result 14.svg" alt="Client result screenshot 14" loading="lazy">
+            <img src="/assets/testimonials/Result 14.webp" alt="Client result screenshot 14" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="14">
-            <img src="/assets/testimonials/Result 15.svg" alt="Client result screenshot 15" loading="lazy">
+            <img src="/assets/testimonials/Result 15.webp" alt="Client result screenshot 15" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="15">
-            <img src="/assets/testimonials/Result 16.svg" alt="Client result screenshot 16" loading="lazy">
+            <img src="/assets/testimonials/Result 16.webp" alt="Client result screenshot 16" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="16">
-            <img src="/assets/testimonials/Result 17.svg" alt="Client result screenshot 17" loading="lazy">
+            <img src="/assets/testimonials/Result 17.webp" alt="Client result screenshot 17" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="17">
-            <img src="/assets/testimonials/Result 18.svg" alt="Client result screenshot 18" loading="lazy">
+            <img src="/assets/testimonials/Result 18.webp" alt="Client result screenshot 18" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="18">
-            <img src="/assets/testimonials/Result 19.svg" alt="Client result screenshot 19" loading="lazy">
+            <img src="/assets/testimonials/Result 19.webp" alt="Client result screenshot 19" loading="lazy">
           </div>
           <div class="screenshot-item" data-index="19">
-            <img src="/assets/testimonials/Result 20.svg" alt="Client result screenshot 20" loading="lazy">
+            <img src="/assets/testimonials/Result 20.webp" alt="Client result screenshot 20" loading="lazy">
           </div>
         </div>
       </div>
@@ -379,7 +395,7 @@
           </div>
 
           <!-- Small bottom card -->
-          <div class="problem-bento-card problem-bento-card-small" style="background-image: url('/assets/images/18.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+          <div class="problem-bento-card problem-bento-card-small" style="background-image: url('/assets/images/18.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <p class="problem-bento-card-text-small" style="color: white;">Custom or fast. Burn cash or burn time. Own nothing either way. That was the deal until now.</p>
           </div>
         </div>
@@ -391,7 +407,10 @@
   <section class="founder-section">
     <div class="founder-container">
       <div class="founder-photo">
-        <img src="assets/images/joncameron-headshot.jpg" alt="JonCameron Johnson" />
+        <picture>
+          <source srcset="/assets/images/joncameron-headshot.webp" type="image/webp">
+          <img src="/assets/images/joncameron-headshot.jpg" alt="JonCameron Johnson" width="3010" height="4517" loading="lazy" />
+        </picture>
       </div>
       <div class="founder-divider"></div>
       <div class="founder-content">
@@ -450,8 +469,14 @@
 
       <!-- Monitor Display -->
       <div class="monitor-display-container">
-        <img src="assets/images/02 - PRO DISPLAY XDR - HORIZONTAL-DARK.svg" alt="Olympus Platform Display" class="monitor-display monitor-display-dark">
-        <img src="assets/images/02 - PRO DISPLAY XDR - HORIZONTAL-LIGHT.svg" alt="Olympus Platform Display" class="monitor-display monitor-display-light">
+        <picture>
+          <source srcset="/assets/images/pro-display-dark.webp" type="image/webp">
+          <img src="/assets/images/02 - PRO DISPLAY XDR - HORIZONTAL-DARK.svg" alt="Olympus Platform Display" class="monitor-display monitor-display-dark" width="3840" height="2824" loading="lazy">
+        </picture>
+        <picture>
+          <source srcset="/assets/images/pro-display-light.webp" type="image/webp">
+          <img src="/assets/images/02 - PRO DISPLAY XDR - HORIZONTAL-LIGHT.svg" alt="Olympus Platform Display" class="monitor-display monitor-display-light" width="3840" height="2786" loading="lazy">
+        </picture>
 
         <!-- macOS Menu Bar -->
         <div class="macos-menu-bar">
@@ -641,7 +666,10 @@
               </div>
               <div class="telegram-visual-side">
                 <div class="telegram-iphone">
-                  <img class="telegram-iphone-light" src="assets/images/IPHONE 15 PRO - LIGHT.svg" alt="" />
+                  <picture>
+                    <source srcset="/assets/images/iphone-15-pro-light.webp" type="image/webp">
+                    <img class="telegram-iphone-light" src="/assets/images/IPHONE 15 PRO - LIGHT.svg" alt="" width="1600" height="2926" loading="lazy" />
+                  </picture>
 
                   <!-- Telegram message bubbles overlay - DARK THEME -->
                   <div class="telegram-messages telegram-messages-dark">
@@ -1243,34 +1271,34 @@
         <div class="feature-graphic content-carousel-graphic">
           <div class="content-carousel">
             <div class="creative-card">
-              <img src="assets/content/content1.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/content1.webp" alt="Creative content" class="creative-image" width="1024" height="1536" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/content2.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/content2.webp" alt="Creative content" class="creative-image" width="1024" height="1024" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/content3.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/content3.webp" alt="Creative content" class="creative-image" width="1024" height="1024" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/content4.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/content4.webp" alt="Creative content" class="creative-image" width="1024" height="1024" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/content6.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/content6.webp" alt="Creative content" class="creative-image" width="1792" height="2560" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/content7.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/content7.webp" alt="Creative content" class="creative-image" width="864" height="1184" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/Deliver.jpeg" alt="Creative content" class="creative-image">
+              <img src="/assets/content/Deliver.webp" alt="Creative content" class="creative-image" width="2912" height="1632" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/Detox.jpeg" alt="Creative content" class="creative-image">
+              <img src="/assets/content/Detox.webp" alt="Creative content" class="creative-image" width="7724" height="4344" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/Reversing Neuropathy 2.png" alt="Creative content" class="creative-image">
+              <img src="/assets/content/Reversing Neuropathy 2.webp" alt="Creative content" class="creative-image" width="1202" height="1202" loading="lazy">
             </div>
             <div class="creative-card">
-              <img src="assets/content/CONMAN.jpg" alt="Creative content" class="creative-image">
+              <img src="/assets/content/CONMAN.webp" alt="Creative content" class="creative-image" width="1500" height="1501" loading="lazy">
             </div>
           </div>
         </div>
@@ -1689,8 +1717,8 @@
               <span class="browser-title">Olympus</span>
             </div>
             <div class="browser-content">
-              <img src="/assets/images/point-dark.png" alt="Olympus Interface" class="browser-screenshot-dark">
-              <img src="/assets/images/point-light.png" alt="Olympus Interface" class="browser-screenshot-light">
+              <picture><source srcset="/assets/images/point-dark.webp" type="image/webp"><img src="/assets/images/point-dark.png" alt="Olympus Interface" class="browser-screenshot-dark" width="1371" height="850" loading="lazy"></picture>
+              <picture><source srcset="/assets/images/point-light.webp" type="image/webp"><img src="/assets/images/point-light.png" alt="Olympus Interface" class="browser-screenshot-light" width="1371" height="850" loading="lazy"></picture>
             </div>
           </div>
         </div>
@@ -1712,8 +1740,8 @@
               <span class="browser-title">Olympus</span>
             </div>
             <div class="browser-content">
-              <img src="/assets/images/build-dark.png" alt="Olympus Build" class="browser-screenshot-dark">
-              <img src="/assets/images/build-light.png" alt="Olympus Build" class="browser-screenshot-light">
+              <picture><source srcset="/assets/images/build-dark.webp" type="image/webp"><img src="/assets/images/build-dark.png" alt="Olympus Build" class="browser-screenshot-dark" width="1098" height="801" loading="lazy"></picture>
+              <picture><source srcset="/assets/images/build-light.webp" type="image/webp"><img src="/assets/images/build-light.png" alt="Olympus Build" class="browser-screenshot-light" width="1098" height="801" loading="lazy"></picture>
             </div>
           </div>
         </div>
@@ -1735,8 +1763,8 @@
               <span class="browser-title">Olympus</span>
             </div>
             <div class="browser-content">
-              <img src="/assets/images/launch-dark.png" alt="Olympus Launch" class="browser-screenshot-dark">
-              <img src="/assets/images/launch-light.png" alt="Olympus Launch" class="browser-screenshot-light">
+              <picture><source srcset="/assets/images/launch-dark.webp" type="image/webp"><img src="/assets/images/launch-dark.png" alt="Olympus Launch" class="browser-screenshot-dark" width="1378" height="891" loading="lazy"></picture>
+              <picture><source srcset="/assets/images/launch-light.webp" type="image/webp"><img src="/assets/images/launch-light.png" alt="Olympus Launch" class="browser-screenshot-light" width="1378" height="891" loading="lazy"></picture>
             </div>
           </div>
         </div>
@@ -1937,7 +1965,7 @@
 
       <!-- Header -->
       <h2 class="pricing-headline">Pricing. Right here.<br><span class="pricing-headline-gradient">Wild concept. I know.</span></h2>
-      <p class="pricing-subheadline">You deserve price info right up front. The demo is just to see it in action and get your questions answered. Check below to see our recommended plan for you.</p>
+      <p class="pricing-subheadline">Enter your monthly revenue to see our recommended plan for your business.</p>
 
       <!-- Revenue Calculator -->
       <div class="revenue-calculator">
@@ -2059,7 +2087,7 @@
               <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
           </ul>
-          <button class="pricing-card-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
+          <button class="pricing-card-button" type="button" data-book-demo-trigger>Book Demo</button>
         </div>
 
         <!-- Alpha Card -->
@@ -2178,7 +2206,7 @@
               <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
           </ul>
-          <button class="pricing-card-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
+          <button class="pricing-card-button" type="button" data-book-demo-trigger>Book Demo</button>
         </div>
 
         <!-- Sigma Card -->
@@ -2304,7 +2332,7 @@
               <svg class="tooltip-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 7v4M8 5.5v-.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </li>
           </ul>
-          <button class="pricing-card-button" onclick="window.location.href='/calendar.html'">Book Demo</button>
+          <button class="pricing-card-button" type="button" data-book-demo-trigger>Book Demo</button>
         </div>
 
       </div>
@@ -2332,177 +2360,226 @@
   <!-- FAQ Section -->
   <section id="faq" class="faq-section">
     <h2 class="faq-headline">Mega FAQ to answer your questions</h2>
-    <div class="faq-categories">
-      <!-- Category 1: Getting Started -->
-      <div class="faq-category">
-        <button class="faq-category-button">
-          <span>Getting Started</span>
-          <svg class="faq-category-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <div class="faq-category-content">
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>How much of my time does this actually take?</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>Most of your involvement is upfront.</p>
-              <p>You provide the goals. The outcomes you want. The brand materials. Access to any documentation that helps Olympus understand your practice.</p>
-              <p>That's the foundation. Once it's in, Olympus takes over.</p>
-              <p>From there, it depends on who's operating it - you or your team. Whoever it is, we train them. We guide them. We're here when they get stuck.</p>
-              <p>But here's where it actually saves you time: instead of guessing what's working and what's not, Olympus sees the entire board. It's trained to break through bottlenecks.</p>
-              <p>So the decisions that used to take you weeks of wondering? Now they're clear. Fast. Obvious.</p>
-              <p>You're not spending more time on marketing.</p>
-              <p>You're spending less - and getting better decisions out of it.</p>
-            </div>
+    <div class="faq-bento-grid">
+
+      <!-- Row 1: The System -->
+      <div class="faq-bento-row-hero">
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">What's automated vs. what needs my approval?</h3>
+          <p class="faq-bento-answer"><strong>Everything generates automatically. Nothing publishes without you.</strong> Copy, creative, landing pages, campaign structures, and optimization recommendations are all generated by the platform. You approve before anything goes live. Final creative sign-off, page publishing, campaign launches, and major budget changes require your click.</p>
+        </div>
+        <div class="faq-bento-stack">
+          <div class="faq-bento-card faq-bento-card--sm">
+            <h3 class="faq-bento-question">Is this just ChatGPT with a wrapper?</h3>
+            <p class="faq-bento-answer"><strong>ChatGPT produces text. Olympus builds, installs, and launches.</strong> No prompting. Connected to your tools. Trained on real campaign data.</p>
           </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>What does my staff have to do? They're not marketers.</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>Good. We don't need marketers.</p>
-              <p>Olympus does the thinking. You or your staff press a few buttons to approve or reject Olympus taking action on your behalf.</p>
-              <p>That's the job.</p>
-              <p>Fifteen minutes a day. Check the dashboard. Respond to leads. Approve the next move.</p>
-              <p>If they can check email, they can run Olympus.</p>
-              <p>We train them until they're confident. When they get stuck, we're there. Screen-share. Help desk. Whatever it takes.</p>
-              <p>This isn't a marketing job. It's a checklist.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>What if I don't have any marketing materials to give you?</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>That's fine.</p>
-              <p>All Olympus needs is your website and a few files - scripts, FAQs, anything that shows how you talk to patients.</p>
-              <p>Don't have those? We'll get on a 30-minute call and pull it out of you.</p>
-              <p>Olympus scrapes your site, captures your voice, and builds from there. It doesn't need a marketing department's worth of assets.</p>
-              <p>It needs you. For 30 minutes. Once.</p>
-              <p>Then it builds everything else.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>Do I need to learn how to use this software?</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>"Learn" is a strong word.</p>
-              <p>It's 15 minutes of training. Follow the dashboard. Press the buttons. Respond to leads.</p>
-              <p>Olympus does the thinking. You or your staff handle the doing. And the doing is simple.</p>
-              <p>If you're imagining some complex marketing platform with 47 tabs and a learning curve - that's not this.</p>
-              <p>This is: log in, see what needs attention, handle it, log out.</p>
-              <p>Fifteen minutes a day.</p>
-              <p>That's the point.</p>
-            </div>
+          <div class="faq-bento-card faq-bento-card--sm">
+            <h3 class="faq-bento-question">How much is AI vs. human?</h3>
+            <p class="faq-bento-answer"><strong>Platform is AI. Support is human.</strong> Strategy, judgment calls, and interpretation are us. In a Telegram channel. Same-day response.</p>
           </div>
         </div>
       </div>
 
-      <!-- Category 2: Results & Expectations -->
-      <div class="faq-category">
-        <button class="faq-category-button">
-          <span>Results & Expectations</span>
-          <svg class="faq-category-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <div class="faq-category-content">
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>I've tried ads before and they didn't work. Why would this be different?</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>Because you weren't running enough of them.</p>
-              <p>Here's what nobody tells you: one in ten campaigns wins. That's the reality. The agencies running four to eight campaigns a year for you? They're not marketing. They're gambling. And you're funding the lottery tickets.</p>
-              <p>The practitioners who win are the ones with volume and speed. They test more. They learn faster. They find what works before their competitors even finish their first campaign.</p>
-              <p>Olympus lets you test as many campaigns as you want. One a day if you need to. That's not hope. That's not luck. That's certainty through volume.</p>
-              <p>And here's the other thing - you don't provide cookie-cutter care. Why would you accept cookie-cutter marketing?</p>
-              <p>The agencies handing you templated campaigns are the same ones blaming your market when they fail. Olympus builds custom acquisition for your practice, your patients, your positioning.</p>
-              <p>Your ads didn't fail because ads don't work.</p>
-              <p>They failed because no one gave you the speed, volume, and customization required to find what actually works.</p>
-            </div>
+      <!-- Section: Ownership & portability -->
+      <div class="faq-bento-section-label"><span class="faq-bento-dot" style="background: #10b981;"></span> Ownership & portability</div>
+      <div class="faq-bento-row-thirds">
+        <div class="faq-bento-card faq-bento-card--dark">
+          <h3 class="faq-bento-question">Do I own everything?</h3>
+          <p class="faq-bento-answer"><strong>Yes. 100%. Written into the MSLA.</strong> Campaigns, copy, creative, landing pages, data. Leave and take it all. Funnels export as HTML. Creatives as full-res PNG/JPG/MP4. Copy as DOC/CSV. Full data export of all leads and interactions.</p>
+        </div>
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">Are my assets used to train models for competitors?</h3>
+          <p class="faq-bento-answer"><strong>No.</strong> Your brand assets, copy, and content are isolated. We aggregate anonymized performance patterns, but your specific IP is never shared or used for other accounts.</p>
+        </div>
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">What happens if I cancel?</h3>
+          <p class="faq-bento-answer"><strong>7 days to export everything.</strong> Account archived for 30 days in case you need recovery. Then permanently removed. We assist with migration if needed.</p>
+        </div>
+      </div>
+
+      <!-- Section: Testing & optimization -->
+      <div class="faq-bento-section-label"><span class="faq-bento-dot" style="background: #FF6F00;"></span> Testing & optimization</div>
+      <div class="faq-bento-row-narrow-wide">
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">How many campaigns can I test per week?</h3>
+          <p class="faq-bento-answer"><strong>No hard limit. Budget is the practical constraint.</strong> With $4K/month you'd run 2-3 campaigns with 25-30 creatives each. More budget, more tests.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Does it prevent learning phase thrash?</h3>
+          <p class="faq-bento-answer"><strong>Yes.</strong> Respects Meta's learning phase. No changes that reset learning unnecessarily. No more than once per 72 hours per ad set.</p>
+        </div>
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">What signals drive optimization?</h3>
+          <p class="faq-bento-answer"><strong>CPL, cost per booked call, show rate, start rate.</strong> You set guardrails: "never spend more than $X per lead" or "pause if CPL exceeds $Y for 72 hours." The platform monitors and recommends. You approve.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Can I import existing pixel and conversion history?</h3>
+          <p class="faq-bento-answer"><strong>Yes. Your existing Meta pixel connects directly.</strong> Historical data informs initial targeting. No starting from scratch.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Can I generate N variants changing one variable at a time?</h3>
+          <p class="faq-bento-answer"><strong>Yes. Systematic isolation is core to the testing methodology.</strong> Take a winner. Generate 10 variants changing only the headline. Or only the CTA. Or only the visual hook.</p>
+        </div>
+      </div>
+
+      <!-- Section: Creative & brand control -->
+      <div class="faq-bento-section-label"><span class="faq-bento-dot" style="background: #8b5cf6;"></span> Creative & brand control</div>
+      <div class="faq-bento-row-hero-grid">
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">Can I enforce brand guidelines across all outputs?</h3>
+          <p class="faq-bento-answer"><strong>Yes. Logo placement, colors, fonts, disclaimers. All enforced.</strong> Upload brand guidelines as PDFs. The system ingests and references them. Safe zones, color palette, font hierarchy, and required disclaimers applied automatically.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Can I upload an ad I like and have it recreated in my brand?</h3>
+          <p class="faq-bento-answer"><strong>Yes. You provide the reference. We recreate it with your identity.</strong></p>
+        </div>
+        <div class="faq-bento-card faq-bento-card--sm">
+          <h3 class="faq-bento-question">What formats are supported?</h3>
+          <p class="faq-bento-answer"><strong>Static, carousel, stories, reels, thumbnails, infographics.</strong> 1:1, 4:5, 9:16. Long-form video is manual production at Sigma.</p>
+        </div>
+        <div class="faq-bento-card faq-bento-card--sm">
+          <h3 class="faq-bento-question">Can creatives be reused across funnels, website, email?</h3>
+          <p class="faq-bento-answer"><strong>Yes. Shared asset library.</strong> Downloaded at full resolution. Used anywhere. You own them.</p>
+        </div>
+      </div>
+
+      <!-- Section: Data, security & attribution -->
+      <div class="faq-bento-section-label"><span class="faq-bento-dot" style="background: #06b6d4;"></span> Data, security & attribution</div>
+      <div class="faq-bento-row-halves">
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">From first eyeball to conversion, what tracks this?</h3>
+          <p class="faq-bento-answer"><strong>Hyros for attribution. GHL for the pipeline. Both connected.</strong> Hyros tracks cross-device, cross-session journeys. GHL is where leads live. All sources (paid, organic, referral) flow into one dashboard.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Multi-touch attribution and duplicate deconfliction?</h3>
+          <p class="faq-bento-answer"><strong>Hyros handles multi-touch. GHL merges duplicates.</strong></p>
+        </div>
+        <div class="faq-bento-card">
+          <h3 class="faq-bento-question">What patient data is stored and where?</h3>
+          <p class="faq-bento-answer"><strong>Lead data in GHL. Campaign data in Olympus. No clinical data or PHI touches the system.</strong> Architecture is built to keep PHI out entirely by design.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Role-based access, MFA, audit logs?</h3>
+          <p class="faq-bento-answer"><strong>All three. Yes.</strong> Configure who sees what. All actions logged with timestamps. 72-hour breach notification commitment.</p>
+        </div>
+      </div>
+
+      <!-- Row 6: Dark cards -->
+      <div class="faq-bento-row-wide-narrow">
+        <div class="faq-bento-card faq-bento-card--dark">
+          <h3 class="faq-bento-question">Contracts?</h3>
+          <p class="faq-bento-answer"><strong>No. Month to month. Leave anytime.</strong> Stay because it works. Not because you're locked in.</p>
+          <div class="faq-bento-divider"></div>
+          <h3 class="faq-bento-question">Performance guarantees?</h3>
+          <p class="faq-bento-answer"><strong>No. Anyone who guarantees results is lying.</strong> We guarantee speed, transparency, and support. If after 90 days of iteration we can't find traction, we'll tell you honestly whether the issue is fixable or fundamental.</p>
+        </div>
+        <div class="faq-bento-card faq-bento-card--dark">
+          <h3 class="faq-bento-question">Who do I actually talk to?</h3>
+          <p class="faq-bento-answer"><strong>The founders. In a Telegram channel.</strong> Not junior account managers. Not a ticket queue. Strategy calls included at Alpha/Sigma.</p>
+        </div>
+      </div>
+
+      <!-- Situational Accordion -->
+      <div class="faq-bento-section-label">Situational</div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>I already have an agency or marketing team.</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Replace or layer.</strong> If layering, position Olympus as a speed tool for your existing team. Agencies will resist. Bring it to the demo call and we'll help you navigate it.</p>
           </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>Will this work for my specialty? My market is different.</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>All markets are different.</p>
-              <p>Olympus has been trained on markets as small as 20,000 people and as large as multiple millions. It has the ability to handle and grow in both.</p>
-              <p>This is where it shines.</p>
-              <p>Before we launch anything, Olympus generates a 50+ page intelligence report on your market. Your competitors. Your patient psychographics. Your positioning.</p>
-              <p>Nothing is templated. Everything is configured for your practice, your specialty, your geography.</p>
-              <p>You're not getting someone else's leftovers.</p>
-              <p>You're getting a system built for the market you're actually in.</p>
-            </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>I'm in a small or rural market.</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Often works better.</strong> Less competition. Lower costs. Less fatigue. Small markets let you dominate faster.</p>
           </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>How long until I see results?</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>The average time for practitioners to get launched is seven days.</p>
-              <p>Olympus can complete an entire run-through of its processes in one hour or less.</p>
-              <p>Now - "results" means different things to different people.</p>
-              <p>If results means a complete funnel built and ready to go? That's days.</p>
-              <p>If results means market intelligence and copy you can actually use? That's hours.</p>
-              <p>If results means ROI - patients showing up and paying? That depends on your launch date plus your average patient start time from ads. For many practitioners, that's within 30 days of going live.</p>
-              <p>What I can tell you is this: Olympus removes the bottleneck of building, launching, and learning. The rest is execution.</p>
-              <p>And if you don't have clarity on what's working within 14 days, we rebuild it at no extra cost until you do.</p>
-            </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Multiple locations or brands?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Lambda: 1. Alpha: 2. Sigma: 3.</strong> Multiple service lines within one brand count as one. More than 3, let's talk.</p>
           </div>
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>I already have a website and social media. Isn't that enough?</span>
-              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
-                <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <div class="faq-answer">
-              <p>No.</p>
-              <p>A website is a brochure. Social media is a hobby.</p>
-              <p>Neither of them is a patient acquisition system.</p>
-              <p>Here's the difference: a website waits for people to find you. Social media hopes people pay attention. A system goes out and brings patients to you - patients who already understand your value and are ready to invest in their health.</p>
-              <p>You can have the best website in the world. Beautiful. Professional. Award-winning.</p>
-              <p>And still have no predictable way to fill your calendar.</p>
-              <p>Olympus isn't a website. It's not social media management. It's a system that generates patients - campaigns, funnels, ads, copy, follow-up sequences - all working together.</p>
-              <p>That's the difference between having a presence and having a pipeline.</p>
-            </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>My website isn't ready.</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Doesn't matter.</strong> Olympus builds landing pages on subdomains. Your main site has zero effect on campaigns.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I integrate my own SEO company?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Yes.</strong> Pixels, cookies, and targeting data flow into one attribution system. GHL becomes the central repository regardless of source.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does ad spend increase my SEO visibility?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Yes. Halo effect.</strong> Brand search volume increases. Direct traffic lifts. Organic CTR improves when people recognize your name. Tracked directionally.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>SMS/call compliance - TCPA, consent records?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>GHL logs all consent and opt-outs.</strong> TCPA compliance built in. Full audit trail available.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Who is this NOT for?</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="vertical-line"/>
+              <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Profits-over-patients practitioners. Get-rich-quick seekers. Under $300K revenue. Anyone who needs guarantees before they act.</strong> If the investment would genuinely hurt you financially, this isn't the right time.</p>
           </div>
         </div>
       </div>
+
+      <!-- CTA -->
+      <div class="faq-bento-cta">
+        <a href="/calendar" class="cta-section-button" data-book-demo-trigger>Book Demo</a>
+        <p>No pressure. Come with your questions.</p>
+      </div>
+
     </div>
   </section>
 
@@ -3635,8 +3712,8 @@
     })();
   </script>
 
-  <!-- Lottie Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Lottie Library (light build, SVG renderer only) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie_light.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 
   <!-- Solution Card Animations -->
   <script>
@@ -3793,9 +3870,18 @@
           }
         }
 
-        // Load animations for visible containers immediately
+        // Lazy-load animations via IntersectionObserver (200px rootMargin)
+        var lazyAnimObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              loadAnimation(entry.target);
+              lazyAnimObserver.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '200px' });
+
         animationContainers.forEach(function(container) {
-          loadAnimation(container);
+          lazyAnimObserver.observe(container);
         });
 
         // Initialize Funnels Lottie animations
@@ -3857,8 +3943,19 @@
           }
         }
 
-        // Initialize funnels animations
-        initFunnelsAnimations();
+        // Lazy-load funnels animations when section approaches viewport
+        var funnelsGraphicEl = document.querySelector('.funnels-graphic');
+        if (funnelsGraphicEl) {
+          var funnelsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                initFunnelsAnimations();
+                funnelsObserver.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '200px' });
+          funnelsObserver.observe(funnelsGraphicEl);
+        }
 
         // Initialize upside card Lottie animations
         function initUpsideAnimations() {
@@ -3910,8 +4007,20 @@
           });
         }
 
-        // Initialize upside animations
-        initUpsideAnimations();
+        // Lazy-load upside animations when section approaches viewport
+        var upsideSection = document.querySelector('.upside-card-lottie[data-animation]');
+        if (upsideSection) {
+          var upsideEl = upsideSection.closest('.upside-card') || upsideSection;
+          var upsideObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                initUpsideAnimations();
+                upsideObserver.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '200px' });
+          upsideObserver.observe(upsideEl);
+        }
 
         // Initialize agent icon Lottie animations (theme-aware)
         function initAgentAnimations() {
@@ -3950,8 +4059,19 @@
           });
         }
 
-        // Initialize agent animations
-        initAgentAnimations();
+        // Lazy-load agent animations when section approaches viewport
+        var agentSection = document.querySelector('.agent-card');
+        if (agentSection) {
+          var agentObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                initAgentAnimations();
+                agentObserver.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '200px' });
+          agentObserver.observe(agentSection);
+        }
 
         // Watch for theme changes
         const themeObserver = new MutationObserver(function(mutations) {
@@ -4102,7 +4222,8 @@
     })();
   </script>
 
-  <script src="/assets/js/tracking.js" defer></script>
+  <script src="/assets/js/tracking.min.js" defer></script>
+  <script src="/assets/js/book-demo-router.js" defer></script>
 
   <script>
     // Toggle mutual exclusivity
@@ -4146,10 +4267,10 @@
   </script>
 
   <!-- Pricing Calculator -->
-  <script src="/assets/js/pricing.js" defer></script>
+  <script src="/assets/js/pricing.min.js" defer></script>
 
   <!-- KPI Calculator -->
-  <script src="/assets/js/kpi-calculator.js" defer></script>
+  <script src="/assets/js/kpi-calculator.min.js" defer></script>
 
   <!-- Lottie Animations (uses library loaded above) -->
   <script>
@@ -4355,130 +4476,130 @@
       <div class="results-gallery-content">
         <div class="results-gallery-masonry" id="resultsGalleryGrid">
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 1.svg" alt="Client result 1" loading="lazy">
+            <img src="/assets/testimonials/Result 1.webp" alt="Client result 1" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 2.svg" alt="Client result 2" loading="lazy">
+            <img src="/assets/testimonials/Result 2.webp" alt="Client result 2" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 3.svg" alt="Client result 3" loading="lazy">
+            <img src="/assets/testimonials/Result 3.webp" alt="Client result 3" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 4.svg" alt="Client result 4" loading="lazy">
+            <img src="/assets/testimonials/Result 4.webp" alt="Client result 4" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 5.svg" alt="Client result 5" loading="lazy">
+            <img src="/assets/testimonials/Result 5.webp" alt="Client result 5" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 6.svg" alt="Client result 6" loading="lazy">
+            <img src="/assets/testimonials/Result 6.webp" alt="Client result 6" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 7.svg" alt="Client result 7" loading="lazy">
+            <img src="/assets/testimonials/Result 7.webp" alt="Client result 7" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 8.svg" alt="Client result 8" loading="lazy">
+            <img src="/assets/testimonials/Result 8.webp" alt="Client result 8" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 9.svg" alt="Client result 9" loading="lazy">
+            <img src="/assets/testimonials/Result 9.webp" alt="Client result 9" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 10.svg" alt="Client result 10" loading="lazy">
+            <img src="/assets/testimonials/Result 10.webp" alt="Client result 10" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 11.svg" alt="Client result 11" loading="lazy">
+            <img src="/assets/testimonials/Result 11.webp" alt="Client result 11" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 12.svg" alt="Client result 12" loading="lazy">
+            <img src="/assets/testimonials/Result 12.webp" alt="Client result 12" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 13.svg" alt="Client result 13" loading="lazy">
+            <img src="/assets/testimonials/Result 13.webp" alt="Client result 13" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 14.svg" alt="Client result 14" loading="lazy">
+            <img src="/assets/testimonials/Result 14.webp" alt="Client result 14" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 15.svg" alt="Client result 15" loading="lazy">
+            <img src="/assets/testimonials/Result 15.webp" alt="Client result 15" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 16.svg" alt="Client result 16" loading="lazy">
+            <img src="/assets/testimonials/Result 16.webp" alt="Client result 16" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 17.svg" alt="Client result 17" loading="lazy">
+            <img src="/assets/testimonials/Result 17.webp" alt="Client result 17" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 18.svg" alt="Client result 18" loading="lazy">
+            <img src="/assets/testimonials/Result 18.webp" alt="Client result 18" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 19.svg" alt="Client result 19" loading="lazy">
+            <img src="/assets/testimonials/Result 19.webp" alt="Client result 19" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 20.svg" alt="Client result 20" loading="lazy">
+            <img src="/assets/testimonials/Result 20.webp" alt="Client result 20" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 21.svg" alt="Client result 21" loading="lazy">
+            <img src="/assets/testimonials/Result 21.webp" alt="Client result 21" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 22.svg" alt="Client result 22" loading="lazy">
+            <img src="/assets/testimonials/Result 22.webp" alt="Client result 22" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 23.svg" alt="Client result 23" loading="lazy">
+            <img src="/assets/testimonials/Result 23.webp" alt="Client result 23" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 24.svg" alt="Client result 24" loading="lazy">
+            <img src="/assets/testimonials/Result 24.webp" alt="Client result 24" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 25.svg" alt="Client result 25" loading="lazy">
+            <img src="/assets/testimonials/Result 25.webp" alt="Client result 25" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 27.svg" alt="Client result 27" loading="lazy">
+            <img src="/assets/testimonials/Result 27.webp" alt="Client result 27" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 28.svg" alt="Client result 28" loading="lazy">
+            <img src="/assets/testimonials/Result 28.webp" alt="Client result 28" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 29.svg" alt="Client result 29" loading="lazy">
+            <img src="/assets/testimonials/Result 29.webp" alt="Client result 29" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 30.svg" alt="Client result 30" loading="lazy">
+            <img src="/assets/testimonials/Result 30.webp" alt="Client result 30" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 31.svg" alt="Client result 31" loading="lazy">
+            <img src="/assets/testimonials/Result 31.webp" alt="Client result 31" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 32.svg" alt="Client result 32" loading="lazy">
+            <img src="/assets/testimonials/Result 32.webp" alt="Client result 32" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 33.svg" alt="Client result 33" loading="lazy">
+            <img src="/assets/testimonials/Result 33.webp" alt="Client result 33" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 34.svg" alt="Client result 34" loading="lazy">
+            <img src="/assets/testimonials/Result 34.webp" alt="Client result 34" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 35.svg" alt="Client result 35" loading="lazy">
+            <img src="/assets/testimonials/Result 35.webp" alt="Client result 35" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 36.svg" alt="Client result 36" loading="lazy">
+            <img src="/assets/testimonials/Result 36.webp" alt="Client result 36" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 37.svg" alt="Client result 37" loading="lazy">
+            <img src="/assets/testimonials/Result 37.webp" alt="Client result 37" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 38.svg" alt="Client result 38" loading="lazy">
+            <img src="/assets/testimonials/Result 38.webp" alt="Client result 38" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 39.svg" alt="Client result 39" loading="lazy">
+            <img src="/assets/testimonials/Result 39.webp" alt="Client result 39" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 40.svg" alt="Client result 40" loading="lazy">
+            <img src="/assets/testimonials/Result 40.webp" alt="Client result 40" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 41.svg" alt="Client result 41" loading="lazy">
+            <img src="/assets/testimonials/Result 41.webp" alt="Client result 41" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 42.svg" alt="Client result 42" loading="lazy">
+            <img src="/assets/testimonials/Result 42.webp" alt="Client result 42" loading="lazy">
           </div>
           <div class="results-gallery-item">
-            <img src="/assets/testimonials/Result 43.svg" alt="Client result 43" loading="lazy">
+            <img src="/assets/testimonials/Result 43.webp" alt="Client result 43" loading="lazy">
           </div>
         </div>
       </div>
@@ -4731,6 +4852,55 @@
   })();
   </script>
 
+  <!-- Demo Routing Modal -->
+  <div class="demo-routing-modal" id="demo-routing-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="demo-routing-title">
+    <div class="demo-routing-backdrop" data-demo-routing-close></div>
+    <div class="demo-routing-container">
+      <button class="demo-routing-close" type="button" aria-label="Close" data-demo-routing-close>&times;</button>
+      <div class="demo-routing-header">
+        <p class="demo-routing-eyebrow">Book Demo</p>
+        <h2 id="demo-routing-title">Pick your right plan for you</h2>
+      </div>
+      <div class="demo-routing-grid">
+        <button class="demo-routing-card" type="button" data-demo-segment="just-getting-started">
+          <span class="demo-routing-card-head">
+            <img src="/olympus-icons/olympus-line-light.svg" alt="" class="demo-routing-logo">
+            <span class="demo-routing-name">Just Getting Started</span>
+          </span>
+          <span class="demo-routing-range">$0 - $250K in annual revenue</span>
+        </button>
+        <button class="demo-routing-card" type="button" data-demo-segment="lambda">
+          <span class="demo-routing-card-head">
+            <img src="/assets/images/lambda-logo.svg" alt="" class="demo-routing-logo">
+            <span class="demo-routing-name">Lambda</span>
+          </span>
+          <span class="demo-routing-range">$250K - $750K in annual revenue</span>
+        </button>
+        <button class="demo-routing-card" type="button" data-demo-segment="alpha">
+          <span class="demo-routing-card-head">
+            <img src="/assets/images/alpha-logo.svg" alt="" class="demo-routing-logo">
+            <span class="demo-routing-name">Alpha</span>
+          </span>
+          <span class="demo-routing-range">$750K - $1.5M in annual revenue</span>
+        </button>
+        <button class="demo-routing-card" type="button" data-demo-segment="sigma">
+          <span class="demo-routing-card-head">
+            <img src="/assets/images/sigma-logo.svg" alt="" class="demo-routing-logo">
+            <span class="demo-routing-name">Sigma</span>
+          </span>
+          <span class="demo-routing-range">$1.5M - $3.6M in annual revenue</span>
+        </button>
+        <button class="demo-routing-card demo-routing-card-wide" type="button" data-demo-segment="omega">
+          <span class="demo-routing-card-head">
+            <img src="/assets/images/omega-logo.svg" alt="" class="demo-routing-logo">
+            <span class="demo-routing-name">Omega</span>
+          </span>
+          <span class="demo-routing-range">$3.6M+ in annual revenue or multi-location</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Quiz Modal -->
   <div class="quiz-modal" id="quiz-modal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="quiz-modal-backdrop"></div>
@@ -4961,6 +5131,6 @@
   </div>
 
   <!-- Quiz Modal Script -->
-  <script src="/assets/js/quiz.js"></script>
+  <script src="/assets/js/quiz.min.js"></script>
 </body>
 </html>

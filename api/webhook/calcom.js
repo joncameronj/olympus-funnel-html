@@ -42,34 +42,81 @@ export default async function handler(request) {
     const data = payload.payload || payload;
     const responses = data.responses || {};
     const attendee = data.attendees?.[0] || {};
+    const metadata = data.metadata || data.bookingMetadata || data.eventTypeMetadata || {};
+
+    const normalizeText = (value) => String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+
+    const getResponseValue = (value) => {
+      if (value == null) return '';
+
+      if (Array.isArray(value)) {
+        return value
+          .map((item) => getResponseValue(item))
+          .filter(Boolean)
+          .join(', ')
+          .trim();
+      }
+
+      if (typeof value === 'object') {
+        if (value.value !== undefined) return getResponseValue(value.value);
+        if (value.answer !== undefined) return getResponseValue(value.answer);
+        if (value.text !== undefined) return getResponseValue(value.text);
+        return '';
+      }
+
+      return String(value).trim();
+    };
 
     // Helper to get response value (handles different Cal.com formats)
     const getResponse = (searchTerms) => {
-      // First, try direct key match
-      for (const key of searchTerms) {
-        if (responses[key]) {
-          const val = responses[key];
-          if (typeof val === 'object' && val.value !== undefined) return val.value;
-          if (Array.isArray(val)) return val.map(v => typeof v === 'object' ? v.value || v : v).join(', ');
-          return val;
-        }
+      const terms = searchTerms.map(normalizeText).filter(Boolean);
+      const entries = Object.entries(responses);
+
+      const isMatch = (candidate) => {
+        const text = normalizeText(candidate);
+        if (!text) return false;
+        return terms.some((term) => text === term || text.includes(term) || term.includes(text));
+      };
+
+      // Direct key lookup with normalized matching
+      for (const [key, val] of entries) {
+        if (!isMatch(key)) continue;
+        const extracted = getResponseValue(val);
+        if (extracted) return extracted;
       }
 
-      // Second, search through all responses by label
-      for (const [key, val] of Object.entries(responses)) {
-        if (typeof val === 'object' && val.label) {
-          const label = val.label.toLowerCase();
-          for (const term of searchTerms) {
-            if (label.includes(term.toLowerCase())) {
-              if (Array.isArray(val.value)) return val.value.join(', ');
-              return val.value || 'Not provided';
-            }
-          }
-        }
+      // Nested object lookup by common label/question keys
+      for (const [, val] of entries) {
+        if (!val || typeof val !== 'object') continue;
+
+        const descriptor = val.label || val.question || val.questionLabel || val.name || val.title;
+        if (!isMatch(descriptor)) continue;
+
+        const extracted = getResponseValue(val);
+        if (extracted) return extracted;
       }
 
       return 'Not provided';
     };
+
+    const getMetadataValue = (...keys) => {
+      for (const key of keys) {
+        const value = metadata[key];
+        if (value !== undefined && value !== null && String(value).trim()) {
+          return String(value).trim();
+        }
+      }
+      return '';
+    };
+
+    const tierFromResponses = getResponse(['tier', 'interested in']);
+    const tierFromMetadata = getMetadataValue('tier', 'Tier');
+    const resolvedTier = tierFromResponses !== 'Not provided'
+      ? tierFromResponses
+      : (tierFromMetadata || 'Not provided');
 
     const bookingData = {
       name: getResponse(['name', 'your name']) || attendee.name || 'Not provided',
@@ -79,7 +126,12 @@ export default async function handler(request) {
       goals: getResponse(['What do you want Olympus to help you achieve', 'help you achieve', 'olympus to help', 'achieve', 'goals']),
       website: getResponse(['What website do you want Olympus to grow', 'website do you want', 'website you want', 'olympus to grow', 'website']),
       challenges: getResponse(['challenges', 'patient acquisition']),
-      tier: getResponse(['tier', 'interested in']),
+      tier: resolvedTier,
+      segment: getMetadataValue('segment'),
+      segmentLabel: getMetadataValue('segmentLabel'),
+      revenueRange: getMetadataValue('revenueRange'),
+      calendarOwner: getMetadataValue('calendarOwner'),
+      calendarNumber: getMetadataValue('calendarNumber'),
       budget: getResponse(['how much', 'monthly', 'toward growth', 'marketing']),
       startTime: data.startTime,
       title: data.title || 'Olympus Demo',
@@ -127,6 +179,10 @@ export default async function handler(request) {
       `**Roughly how much goes toward marketing each month?** ${bookingData.budget}`,
       `**Biggest patient acquisition challenges?** ${bookingData.challenges}`,
       `**Tier most interested in?** ${bookingData.tier}`,
+      `**Segment:** ${bookingData.segmentLabel || bookingData.segment || 'Not provided'}`,
+      `**Revenue range:** ${bookingData.revenueRange || 'Not provided'}`,
+      `**Calendar owner:** ${bookingData.calendarOwner || 'Not provided'}`,
+      `**Calendar number:** ${bookingData.calendarNumber || 'Not provided'}`,
       `**Scheduled:** ${bookingTime}`,
     ];
     const message = messageParts.join('\n\n');

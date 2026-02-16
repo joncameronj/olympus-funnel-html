@@ -5,6 +5,7 @@
  * 1. Sends notification to Roam channel
  * 2. Creates contact in GoHighLevel
  * 3. Adds contact to Olympus pipeline under "Call Booked" stage
+ * 4. Schedules tier-based prep content emails via Resend
  *
  * Environment Variables Required (set in Vercel dashboard):
  * - ROAM_API_KEY: Your RO.AM API key
@@ -13,7 +14,12 @@
  * - GHL_LOCATION_ID: Your GHL location ID
  * - GHL_PIPELINE_ID: The Olympus pipeline ID
  * - CAL_WEBHOOK_SECRET: (Optional) Cal.com webhook secret for verification
+ * - RESEND_API_KEY: Resend API key for email scheduling
  */
+
+import { getEmailSequence, normalizeTier } from './config/email-sequences.js';
+import { scheduleEmailSequence } from './lib/resend.js';
+import { getEmailTemplate } from './templates/index.js';
 
 export const config = {
   runtime: 'edge',
@@ -69,12 +75,27 @@ export default async function handler(request) {
       roamResult = { status: 'failed', error: roamError.message };
     }
 
+    // Schedule tier-based prep content emails via Resend
+    let emailResult = { status: 'skipped' };
+    if (process.env.RESEND_API_KEY) {
+      try {
+        emailResult = await scheduleEmailsForBooking(bookingData);
+        console.log('Prep emails scheduled:', emailResult);
+      } catch (emailError) {
+        console.error('Email scheduling error:', emailError.message);
+        emailResult = { status: 'failed', error: emailError.message };
+      }
+    } else {
+      console.log('RESEND_API_KEY not set, skipping email scheduling');
+    }
+
     // GHL integration disabled temporarily
     // const ghlResult = await processGHLIntegration(bookingData);
 
     return new Response(JSON.stringify({
       success: true,
       roam: roamResult.status,
+      emails: emailResult.status || 'scheduled',
     }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -91,46 +112,155 @@ export default async function handler(request) {
 }
 
 /**
+ * Helper to get response value (handles different Cal.com formats)
+ * Cal.com can return responses in different formats:
+ * - Direct key: responses['Quick description'] = 'My practice...'
+ * - Nested object: responses['custom_123'] = { label: 'Quick description', value: 'My practice...' }
+ */
+function normalizeText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function getResponseValue(value) {
+  if (value == null) return '';
+
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => getResponseValue(item))
+      .filter(Boolean)
+      .join(', ')
+      .trim();
+  }
+
+  if (typeof value === 'object') {
+    if (value.value !== undefined) return getResponseValue(value.value);
+    if (value.answer !== undefined) return getResponseValue(value.answer);
+    if (value.text !== undefined) return getResponseValue(value.text);
+    return '';
+  }
+
+  return String(value).trim();
+}
+
+function getResponse(responses, searchTerms) {
+  if (!responses || typeof responses !== 'object') return 'Not provided';
+
+  const terms = searchTerms.map(normalizeText).filter(Boolean);
+  const entries = Object.entries(responses);
+
+  const isMatch = (candidate) => {
+    const text = normalizeText(candidate);
+    if (!text) return false;
+    return terms.some((term) => text === term || text.includes(term) || term.includes(text));
+  };
+
+  // Direct key lookup with normalized matching
+  for (const [key, val] of entries) {
+    if (!isMatch(key)) continue;
+    const extracted = getResponseValue(val);
+    if (extracted) return extracted;
+  }
+
+  // Nested object lookup by common label/question keys
+  for (const [, val] of entries) {
+    if (!val || typeof val !== 'object') continue;
+
+    const descriptor = val.label || val.question || val.questionLabel || val.name || val.title;
+    if (!isMatch(descriptor)) continue;
+
+    const extracted = getResponseValue(val);
+    if (extracted) return extracted;
+  }
+
+  return 'Not provided';
+}
+
+/**
  * Extract booking data from Cal.com webhook payload
  */
 function extractBookingData(payload) {
   const data = payload.payload || payload;
   const responses = data.responses || {};
   const attendee = data.attendees?.[0] || {};
+  const metadata = data.metadata || data.bookingMetadata || data.eventTypeMetadata || {};
+
+  // Log raw responses for debugging
+  console.log('Raw responses:', JSON.stringify(responses));
+
+  const getMetadataValue = (...keys) => {
+    for (const key of keys) {
+      const value = metadata[key];
+      if (value !== undefined && value !== null && String(value).trim()) {
+        return String(value).trim();
+      }
+    }
+    return '';
+  };
+
+  const tierFromResponses = getResponse(responses, [
+    'Olympus tier most interested in?',
+    'Tier most interested in?',
+    'tier',
+    'Tier',
+    'most interested in',
+  ]);
+  const tierFromMetadata = getMetadataValue('tier', 'Tier');
+  const resolvedTier = tierFromResponses !== 'Not provided'
+    ? tierFromResponses
+    : (tierFromMetadata || 'Not provided');
 
   // Cal.com can have responses in different formats
-  // Try to get data from responses first, then fall back to attendee info
+  // Use getResponse() helper to handle direct keys and nested label/value objects
   return {
     // Basic info
     name: responses.name || attendee.name || 'Not provided',
     email: responses.email || attendee.email || 'Not provided',
-    phone: responses.phone || responses.Phone || responses['phone-number'] || 'Not provided',
+    phone: getResponse(responses, ['phone', 'Phone', 'phone-number', 'phone number']),
 
-    // Custom form fields - matched to Cal.com form field names
-    practiceDescription: responses['Quick description of your practice'] ||
-                         responses['Quick description of your practice?'] ||
-                         responses.practice_description ||
-                         responses.practiceDescription ||
-                         'Not provided',
-    website: responses['What website do you want Olympus to grow?'] ||
-             responses['Website you want Olympus to grow?'] ||
-             responses.website ||
-             'Not provided',
-    goals: responses['What do you want Olympus to help you achieve?'] ||
-           responses.goals ||
-           'Not provided',
-    budget: responses['Roughly how much goes towards growth & marketing each month?'] ||
-            responses['Roughly how much goes toward marketing each month?'] ||
-            responses.budget ||
-            'Not provided',
-    challenges: responses['Biggest patient acquisition challenges?'] ||
-                responses['Biggest marketing challenges?'] ||
-                responses.challenges ||
-                'Not provided',
-    tier: responses['Olympus tier most interested in?'] ||
-          responses['Tier most interested in?'] ||
-          responses.tier ||
-          'Not provided',
+    // Custom form fields - use getResponse() to handle multiple formats
+    practiceDescription: getResponse(responses, [
+      'Quick description of your practice',
+      'Quick description of your practice?',
+      'practice_description',
+      'practiceDescription',
+      'description of your practice',
+    ]),
+    website: getResponse(responses, [
+      'What website do you want Olympus to grow?',
+      'Website you want Olympus to grow?',
+      'website',
+      'Website',
+      'website you want',
+    ]),
+    goals: getResponse(responses, [
+      'What do you want Olympus to help you achieve?',
+      'goals',
+      'Goals',
+      'help you achieve',
+    ]),
+    budget: getResponse(responses, [
+      'Roughly how much goes towards growth & marketing each month?',
+      'Roughly how much goes toward marketing each month?',
+      'budget',
+      'Budget',
+      'marketing each month',
+    ]),
+    challenges: getResponse(responses, [
+      'Biggest patient acquisition challenges?',
+      'Biggest marketing challenges?',
+      'challenges',
+      'Challenges',
+      'acquisition challenges',
+    ]),
+    tier: resolvedTier,
+    segment: getMetadataValue('segment', 'segmentLabel'),
+    segmentLabel: getMetadataValue('segmentLabel'),
+    revenueRange: getMetadataValue('revenueRange'),
+    calendarOwner: getMetadataValue('calendarOwner'),
+    calendarNumber: getMetadataValue('calendarNumber'),
 
     // Booking details
     bookingId: data.uid || 'N/A',
@@ -205,8 +335,42 @@ function formatRoamMessage(data) {
 **Roughly how much goes towards growth & marketing each month?** ${data.budget}
 **Biggest patient acquisition challenges?** ${data.challenges}
 **Olympus tier most interested in?** ${data.tier}
+**Segment:** ${data.segmentLabel || data.segment || 'Not provided'}
+**Revenue range:** ${data.revenueRange || 'Not provided'}
+**Calendar owner:** ${data.calendarOwner || 'Not provided'}
+**Calendar number:** ${data.calendarNumber || 'Not provided'}
 
 📅 **Booked:** ${bookingTime}`;
+}
+
+/**
+ * Schedule tier-based prep content emails via Resend
+ */
+async function scheduleEmailsForBooking(data) {
+  // Get normalized tier and email sequence
+  const tier = normalizeTier(data.tier);
+  const emails = getEmailSequence(tier);
+
+  console.log(`Scheduling ${emails.length} emails for tier: ${tier}`);
+
+  // Schedule the email sequence
+  const result = await scheduleEmailSequence({
+    to: data.email,
+    name: data.name,
+    bookingTime: data.startTime,
+    tier,
+    emails,
+    getTemplate: (tierName, emailId, templateData) => {
+      return getEmailTemplate(tierName, emailId, templateData);
+    },
+  });
+
+  return {
+    status: 'scheduled',
+    tier,
+    scheduled: result.totalScheduled,
+    failed: result.totalFailed,
+  };
 }
 
 /**

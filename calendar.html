@@ -3,22 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Your Call | Olympus</title>
+  <title>Book Your Call · Olympus</title>
   <meta name="description" content="Select a time that works best for you.">
   <meta name="color-scheme" content="light">
 
   <!-- Open Graph -->
-  <meta property="og:image" content="/assets/images/Olympus OpenGraph.png">
+  <meta property="og:image" content="/assets/images/olympus-opengraph.webp">
 
   <!-- Favicon -->
   <link rel="icon" id="favicon" href="/olympus-icons/olympus-line-light.ico" type="image/x-icon">
 
   <!-- Preload fonts -->
-  <link rel="preload" href="/fonts/tasa-orbiter/TASAOrbiterDisplay-Medium-BF64891cba56e9b.otf" as="font" type="font/otf" crossorigin>
-  <link rel="preload" href="/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Critical CSS -->
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.min.css">
   <style>
     /* Calendar-specific overrides */
     .page-header {
@@ -64,8 +63,15 @@
       font-weight: 600;
       letter-spacing: -0.05em;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 12px;
       color: var(--text-primary);
+    }
+
+    .routing-note {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      margin-bottom: 28px;
     }
 
     #cal-embed {
@@ -141,6 +147,7 @@
 
   <main class="calendar-section">
     <h1 class="section-title">Book Your Quick "Prove It" Demo</h1>
+    <p id="routing-note" class="routing-note"></p>
 
     <div id="cal-embed"></div>
   </main>
@@ -191,16 +198,122 @@
 
   <!-- Cal inline embed code begins -->
   <script type="text/javascript">
+    const SEGMENT_CONFIG = {
+      'just-getting-started': {
+        segment: 'just-getting-started',
+        segmentLabel: 'Just Getting Started',
+        revenueRange: '$0-$250K in annual revenue',
+        tier: 'lambda',
+        calendarNumber: 2,
+        calendarOwner: 'luke'
+      },
+      'lambda': {
+        segment: 'lambda',
+        segmentLabel: 'Lambda',
+        revenueRange: '$250K-$750K in annual revenue',
+        tier: 'lambda',
+        calendarNumber: 2,
+        calendarOwner: 'luke'
+      },
+      'alpha': {
+        segment: 'alpha',
+        segmentLabel: 'Alpha',
+        revenueRange: '$750K-$1.5M in annual revenue',
+        tier: 'alpha',
+        calendarNumber: 1,
+        calendarOwner: 'joncameron'
+      },
+      'sigma': {
+        segment: 'sigma',
+        segmentLabel: 'Sigma',
+        revenueRange: '$1.5M-$3.6M in annual revenue',
+        tier: 'sigma',
+        calendarNumber: 1,
+        calendarOwner: 'joncameron'
+      },
+      'omega': {
+        segment: 'omega',
+        segmentLabel: 'Omega',
+        revenueRange: '$3.6M+ in annual revenue or multi-location',
+        tier: 'enterprise',
+        calendarNumber: 1,
+        calendarOwner: 'joncameron'
+      }
+    };
+
+    const CALENDAR_LINKS = {
+      1: 'joncameron/olympus-demo',
+      2: 'luke/olympus-demo'
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const requestedSegment = params.get('segment') || sessionStorage.getItem('routing_segment') || 'lambda';
+    const defaultSelection = SEGMENT_CONFIG[requestedSegment] || SEGMENT_CONFIG.lambda;
+
+    const calendarParam = Number(params.get('calendar'));
+    const resolvedCalendarNumber = calendarParam === 1 || calendarParam === 2
+      ? calendarParam
+      : defaultSelection.calendarNumber;
+
+    const routingSelection = {
+      ...defaultSelection,
+      calendarNumber: resolvedCalendarNumber,
+      calendarOwner: resolvedCalendarNumber === 1 ? 'joncameron' : 'luke'
+    };
+    const calLink = CALENDAR_LINKS[resolvedCalendarNumber] || CALENDAR_LINKS[1];
+
+    const routingNote = document.getElementById('routing-note');
+    if (routingNote) {
+      const calendarText = resolvedCalendarNumber === 1 ? 'Calendar 1 · JonCameron' : 'Calendar 2 · Luke';
+      routingNote.textContent = 'Routing: ' + routingSelection.segmentLabel + ' to ' + calendarText;
+    }
+
+    sessionStorage.setItem('routing_segment', routingSelection.segment);
+    sessionStorage.setItem('routing_segment_label', routingSelection.segmentLabel);
+    sessionStorage.setItem('routing_revenue_range', routingSelection.revenueRange);
+    sessionStorage.setItem('routing_tier', routingSelection.tier);
+    sessionStorage.setItem('routing_calendar_owner', routingSelection.calendarOwner);
+    sessionStorage.setItem('routing_calendar_number', String(routingSelection.calendarNumber));
+
+    const leadName = sessionStorage.getItem('lead_name') || '';
+    const leadEmail = sessionStorage.getItem('lead_email') || '';
+    const leadPhone = sessionStorage.getItem('lead_phone') || '';
+
+    const attribution = {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_term: params.get('utm_term') || '',
+      utm_content: params.get('utm_content') || '',
+      gclid: params.get('gclid') || '',
+      fbclid: params.get('fbclid') || ''
+    };
+
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
     Cal("init", "olympus-demo", {origin:"https://app.cal.com"});
 
+    const calConfig = {
+      layout: "month_view",
+      successRedirectUrl: "https://olympus.etho.net/confirmation.html",
+      metadata: {
+        segment: routingSelection.segment,
+        segmentLabel: routingSelection.segmentLabel,
+        revenueRange: routingSelection.revenueRange,
+        tier: routingSelection.tier,
+        calendarNumber: routingSelection.calendarNumber,
+        calendarOwner: routingSelection.calendarOwner,
+        ...attribution
+      }
+    };
+
+    if (leadName) calConfig.name = leadName;
+    if (leadEmail) calConfig.email = leadEmail;
+    if (leadPhone) calConfig.phone = leadPhone;
+
     Cal.ns["olympus-demo"]("inline", {
       elementOrSelector:"#cal-embed",
-      config: {
-        "layout": "month_view",
-        "successRedirectUrl": "https://olympus.etho.net/confirmation.html"
-      },
-      calLink: "joncameron/olympus-demo",
+      config: calConfig,
+      calLink: calLink
     });
 
     Cal.ns["olympus-demo"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#000000"},"dark":{"cal-brand":"#ffffff","cal-bg":"#0a0a0a"}},"hideEventTypeDetails":false,"layout":"month_view"});
@@ -261,7 +374,13 @@
               startTime: data.startTime,
               endTime: data.endTime,
               attendeeName: sessionStorage.getItem('lead_name') || 'Unknown',
-              attendeeEmail: sessionStorage.getItem('lead_email') || 'Unknown'
+              attendeeEmail: sessionStorage.getItem('lead_email') || 'Unknown',
+              segment: sessionStorage.getItem('routing_segment') || routingSelection.segment,
+              segmentLabel: sessionStorage.getItem('routing_segment_label') || routingSelection.segmentLabel,
+              revenueRange: sessionStorage.getItem('routing_revenue_range') || routingSelection.revenueRange,
+              tier: sessionStorage.getItem('routing_tier') || routingSelection.tier,
+              calendarOwner: sessionStorage.getItem('routing_calendar_owner') || routingSelection.calendarOwner,
+              calendarNumber: sessionStorage.getItem('routing_calendar_number') || String(routingSelection.calendarNumber)
             }
           })
         }).catch(function() {

@@ -26,43 +26,57 @@
 
 @font-face {
   font-family: 'Acid Grotesk';
-  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Light-TRIAL.otf') format('opentype');
+  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Light-TRIAL.woff2') format('woff2'),
+       url('/fonts/acid-grotesk/FFF-AcidGrotesk-Light-TRIAL.otf') format('opentype');
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: 'Acid Grotesk';
-  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf') format('opentype');
+  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.woff2') format('woff2'),
+       url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf') format('opentype');
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: 'Acid Grotesk';
-  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Bold-TRIAL.otf') format('opentype');
+  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Bold-TRIAL.woff2') format('woff2'),
+       url('/fonts/acid-grotesk/FFF-AcidGrotesk-Bold-TRIAL.otf') format('opentype');
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Regular.ttf') format('truetype');
+  src: url('/fonts/inter/Inter-Regular.woff2') format('woff2'),
+       url('/fonts/inter/Inter-Regular.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Medium.ttf') format('truetype');
+  src: url('/fonts/inter/Inter-Medium.woff2') format('woff2'),
+       url('/fonts/inter/Inter-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Bold.ttf') format('truetype');
+  src: url('/fonts/inter/Inter-Bold.woff2') format('woff2'),
+       url('/fonts/inter/Inter-Bold.ttf') format('truetype');
   font-weight: 700;
   font-display: swap;
 }
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
+  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2'),
+       url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif/InstrumentSerif-Italic.woff2') format('woff2');
+  font-style: italic;
   font-weight: 400;
   font-display: swap;
 }
@@ -621,7 +635,7 @@ body.menu-open {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/assets/images/19.jpg');
+  background-image: url('/assets/images/19.webp');
   background-size: cover;
   background-position: center;
   border-radius: 4px;
@@ -629,7 +643,7 @@ body.menu-open {
 }
 
 [data-theme="light"] .pre-video-headline::before {
-  background-image: url('/assets/images/19.jpg');
+  background-image: url('/assets/images/19.webp');
   background-size: cover;
   background-position: center;
 }
@@ -2073,7 +2087,7 @@ wistia-player:not(:defined) {
 
 /* Point Step - Image */
 .step-image.step-point {
-  background-image: url('/assets/images/19.jpg');
+  background-image: url('/assets/images/19.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -2084,7 +2098,7 @@ wistia-player:not(:defined) {
 
 /* Build Step - Image */
 .step-image.step-build {
-  background-image: url('/assets/images/26D.jpg');
+  background-image: url('/assets/images/26D.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -2095,7 +2109,7 @@ wistia-player:not(:defined) {
 
 /* Launch Step - Image */
 .step-image.step-launch {
-  background-image: url('/assets/images/34.jpg');
+  background-image: url('/assets/images/34.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -2466,6 +2480,185 @@ wistia-player:not(:defined) {
 @media (max-width: 768px) {
   .faq-section {
     margin-top: 120px;
+  }
+}
+
+/* ========================================
+   FAQ Bento Grid
+   ======================================== */
+
+.faq-bento-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-bento-row-hero {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.faq-bento-row-thirds {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr;
+  gap: 16px;
+}
+
+.faq-bento-row-narrow-wide {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+}
+
+.faq-bento-row-hero-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+
+.faq-bento-row-halves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.faq-bento-row-wide-narrow {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.faq-bento-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-bento-card {
+  background: rgba(155, 155, 155, 0.1);
+  border-radius: 4px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.faq-bento-card--sm {
+  padding: 32px;
+}
+
+.faq-bento-card--dark {
+  background: #000000;
+}
+
+.faq-bento-card--dark .faq-bento-question,
+.faq-bento-card--dark .faq-bento-answer,
+.faq-bento-card--dark .faq-bento-answer strong {
+  color: #ffffff;
+}
+
+[data-theme="light"] .faq-bento-card--dark {
+  background: #000000;
+}
+
+[data-theme="light"] .faq-bento-card--dark .faq-bento-question,
+[data-theme="light"] .faq-bento-card--dark .faq-bento-answer,
+[data-theme="light"] .faq-bento-card--dark .faq-bento-answer strong {
+  color: #ffffff;
+}
+
+.faq-bento-section-label {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.faq-bento-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.faq-bento-question {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.faq-bento-answer {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.faq-bento-answer strong {
+  color: var(--text-primary);
+}
+
+.faq-bento-divider {
+  height: 1px;
+  background: rgba(155, 155, 155, 0.15);
+  margin: 24px 0;
+}
+
+.faq-bento-card--dark .faq-bento-divider {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.faq-bento-cta {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.faq-bento-cta p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .faq-bento-row-hero,
+  .faq-bento-row-thirds,
+  .faq-bento-row-narrow-wide,
+  .faq-bento-row-hero-grid,
+  .faq-bento-row-halves,
+  .faq-bento-row-wide-narrow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .faq-bento-card {
+    padding: 24px;
+  }
+
+  .faq-bento-card--sm {
+    padding: 20px;
+  }
+
+  .faq-bento-question {
+    font-size: 1.125rem;
+  }
+
+  .faq-bento-answer {
+    font-size: 1rem;
   }
 }
 
@@ -8894,6 +9087,199 @@ wistia-player:not(:defined) {
   .final-cta-subheadline,
   .final-cta-text {
     font-size: 1rem;
+  }
+}
+
+/* ===== Demo Routing Modal ===== */
+.demo-routing-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10040;
+  background: #f2f2f2;
+  padding: 28px 20px;
+  overflow-y: auto;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.demo-routing-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.demo-routing-backdrop {
+  display: none;
+}
+
+.demo-routing-container {
+  position: relative;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 4px 0 24px;
+}
+
+.demo-routing-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  background: #ffffff;
+  color: #111111;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.demo-routing-header {
+  margin-bottom: 28px;
+}
+
+.demo-routing-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.demo-routing-header h2 {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: clamp(2rem, 4.1vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #101010;
+}
+
+.demo-routing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.demo-routing-card {
+  border: 1px solid #dbdbdb;
+  background: #ffffff;
+  border-radius: 4px;
+  min-height: 164px;
+  text-align: left;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.demo-routing-card:hover {
+  transform: translateY(-2px);
+  border-color: #111111;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.demo-routing-card:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 2px;
+}
+
+.demo-routing-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.demo-routing-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.demo-routing-name {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #101010;
+}
+
+.demo-routing-range {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #6b7280;
+}
+
+.demo-routing-card-wide {
+  grid-column: 1 / -1;
+}
+
+[data-theme="dark"] .demo-routing-modal {
+  background: #111111;
+}
+
+[data-theme="dark"] .demo-routing-close {
+  background: #1a1a1a;
+  border-color: #2a2a2a;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .demo-routing-header h2 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .demo-routing-eyebrow,
+[data-theme="dark"] .demo-routing-range {
+  color: #9b9b9b;
+}
+
+[data-theme="dark"] .demo-routing-card {
+  background: #181818;
+  border-color: #2a2a2a;
+}
+
+[data-theme="dark"] .demo-routing-name {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .demo-routing-container {
+    width: 100%;
+    padding: 8px 0 16px;
+  }
+
+  .demo-routing-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .demo-routing-card {
+    min-height: 132px;
+    padding: 16px;
+  }
+
+  .demo-routing-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .demo-routing-name {
+    font-size: 1.5rem;
+  }
+
+  .demo-routing-range {
+    font-size: 0.9375rem;
+  }
+
+  .demo-routing-card-wide {
+    grid-column: auto;
   }
 }
 

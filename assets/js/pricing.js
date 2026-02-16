@@ -142,6 +142,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update highlighting
     updateHighlighting(revenue);
 
+    // Scroll to top of pricing container
+    const pricingContainer = document.querySelector('.pricing-container');
+    if (pricingContainer) {
+      pricingContainer.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
     // Play Lottie animation
     if (checkAnimation) {
       checkAnimation.goToAndPlay(0, true);
