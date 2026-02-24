@@ -7,16 +7,16 @@
       label: 'Just Getting Started',
       revenueRange: '$0-$250K annual revenue',
       tier: 'lambda',
-      calendarNumber: 2,
-      calendarOwner: 'luke'
+      calendarNumber: 1,
+      calendarOwner: 'joncameron'
     },
     'lambda': {
       segment: 'lambda',
       label: 'Lambda',
       revenueRange: '$250K-$750K annual revenue',
       tier: 'lambda',
-      calendarNumber: 2,
-      calendarOwner: 'luke'
+      calendarNumber: 1,
+      calendarOwner: 'joncameron'
     },
     'alpha': {
       segment: 'alpha',

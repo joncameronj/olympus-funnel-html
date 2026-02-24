@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "resend": {
+      "command": "npx",
+      "args": ["-y", "resend-mcp"],
+      "env": {
+        "RESEND_API_KEY": "re_Hw9zGUUj_2ZzMPRcuMusXqxpEg27JC9jv",
+        "SENDER_EMAIL_ADDRESS": "support@etho.net",
+        "REPLY_TO_EMAIL_ADDRESSES": "luke@etho.net"
+      }
+    }
+  }
+}
