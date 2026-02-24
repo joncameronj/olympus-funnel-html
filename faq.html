@@ -27,7 +27,7 @@
   <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/styles.min.css">
+  <link rel="stylesheet" href="/styles.min.css?v=20260217a">
 </head>
 <body>
   <!-- Header -->
@@ -79,6 +79,9 @@
     <div class="faq-page-container">
       <h1 class="faq-page-headline">Frequently Asked Questions</h1>
       <p class="faq-page-subheadline">Watch videos that answer your questions about Olympus.</p>
+      <div class="faq-hero-meta">
+        <span class="faq-count-badge">12 questions answered</span>
+      </div>
 
       <!-- Search Bar -->
       <div class="faq-search-wrapper">
@@ -97,6 +100,7 @@
           <div class="faq-main-player" id="faqMainPlayer">
             <!-- Wistia player will be injected here -->
           </div>
+          <div class="faq-now-playing" id="faqNowPlaying">Now Playing</div>
           <h2 class="faq-current-title" id="faqCurrentTitle">What Results Can You Realistically Expect?</h2>
           <p class="faq-current-subtitle" id="faqCurrentSubtitle">Watch this if you have questions about ROI potential.</p>
         </div>
@@ -111,6 +115,13 @@
             No videos match your search.
           </div>
         </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="faq-bottom-cta">
+        <h2 class="faq-bottom-cta-headline">Still have questions?</h2>
+        <p class="faq-bottom-cta-text">Book a 15-minute call and we'll answer everything.</p>
+        <a href="/calendar.html" class="btn btn-primary">Book a Call</a>
       </div>
     </div>
   </section>
@@ -319,9 +330,12 @@
         item.setAttribute('tabindex', '0');
         item.setAttribute('role', 'button');
 
+        var numStr = visibleCount < 10 ? '0' + visibleCount : '' + visibleCount;
         item.innerHTML =
+          '<div class="faq-playlist-num">' + numStr + '</div>' +
           '<div class="faq-playlist-thumb">' +
-            '<img src="https://fast.wistia.com/embed/medias/' + video.id + '/swatch" alt="" loading="lazy">' +
+            '<img class="faq-playlist-thumb-img" src="https://fast.wistia.com/embed/medias/' + video.id + '/swatch" alt="" loading="lazy">' +
+            '<div class="faq-playlist-play-overlay"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><polygon points="8,5 18,11 8,17" fill="white"/></svg></div>' +
             (video.id === currentVideoId ? '<div class="faq-playlist-playing">Playing</div>' : '') +
           '</div>' +
           '<div class="faq-playlist-info">' +

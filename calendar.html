@@ -17,7 +17,7 @@
   <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Critical CSS -->
-  <link rel="stylesheet" href="/styles.min.css">
+  <link rel="stylesheet" href="/styles.min.css?v=20260217a">
   <style>
     /* Calendar-specific overrides */
     .page-header {
@@ -302,6 +302,11 @@
         tier: routingSelection.tier,
         calendarNumber: routingSelection.calendarNumber,
         calendarOwner: routingSelection.calendarOwner,
+        practiceDescription: sessionStorage.getItem('quiz_practice_description') || '',
+        website: sessionStorage.getItem('quiz_website') || '',
+        goals: sessionStorage.getItem('quiz_goals') || '',
+        budget: sessionStorage.getItem('quiz_budget') || '',
+        challenges: sessionStorage.getItem('quiz_challenges') || '',
         ...attribution
       }
     };

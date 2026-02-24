@@ -165,7 +165,7 @@ body {
   background: var(--btn-primary-bg);
   text-decoration: none;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 9999px;
   border: none;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -309,7 +309,7 @@ body.menu-open {
   background: var(--btn-primary-bg);
   text-decoration: none;
   padding: 16px 32px;
-  border-radius: 4px;
+  border-radius: 9999px;
   letter-spacing: -0.03em;
   display: block;
   text-align: center;
@@ -625,7 +625,7 @@ body.menu-open {
   margin-left: auto;
   margin-right: auto;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 24px;
   display: inline-block;
   position: relative;
   color: #000000;
@@ -638,7 +638,7 @@ body.menu-open {
   background-image: url('/assets/images/19.webp');
   background-size: cover;
   background-position: center;
-  border-radius: 4px;
+  border-radius: 24px;
   z-index: -1;
 }
 
@@ -679,7 +679,7 @@ body.menu-open {
   max-width: 1300px;
   aspect-ratio: 16 / 9;
   background: transparent;
-  border-radius: 4px;
+  border-radius: 24px;
   margin-top: 0;
   margin-bottom: 0;
   margin-left: auto;
@@ -884,7 +884,7 @@ body.menu-open {
   max-width: 700px;
   margin: 32px auto 0;
   background: rgba(16, 185, 129, 0.15);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 16px 24px;
   text-align: center;
 }
@@ -901,7 +901,7 @@ body.menu-open {
   background: #ffffff;
   color: #000000;
   border: none;
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: opacity 0.2s;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
@@ -1312,7 +1312,7 @@ wistia-player:not(:defined) {
 /* Master Olympus Card (Dark) */
 .agents-master-card {
   background: url('assets/images/7.webp') center center / cover no-repeat;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 48px 40px 24px 40px;
   display: flex;
   flex-direction: column;
@@ -1415,7 +1415,7 @@ wistia-player:not(:defined) {
 
 .agent-card {
   background: #1C1C1E;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -1649,7 +1649,7 @@ wistia-player:not(:defined) {
 
 .feature-card {
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 36px;
   min-width: 0;
 }
@@ -1662,7 +1662,7 @@ wistia-player:not(:defined) {
   width: 100%;
   height: 300px;
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   margin-bottom: 20px;
 }
 
@@ -1757,7 +1757,7 @@ wistia-player:not(:defined) {
 
 .stat-card {
   background: var(--bg-card);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 12px 16px;
   display: flex;
   align-items: center;
@@ -2002,7 +2002,7 @@ wistia-player:not(:defined) {
   align-items: center;
   gap: 48px;
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 32px;
   margin-bottom: 64px;
 }
@@ -2078,7 +2078,7 @@ wistia-player:not(:defined) {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 4px;
+  border-radius: 24px;
 }
 
 [data-theme="dark"] .step-image {
@@ -2288,13 +2288,41 @@ wistia-player:not(:defined) {
   line-height: 0.9;
   text-align: center;
   color: var(--text-primary);
-  margin-bottom: 48px;
+  margin-bottom: 16px;
+}
+
+.faq-subheadline {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto 48px;
 }
 
 .faq-categories {
+  background: rgba(155, 155, 155, 0.08);
+  border-radius: 16px;
+  padding: 8px 24px;
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+.faq-cta {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.faq-cta p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 16px;
 }
 
 /* Category Level (Top accordion) */
@@ -2328,7 +2356,7 @@ wistia-player:not(:defined) {
 .faq-category-chevron {
   flex-shrink: 0;
   color: var(--text-muted);
-  transition: color 0.4s ease-out, transform 0.4s ease-out;
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform: rotate(0deg);
 }
 
@@ -2340,7 +2368,7 @@ wistia-player:not(:defined) {
 .faq-category-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease-out;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   padding-left: 24px;
   background: rgba(155, 155, 155, 0.03);
 }
@@ -2376,7 +2404,7 @@ wistia-player:not(:defined) {
   cursor: pointer;
   text-align: left;
   font-family: 'Acid Grotesk', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.06em;
   color: var(--text-primary);
@@ -2390,12 +2418,12 @@ wistia-player:not(:defined) {
 .faq-chevron {
   flex-shrink: 0;
   color: var(--text-muted);
-  transition: color 0.4s ease-out, transform 0.4s ease-out;
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   transform: rotate(0deg);
 }
 
 .faq-chevron .vertical-line {
-  transition: opacity 0.3s ease, stroke-width 0.3s ease;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
 }
 
@@ -2411,7 +2439,7 @@ wistia-player:not(:defined) {
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease-out;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .faq-item.open .faq-answer {
@@ -2439,6 +2467,14 @@ wistia-player:not(:defined) {
 }
 
 @media (max-width: 600px) {
+  .faq-subheadline {
+    font-size: 1rem;
+  }
+
+  .faq-categories {
+    padding: 4px 16px;
+  }
+
   .faq-category-button {
     font-size: 1.35rem;
     padding: 20px 20px;
@@ -2449,7 +2485,7 @@ wistia-player:not(:defined) {
   }
 
   .faq-question {
-    font-size: 1.125rem;
+    font-size: 1rem;
     letter-spacing: -0.06em;
     padding: 16px 16px;
   }
@@ -2480,185 +2516,6 @@ wistia-player:not(:defined) {
 @media (max-width: 768px) {
   .faq-section {
     margin-top: 120px;
-  }
-}
-
-/* ========================================
-   FAQ Bento Grid
-   ======================================== */
-
-.faq-bento-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.faq-bento-row-hero {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
-}
-
-.faq-bento-row-thirds {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 0.8fr;
-  gap: 16px;
-}
-
-.faq-bento-row-narrow-wide {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 16px;
-}
-
-.faq-bento-row-hero-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 16px;
-}
-
-.faq-bento-row-halves {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.faq-bento-row-wide-narrow {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
-}
-
-.faq-bento-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.faq-bento-card {
-  background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
-  padding: 48px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.faq-bento-card--sm {
-  padding: 32px;
-}
-
-.faq-bento-card--dark {
-  background: #000000;
-}
-
-.faq-bento-card--dark .faq-bento-question,
-.faq-bento-card--dark .faq-bento-answer,
-.faq-bento-card--dark .faq-bento-answer strong {
-  color: #ffffff;
-}
-
-[data-theme="light"] .faq-bento-card--dark {
-  background: #000000;
-}
-
-[data-theme="light"] .faq-bento-card--dark .faq-bento-question,
-[data-theme="light"] .faq-bento-card--dark .faq-bento-answer,
-[data-theme="light"] .faq-bento-card--dark .faq-bento-answer strong {
-  color: #ffffff;
-}
-
-.faq-bento-section-label {
-  font-family: 'Acid Grotesk', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 32px;
-}
-
-.faq-bento-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.faq-bento-question {
-  font-family: 'Acid Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1.2;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-}
-
-.faq-bento-answer {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-
-.faq-bento-answer strong {
-  color: var(--text-primary);
-}
-
-.faq-bento-divider {
-  height: 1px;
-  background: rgba(155, 155, 155, 0.15);
-  margin: 24px 0;
-}
-
-.faq-bento-card--dark .faq-bento-divider {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.faq-bento-cta {
-  text-align: center;
-  margin-top: 48px;
-}
-
-.faq-bento-cta p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-top: 16px;
-}
-
-@media (max-width: 900px) {
-  .faq-bento-row-hero,
-  .faq-bento-row-thirds,
-  .faq-bento-row-narrow-wide,
-  .faq-bento-row-hero-grid,
-  .faq-bento-row-halves,
-  .faq-bento-row-wide-narrow {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .faq-bento-card {
-    padding: 24px;
-  }
-
-  .faq-bento-card--sm {
-    padding: 20px;
-  }
-
-  .faq-bento-question {
-    font-size: 1.125rem;
-  }
-
-  .faq-bento-answer {
-    font-size: 1rem;
   }
 }
 
@@ -2706,7 +2563,7 @@ wistia-player:not(:defined) {
 
 .faq-video-card {
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 24px;
   overflow: hidden;
 }
@@ -2738,7 +2595,7 @@ wistia-player:not(:defined) {
 }
 
 .faq-video-player {
-  border-radius: 4px;
+  border-radius: 24px;
   overflow: hidden;
 }
 
@@ -3046,7 +2903,7 @@ wistia-player:not(:defined) {
   color: #000000;
   background: #FFFFFF;
   border: none;
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: opacity 0.15s ease, transform 0.1s ease;
 }
@@ -3100,7 +2957,7 @@ wistia-player:not(:defined) {
 .pricing-card {
   background: var(--bg-card);
   border: none;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 48px 40px;
   display: flex;
   flex-direction: column;
@@ -3445,7 +3302,7 @@ wistia-player:not(:defined) {
   color: #000000;
   background: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all 0.2s;
   margin-top: auto;
@@ -3485,7 +3342,7 @@ wistia-player:not(:defined) {
   overflow: hidden;
   box-sizing: border-box;
   background: var(--bg-card);
-  border-radius: 4px;
+  border-radius: 24px;
   min-height: auto;
 }
 
@@ -3728,7 +3585,7 @@ wistia-player:not(:defined) {
   background: #000000;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: opacity 0.2s;
 }
@@ -3832,7 +3689,7 @@ wistia-player:not(:defined) {
 
 .problem-bento-card {
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 48px;
   display: flex;
   flex-direction: column;
@@ -3986,7 +3843,7 @@ wistia-player:not(:defined) {
 /* Dark tall card */
 .problem-bento-card-dark {
   background: #000000;
-  border-radius: 4px;
+  border-radius: 24px;
 }
 
 [data-theme="light"] .problem-bento-card-dark {
@@ -4008,7 +3865,7 @@ wistia-player:not(:defined) {
 /* Red card */
 .problem-bento-card-blue {
   background: #ef4444;
-  border-radius: 4px;
+  border-radius: 24px;
   flex: 1;
   position: relative;
   overflow: hidden;
@@ -4360,7 +4217,7 @@ wistia-player:not(:defined) {
 
 .problem-card {
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 80px 40px;
 }
 
@@ -4663,19 +4520,20 @@ wistia-player:not(:defined) {
   display: block;
 }
 
-.monitor-display-dark {
+/* Hide entire <picture> element to prevent flex artifact */
+picture:has(.monitor-display-dark) {
   display: block;
 }
 
-.monitor-display-light {
+picture:has(.monitor-display-light) {
   display: none;
 }
 
-[data-theme="light"] .monitor-display-dark {
+[data-theme="light"] picture:has(.monitor-display-dark) {
   display: none;
 }
 
-[data-theme="light"] .monitor-display-light {
+[data-theme="light"] picture:has(.monitor-display-light) {
   display: block;
 }
 
@@ -4984,11 +4842,12 @@ wistia-player:not(:defined) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  margin-bottom: 80px;
 }
 
 .solution-card {
   background: rgba(155, 155, 155, 0.1);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -5195,6 +5054,7 @@ wistia-player:not(:defined) {
 
   .solution-cards {
     grid-template-columns: 1fr;
+    margin-bottom: 0;
   }
 
   .solution-card {
@@ -5412,7 +5272,7 @@ wistia-player:not(:defined) {
 
 .comparison-card {
   background: #1a1a1a;
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 48px;
 }
 
@@ -5612,7 +5472,7 @@ wistia-player:not(:defined) {
 /* Base Card Styles */
 .cb-card {
   background: var(--bg-card);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 40px;
   position: relative;
   overflow: hidden;
@@ -6473,7 +6333,7 @@ wistia-player:not(:defined) {
 .upside-section {
   margin-top: 0px;
   margin-bottom: 0px;
-  padding: 80px 24px;
+  padding: 120px 24px 80px;
   background: var(--bg-page);
 }
 
@@ -6584,7 +6444,7 @@ wistia-player:not(:defined) {
 
 .upside-card {
   background-color: rgb(28, 28, 30);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 32px;
   overflow: hidden;
 }
@@ -7838,7 +7698,7 @@ wistia-player:not(:defined) {
   flex-shrink: 0;
   width: auto;
   height: 630px;
-  border-radius: 4px;
+  border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -7960,7 +7820,7 @@ wistia-player:not(:defined) {
   max-width: 90vw;
   max-height: 85vh;
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: 24px;
   display: block;
 }
 
@@ -8041,7 +7901,7 @@ wistia-player:not(:defined) {
   background: transparent;
   color: var(--text-primary);
   border: 1px solid var(--text-muted);
-  border-radius: 4px;
+  border-radius: 9999px;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
 }
@@ -8567,7 +8427,7 @@ wistia-player:not(:defined) {
 
 .preparation-card {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: 32px;
 }
 
@@ -8621,7 +8481,7 @@ wistia-player:not(:defined) {
 
 .commitment-card {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: 32px;
   border: 1px solid rgba(155, 155, 155, 0.1);
 }
@@ -8658,18 +8518,6 @@ wistia-player:not(:defined) {
   color: var(--text-primary);
 }
 
-/* FAQ Section - Subheadline for Confirmation Page */
-.faq-subheadline {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.375rem;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  color: rgb(160, 160, 160);
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 48px;
-  line-height: 1.4;
-}
 
 /* Video Testimonials Section */
 .video-testimonials-section {
@@ -8714,7 +8562,7 @@ wistia-player:not(:defined) {
 
 .video-testimonial-card {
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -9095,7 +8943,7 @@ wistia-player:not(:defined) {
   position: fixed;
   inset: 0;
   z-index: 10040;
-  background: #f2f2f2;
+  background: #ffffff;
   padding: 28px 20px;
   overflow-y: auto;
   transition: opacity 0.2s ease, visibility 0.2s ease;
@@ -9119,6 +8967,10 @@ wistia-player:not(:defined) {
   background: transparent;
   border: 0;
   border-radius: 0;
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 4px 0 24px;
 }
 
@@ -9128,12 +8980,13 @@ wistia-player:not(:defined) {
   right: 0;
   width: 40px;
   height: 40px;
-  border-radius: 4px;
-  border: 1px solid #d9d9d9;
-  background: #ffffff;
-  color: #111111;
-  font-size: 1.5rem;
+  background: transparent;
+  border: none;
   cursor: pointer;
+}
+
+.demo-routing-close svg {
+  stroke: #111111;
 }
 
 .demo-routing-header {
@@ -9160,27 +9013,26 @@ wistia-player:not(:defined) {
 .demo-routing-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .demo-routing-card {
-  border: 1px solid #dbdbdb;
-  background: #ffffff;
-  border-radius: 4px;
-  min-height: 164px;
+  border: none;
+  background: #f2f2f2;
+  border-radius: 24px;
+  min-height: 132px;
   text-align: left;
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 14px;
+  gap: 10px;
   cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .demo-routing-card:hover {
   transform: translateY(-2px);
-  border-color: #111111;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -9192,7 +9044,7 @@ wistia-player:not(:defined) {
 .demo-routing-card-head {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
 }
 
 .demo-routing-logo {
@@ -9200,6 +9052,7 @@ wistia-player:not(:defined) {
   height: 32px;
   object-fit: contain;
   flex-shrink: 0;
+  filter: invert(1);
 }
 
 .demo-routing-name {
@@ -9225,10 +9078,12 @@ wistia-player:not(:defined) {
   background: #111111;
 }
 
-[data-theme="dark"] .demo-routing-close {
-  background: #1a1a1a;
-  border-color: #2a2a2a;
-  color: #ffffff;
+[data-theme="dark"] .demo-routing-close svg {
+  stroke: #ffffff;
+}
+
+[data-theme="dark"] .demo-routing-logo {
+  filter: none;
 }
 
 [data-theme="dark"] .demo-routing-header h2 {
@@ -9252,17 +9107,19 @@ wistia-player:not(:defined) {
 @media (max-width: 768px) {
   .demo-routing-container {
     width: 100%;
+    min-height: auto;
+    justify-content: flex-start;
     padding: 8px 0 16px;
   }
 
   .demo-routing-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   .demo-routing-card {
-    min-height: 132px;
-    padding: 16px;
+    min-height: 100px;
+    padding: 14px;
   }
 
   .demo-routing-logo {
@@ -10217,7 +10074,30 @@ wistia-player:not(:defined) {
   letter-spacing: -0.02em;
   color: var(--text-muted);
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 16px;
+}
+
+.faq-hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.faq-count-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #10b981;
 }
 
 /* Search Bar */
@@ -10244,10 +10124,10 @@ wistia-player:not(:defined) {
   font-weight: 500;
   color: var(--text-primary);
   background: var(--bg-card);
-  border: 2px solid var(--border-input);
-  border-radius: 8px;
+  border: 1.5px solid var(--border-input);
+  border-radius: 10px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .faq-search-input::placeholder {
@@ -10256,6 +10136,7 @@ wistia-player:not(:defined) {
 
 .faq-search-input:focus {
   border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
 }
 
 .faq-search-clear {
@@ -10297,9 +10178,10 @@ wistia-player:not(:defined) {
 .faq-main-player {
   width: 100%;
   background: var(--bg-card);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .faq-main-player wistia-player {
@@ -10307,11 +10189,44 @@ wistia-player:not(:defined) {
   width: 100%;
 }
 
+.faq-now-playing {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #10b981;
+  margin-bottom: 10px;
+}
+
+.faq-now-playing::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  flex-shrink: 0;
+  animation: faq-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes faq-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
 .faq-current-title {
   font-family: 'Acid Grotesk', sans-serif;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1.2;
   color: var(--text-primary);
   margin-bottom: 8px;
@@ -10330,6 +10245,8 @@ wistia-player:not(:defined) {
 .faq-playlist-sidebar {
   background: var(--bg-card);
   border-radius: 8px;
+  border: 1px solid var(--border-list);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
   max-height: calc(100vh - 200px);
   overflow-y: auto;
   position: sticky;
@@ -10337,11 +10254,15 @@ wistia-player:not(:defined) {
 }
 
 .faq-playlist-header {
-  padding: 16px 20px;
-  font-family: 'Acid Grotesk', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text-primary);
   border-bottom: 1px solid var(--border-list);
   position: sticky;
@@ -10351,8 +10272,18 @@ wistia-player:not(:defined) {
 }
 
 .faq-playlist-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(155, 155, 155, 0.12);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text-muted);
-  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .faq-playlist-items {
@@ -10361,15 +10292,16 @@ wistia-player:not(:defined) {
 
 .faq-playlist-item {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   padding: 12px 16px;
   cursor: pointer;
   border-left: 3px solid transparent;
   transition: all 0.2s;
+  align-items: flex-start;
 }
 
 .faq-playlist-item:hover {
-  background: rgba(155, 155, 155, 0.1);
+  background: rgba(155, 155, 155, 0.12);
 }
 
 .faq-playlist-item:focus {
@@ -10380,18 +10312,35 @@ wistia-player:not(:defined) {
 .faq-playlist-item.active {
   background: rgba(16, 185, 129, 0.1);
   border-left-color: #10b981;
+  border-left-width: 3px;
+}
+
+.faq-playlist-item.active .faq-playlist-title {
+  color: #10b981;
 }
 
 [data-theme="light"] .faq-playlist-item.active {
   background: rgba(16, 185, 129, 0.08);
 }
 
+.faq-playlist-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+  padding-top: 3px;
+  line-height: 1;
+}
+
 .faq-playlist-thumb {
   position: relative;
   flex-shrink: 0;
   width: 120px;
-  height: 90px;
-  border-radius: 4px;
+  height: 68px;
+  border-radius: 6px;
   overflow: hidden;
   background: rgba(155, 155, 155, 0.2);
 }
@@ -10400,6 +10349,23 @@ wistia-player:not(:defined) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 6px;
+}
+
+.faq-playlist-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: 6px;
+}
+
+.faq-playlist-item:hover .faq-playlist-play-overlay {
+  opacity: 1;
 }
 
 .faq-playlist-playing {
@@ -10415,6 +10381,7 @@ wistia-player:not(:defined) {
   color: #ffffff;
   background: #10b981;
   border-radius: 2px;
+  z-index: 2;
 }
 
 .faq-playlist-info {
@@ -10437,6 +10404,7 @@ wistia-player:not(:defined) {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.2s;
 }
 
 .faq-playlist-subtitle {
@@ -10459,6 +10427,34 @@ wistia-player:not(:defined) {
   color: var(--text-muted);
 }
 
+/* Bottom CTA */
+.faq-bottom-cta {
+  margin-top: 64px;
+  padding: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-list);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.faq-bottom-cta-headline {
+  font-family: 'Acid Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.faq-bottom-cta-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
 /* Mobile Responsive */
 @media (max-width: 900px) {
   .faq-page-container {
@@ -10475,9 +10471,10 @@ wistia-player:not(:defined) {
     margin-top: 24px;
   }
 
+  /* Tablet: larger 16:9 thumbnails, list stays horizontal */
   .faq-playlist-thumb {
-    width: 100px;
-    height: 75px;
+    width: 168px;
+    height: 95px;
   }
 }
 
@@ -10488,7 +10485,11 @@ wistia-player:not(:defined) {
 
   .faq-page-subheadline {
     font-size: 1rem;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
+  }
+
+  .faq-count-badge {
+    display: none;
   }
 
   .faq-search-wrapper {
@@ -10508,16 +10509,81 @@ wistia-player:not(:defined) {
     font-size: 0.875rem;
   }
 
+  /* Mobile: YouTube-style card feed */
+  .faq-playlist-sidebar {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+
+  .faq-playlist-items {
+    padding: 0;
+  }
+
+  .faq-playlist-item {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border-left: none;
+    border-bottom: 1px solid var(--border-list);
+  }
+
+  .faq-playlist-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-playlist-item.active {
+    border-left: none;
+    border-top: 3px solid #10b981;
+    background: rgba(16, 185, 129, 0.05);
+  }
+
+  .faq-playlist-item.active .faq-playlist-title {
+    color: #10b981;
+  }
+
+  .faq-playlist-num {
+    display: none;
+  }
+
   .faq-playlist-thumb {
-    width: 80px;
-    height: 60px;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%;
+    border-radius: 0;
+  }
+
+  .faq-playlist-thumb img,
+  .faq-playlist-thumb-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+  }
+
+  .faq-playlist-play-overlay {
+    border-radius: 0;
+  }
+
+  .faq-playlist-info {
+    padding: 12px 16px 16px;
   }
 
   .faq-playlist-title {
-    font-size: 13px;
+    font-size: 14px;
+    -webkit-line-clamp: 3;
+    margin-bottom: 6px;
   }
 
   .faq-playlist-subtitle {
-    font-size: 11px;
+    font-size: 12px;
+  }
+
+  .faq-bottom-cta {
+    padding: 32px 24px;
   }
 }

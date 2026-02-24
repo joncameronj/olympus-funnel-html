@@ -1,7 +1,8 @@
 /**
- * Resend API Wrapper & Dynamic Timing Calculator
+ * Resend API Wrapper & Adaptive Email Scheduler
  *
- * Handles scheduling emails with dynamic timing based on booking lead time.
+ * Schedules 16 emails between booking and call time using even spacing.
+ * Uses Resend template IDs instead of local HTML generation.
  */
 
 import { TIMING_CONFIG } from '../config/email-sequences.js';
@@ -9,75 +10,67 @@ import { TIMING_CONFIG } from '../config/email-sequences.js';
 const RESEND_API_URL = 'https://api.resend.com/emails';
 
 /**
- * Calculate send times for all emails in a sequence
+ * Calculate send times for all 16 emails in the sequence.
  *
- * @param {Date} bookingTime - When the call is scheduled
- * @param {number} emailCount - Number of emails to schedule
- * @returns {Date[]} Array of send times for each email
+ * All emails MUST send before the call. Email 1 sends immediately,
+ * Email 16 sends at callTime - 1hr buffer, and emails 2-15 are
+ * spaced evenly between.
+ *
+ * @param {Date|string} bookingTime - When the call is scheduled
+ * @returns {Date[]} Array of 16 send times
  */
-export function calculateEmailSchedule(bookingTime, emailCount = TIMING_CONFIG.EMAILS_PER_TIER) {
+export function calculateEmailSchedule(bookingTime) {
   const now = new Date();
   const callTime = new Date(bookingTime);
-
-  // Calculate buffer time (2 hours before call)
   const bufferMs = TIMING_CONFIG.BUFFER_BEFORE_CALL_HOURS * 60 * 60 * 1000;
-  const lastEmailTime = new Date(callTime.getTime() - bufferMs);
+  const deadline = new Date(callTime.getTime() - bufferMs);
+  const emailCount = TIMING_CONFIG.EMAILS_PER_SEQUENCE;
 
-  // Calculate available time window
-  const availableMs = lastEmailTime.getTime() - now.getTime();
+  // Email 1 sends now (+ 1 min for Resend minimum)
+  const firstSend = new Date(now.getTime() + 60000);
 
-  // Minimum spacing in milliseconds
-  const minSpacingMs = TIMING_CONFIG.MIN_SPACING_MINUTES * 60 * 1000;
+  // Email 16 sends at deadline
+  const lastSend = deadline;
 
-  // Calculate ideal interval
-  let intervalMs = availableMs / emailCount;
-
-  // Enforce minimum spacing
-  if (intervalMs < minSpacingMs) {
-    intervalMs = minSpacingMs;
-  }
-
-  // Generate send times
-  const sendTimes = [];
-  for (let i = 0; i < emailCount; i++) {
-    const sendTime = new Date(now.getTime() + intervalMs * (i + 1));
-
-    // Don't schedule past the buffer time
-    if (sendTime >= lastEmailTime) {
-      break;
+  // If deadline is already past or too close, compress everything
+  // with minimum 30-second spacing so all emails still send
+  if (lastSend.getTime() <= firstSend.getTime()) {
+    const sendTimes = [];
+    for (let i = 0; i < emailCount; i++) {
+      sendTimes.push(new Date(firstSend.getTime() + i * 30000));
     }
-
-    sendTimes.push(sendTime);
+    return sendTimes;
   }
 
-  // If we couldn't fit any emails, schedule the first one immediately
-  // and space the rest at minimum intervals
-  if (sendTimes.length === 0) {
-    const firstSend = new Date(now.getTime() + 60000); // 1 minute from now
-    sendTimes.push(firstSend);
+  // Emails 2-15 spaced evenly between first and last
+  const sendTimes = [firstSend];
+  const innerCount = emailCount - 2;
+  const innerWindow = lastSend.getTime() - firstSend.getTime();
+  const interval = innerWindow / (innerCount + 1);
 
-    for (let i = 1; i < emailCount; i++) {
-      const nextTime = new Date(firstSend.getTime() + minSpacingMs * i);
-      if (nextTime < lastEmailTime) {
-        sendTimes.push(nextTime);
-      }
-    }
+  for (let i = 1; i <= innerCount; i++) {
+    sendTimes.push(new Date(firstSend.getTime() + interval * i));
   }
 
+  sendTimes.push(lastSend);
   return sendTimes;
 }
 
 /**
- * Schedule a single email via Resend API
+ * Schedule a single email via Resend API.
  *
- * @param {Object} options - Email options
+ * Supports both template mode (templateId + data) and raw HTML mode.
+ *
+ * @param {Object} options
  * @param {string} options.to - Recipient email
  * @param {string} options.subject - Email subject
- * @param {string} options.html - Email HTML content
- * @param {Date} options.scheduledAt - When to send (optional, sends immediately if not provided)
+ * @param {string} [options.templateId] - Resend template ID
+ * @param {Object} [options.data] - Template variables (e.g. { firstName })
+ * @param {string} [options.html] - Raw HTML fallback
+ * @param {Date} [options.scheduledAt] - When to send
  * @returns {Promise<Object>} Resend API response
  */
-export async function scheduleEmail({ to, subject, html, scheduledAt }) {
+export async function scheduleEmail({ to, subject, templateId, data, html, scheduledAt }) {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {
@@ -85,12 +78,21 @@ export async function scheduleEmail({ to, subject, html, scheduledAt }) {
   }
 
   const payload = {
-    from: 'Olympus <hello@etho.net>',
+    from: 'JonCameron Johnson <joncameron@etho.net>',
     reply_to: 'saas@etho.net',
     to: [to],
-    subject,
-    html,
   };
+
+  // Only set subject when NOT using a template (template has its own subject)
+  if (!templateId) {
+    payload.subject = subject;
+  }
+
+  if (templateId) {
+    payload.template = { id: templateId, variables: data || {} };
+  } else if (html) {
+    payload.html = html;
+  }
 
   // Add scheduled_at if provided and in the future
   if (scheduledAt) {
@@ -121,22 +123,29 @@ export async function scheduleEmail({ to, subject, html, scheduledAt }) {
 }
 
 /**
- * Schedule an entire email sequence
+ * Schedule an entire 16-email sequence via Resend.
  *
- * @param {Object} options - Scheduling options
+ * @param {Object} options
  * @param {string} options.to - Recipient email
- * @param {string} options.name - Recipient name
- * @param {Date} options.bookingTime - When the call is scheduled
- * @param {string} options.tier - User's tier (lambda, alpha, sigma, enterprise)
- * @param {Array} options.emails - Array of email definitions with id and subject
- * @param {Function} options.getTemplate - Function to get email HTML template
+ * @param {string} options.firstName - Recipient first name (template variable)
+ * @param {Date|string} options.bookingTime - When the call is scheduled
+ * @param {string} options.tier - User's tier (for logging)
+ * @param {string} [options.callLink] - Call/join link from booking event
+ * @param {Array} options.emails - Array of { id, subject, templateId }
  * @returns {Promise<Object>} Results of scheduling
  */
-export async function scheduleEmailSequence({ to, name, bookingTime, tier, emails, getTemplate }) {
-  const sendTimes = calculateEmailSchedule(bookingTime, emails.length);
-  const results = [];
+export async function scheduleEmailSequence({ to, firstName, bookingTime, tier, callLink, emails }) {
+  const recipient = String(to || '').trim();
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipient);
+  if (!isValidEmail) {
+    throw new Error(`Invalid recipient email for Resend sequence: "${to}"`);
+  }
 
-  console.log(`Scheduling ${sendTimes.length} emails for ${to} (${tier} tier)`);
+  const sendTimes = calculateEmailSchedule(bookingTime);
+  const results = [];
+  const normalizedCallLink = String(callLink || '').trim();
+
+  console.log(`Scheduling ${sendTimes.length} emails for ${recipient} (${tier} tier)`);
   console.log(`Booking time: ${new Date(bookingTime).toISOString()}`);
   console.log(`Send times calculated:`, sendTimes.map((t) => t.toISOString()));
 
@@ -144,13 +153,24 @@ export async function scheduleEmailSequence({ to, name, bookingTime, tier, email
     const email = emails[i];
     const sendTime = sendTimes[i];
 
-    try {
-      const html = getTemplate(tier, email.id, { name, tier });
+    if (!email) break;
 
+    try {
       const result = await scheduleEmail({
-        to,
+        to: recipient,
         subject: email.subject,
-        html,
+        templateId: email.templateId,
+        data: {
+          firstName,
+          attendeeEmail: recipient,
+          recipientEmail: recipient,
+          sentToEmail: recipient,
+          email: recipient,
+          callLink: normalizedCallLink,
+          meetingLink: normalizedCallLink,
+          call_link: normalizedCallLink,
+          meeting_link: normalizedCallLink,
+        },
         scheduledAt: sendTime,
       });
 
@@ -163,6 +183,11 @@ export async function scheduleEmailSequence({ to, name, bookingTime, tier, email
       });
 
       console.log(`Scheduled email ${email.id}: "${email.subject}" for ${sendTime.toISOString()}`);
+
+      // 500ms throttle to stay under Resend's 2 req/sec rate limit
+      if (i < sendTimes.length - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
     } catch (error) {
       console.error(`Failed to schedule email ${email.id}:`, error.message);
       results.push({

@@ -715,6 +715,19 @@
         sessionStorage.setItem('routing_calendar_owner', routing.calendarOwner);
         sessionStorage.setItem('routing_calendar_number', String(routing.calendarNumber));
 
+        // Store quiz answers for Cal.com metadata passthrough
+        sessionStorage.setItem('lead_name', this.formData.firstName + ' ' + this.formData.lastName);
+        sessionStorage.setItem('lead_email', this.formData.email);
+        sessionStorage.setItem('lead_phone', this.formData.countryCode + this.formData.phoneNumber);
+        sessionStorage.setItem('quiz_practice_description', this.formData.practiceDescription || '');
+        sessionStorage.setItem('quiz_website', this.formData.website || '');
+        sessionStorage.setItem('quiz_goals', this.formData.currentSituation || '');
+        sessionStorage.setItem('quiz_budget', spendLabels[this.formData.marketingSpend] || this.formData.marketingSpend || '');
+        sessionStorage.setItem('quiz_challenges', this.formData.marketingChallenges
+          .map(function(c) { return challengeLabels[c] || c; })
+          .join(', ')
+        );
+
         const calendarUrl = new URL('/calendar.html', window.location.origin);
         calendarUrl.searchParams.set('segment', routing.segment);
         calendarUrl.searchParams.set('tier', routing.tier);

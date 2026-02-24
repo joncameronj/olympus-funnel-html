@@ -19,7 +19,6 @@
 
 import { getEmailSequence, normalizeTier } from './config/email-sequences.js';
 import { scheduleEmailSequence } from './lib/resend.js';
-import { getEmailTemplate } from './templates/index.js';
 
 export const config = {
   runtime: 'edge',
@@ -139,6 +138,7 @@ function getResponseValue(value) {
     if (value.value !== undefined) return getResponseValue(value.value);
     if (value.answer !== undefined) return getResponseValue(value.answer);
     if (value.text !== undefined) return getResponseValue(value.text);
+    if (value.response !== undefined) return getResponseValue(value.response);
     return '';
   }
 
@@ -175,7 +175,62 @@ function getResponse(responses, searchTerms) {
     if (extracted) return extracted;
   }
 
+  // Search through array-type values (e.g. responses.customInputs = [{label, value}])
+  for (const [, val] of entries) {
+    if (!Array.isArray(val)) continue;
+    for (const item of val) {
+      if (!item || typeof item !== 'object') continue;
+      const descriptor = item.label || item.question || item.questionLabel || item.name || item.title;
+      if (!isMatch(descriptor)) continue;
+      const extracted = getResponseValue(item);
+      if (extracted) return extracted;
+    }
+  }
+
   return 'Not provided';
+}
+
+const URL_REGEX = /https?:\/\/[^\s<>"')]+/i;
+
+function extractUrlCandidate(value, seen = new Set()) {
+  if (value == null) return '';
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return '';
+    const directMatch = trimmed.match(URL_REGEX);
+    return directMatch ? directMatch[0] : '';
+  }
+
+  if (typeof value !== 'object') return '';
+  if (seen.has(value)) return '';
+  seen.add(value);
+
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = extractUrlCandidate(item, seen);
+      if (found) return found;
+    }
+    return '';
+  }
+
+  const priorityKeys = [
+    'url', 'href', 'link', 'uri',
+    'joinUrl', 'joinURL', 'meetingUrl', 'meetingURL',
+    'meetingLink', 'videoCallUrl', 'conferenceUrl',
+  ];
+  for (const key of priorityKeys) {
+    if (!(key in value)) continue;
+    const found = extractUrlCandidate(value[key], seen);
+    if (found) return found;
+  }
+
+  for (const nested of Object.values(value)) {
+    const found = extractUrlCandidate(nested, seen);
+    if (found) return found;
+  }
+
+  return '';
 }
 
 /**
@@ -188,7 +243,26 @@ function extractBookingData(payload) {
   const metadata = data.metadata || data.bookingMetadata || data.eventTypeMetadata || {};
 
   // Log raw responses for debugging
-  console.log('Raw responses:', JSON.stringify(responses));
+  console.log('Raw responses keys:', Object.keys(responses));
+  console.log('Response key details:', JSON.stringify(
+    Object.entries(responses).map(([k, v]) => ({
+      key: k,
+      type: Array.isArray(v) ? 'array' : typeof v,
+      preview: typeof v === 'string' ? v.slice(0, 80) : JSON.stringify(v).slice(0, 80)
+    }))
+  ));
+  console.log('Metadata keys:', Object.keys(metadata));
+
+  // Flag unmatched response keys for debugging
+  const knownKeys = ['name', 'email', 'phone', 'location', 'guests', 'rescheduleReason'];
+  const unmatchedEntries = Object.entries(responses).filter(
+    ([k]) => !knownKeys.includes(k)
+  );
+  if (unmatchedEntries.length > 0) {
+    console.log('Unmatched response entries:', JSON.stringify(
+      unmatchedEntries.map(([k, v]) => ({ key: k, value: getResponseValue(v) || '(empty)' }))
+    ));
+  }
 
   const getMetadataValue = (...keys) => {
     for (const key of keys) {
@@ -211,30 +285,68 @@ function extractBookingData(payload) {
   const resolvedTier = tierFromResponses !== 'Not provided'
     ? tierFromResponses
     : (tierFromMetadata || 'Not provided');
+  const callLinkFromMetadata = getMetadataValue(
+    'callLink',
+    'meetingLink',
+    'meetingUrl',
+    'videoCallUrl',
+    'joinUrl',
+    'conferenceUrl',
+  );
+  const callLinkFromResponses = getResponse(responses, [
+    'meeting link',
+    'meeting url',
+    'call link',
+    'join link',
+    'zoom link',
+    'google meet',
+    'location',
+  ]);
+  const resolvedCallLink = callLinkFromMetadata
+    || (callLinkFromResponses !== 'Not provided' ? extractUrlCandidate(callLinkFromResponses) : '')
+    || extractUrlCandidate(data.location)
+    || extractUrlCandidate(data.meetingUrl)
+    || extractUrlCandidate(data.meetingLink)
+    || extractUrlCandidate(data.videoCallUrl)
+    || extractUrlCandidate(data.videoCall)
+    || extractUrlCandidate(data.conferenceData)
+    || extractUrlCandidate(data.eventType)
+    || extractUrlCandidate(data.bookingFieldsResponses)
+    || extractUrlCandidate(attendee);
 
   // Cal.com can have responses in different formats
   // Use getResponse() helper to handle direct keys and nested label/value objects
+  const practiceFromResponses = getResponse(responses, [
+    'Quick description of your practice',
+    'Quick description of your practice?',
+    'practice_description',
+    'practiceDescription',
+    'description of your practice',
+    'describe', 'about your practice', 'tell us about', 'your practice',
+    'describe your practice', 'practice description',
+  ]);
+  const websiteFromResponses = getResponse(responses, [
+    'What website do you want Olympus to grow?',
+    'Website you want Olympus to grow?',
+    'website',
+    'Website',
+    'website you want',
+    'url', 'site', 'web address', 'domain',
+  ]);
+
   return {
     // Basic info
     name: responses.name || attendee.name || 'Not provided',
     email: responses.email || attendee.email || 'Not provided',
     phone: getResponse(responses, ['phone', 'Phone', 'phone-number', 'phone number']),
 
-    // Custom form fields - use getResponse() to handle multiple formats
-    practiceDescription: getResponse(responses, [
-      'Quick description of your practice',
-      'Quick description of your practice?',
-      'practice_description',
-      'practiceDescription',
-      'description of your practice',
-    ]),
-    website: getResponse(responses, [
-      'What website do you want Olympus to grow?',
-      'Website you want Olympus to grow?',
-      'website',
-      'Website',
-      'website you want',
-    ]),
+    // Custom form fields - use getResponse() to handle multiple formats, fall back to metadata
+    practiceDescription: practiceFromResponses !== 'Not provided'
+      ? practiceFromResponses
+      : (getMetadataValue('practiceDescription', 'practice_description', 'quiz_practice_description') || 'Not provided'),
+    website: websiteFromResponses !== 'Not provided'
+      ? websiteFromResponses
+      : (getMetadataValue('website', 'quiz_website') || 'Not provided'),
     goals: getResponse(responses, [
       'What do you want Olympus to help you achieve?',
       'goals',
@@ -261,6 +373,7 @@ function extractBookingData(payload) {
     revenueRange: getMetadataValue('revenueRange'),
     calendarOwner: getMetadataValue('calendarOwner'),
     calendarNumber: getMetadataValue('calendarNumber'),
+    callLink: resolvedCallLink || 'Not provided',
 
     // Booking details
     bookingId: data.uid || 'N/A',
@@ -339,30 +452,37 @@ function formatRoamMessage(data) {
 **Revenue range:** ${data.revenueRange || 'Not provided'}
 **Calendar owner:** ${data.calendarOwner || 'Not provided'}
 **Calendar number:** ${data.calendarNumber || 'Not provided'}
+**Call link:** ${data.callLink || 'Not provided'}
 
 📅 **Booked:** ${bookingTime}`;
 }
 
 /**
- * Schedule tier-based prep content emails via Resend
+ * Schedule prep content emails via Resend templates
  */
 async function scheduleEmailsForBooking(data) {
-  // Get normalized tier and email sequence
   const tier = normalizeTier(data.tier);
-  const emails = getEmailSequence(tier);
+  const emails = getEmailSequence();
+  const firstName = (data.name || '').split(' ')[0] || 'there';
+  const recipientEmail = String(data.email || '').trim();
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipientEmail);
+  if (!isValidEmail) {
+    throw new Error(`Cannot schedule emails: invalid attendee email "${data.email}"`);
+  }
+  const callLink = data.callLink && data.callLink !== 'Not provided'
+    ? data.callLink
+    : '';
 
   console.log(`Scheduling ${emails.length} emails for tier: ${tier}`);
+  console.log(`Template data: recipientEmail=${recipientEmail}, callLinkPresent=${Boolean(callLink)}`);
 
-  // Schedule the email sequence
   const result = await scheduleEmailSequence({
-    to: data.email,
-    name: data.name,
+    to: recipientEmail,
+    firstName,
     bookingTime: data.startTime,
     tier,
+    callLink,
     emails,
-    getTemplate: (tierName, emailId, templateData) => {
-      return getEmailTemplate(tierName, emailId, templateData);
-    },
   });
 
   return {
