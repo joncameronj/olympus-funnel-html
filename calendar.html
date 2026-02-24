@@ -271,11 +271,6 @@
     };
     const calLink = CALENDAR_LINKS[resolvedCalendarNumber] || CALENDAR_LINKS[1];
 
-    const routingNote = document.getElementById('routing-note');
-    if (routingNote) {
-      const calendarText = resolvedCalendarNumber === 1 ? 'Calendar 1 · JonCameron' : 'Calendar 2 · Luke';
-      routingNote.textContent = 'Routing: ' + routingSelection.segmentLabel + ' to ' + calendarText;
-    }
 
     sessionStorage.setItem('routing_segment', routingSelection.segment);
     sessionStorage.setItem('routing_segment_label', routingSelection.segmentLabel);
