@@ -16,9 +16,14 @@
   <!-- Preload fonts -->
   <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Critical CSS -->
-  <link rel="stylesheet" href="/styles.min.css?v=20260217a">
+  <!-- Critical CSS (above-fold) -->
   <style>
+    :root{--bg-page:rgb(10,10,10);--bg-card:rgb(15,15,15);--text-primary:rgb(255,255,255);--text-muted:rgb(155,155,155);--btn-primary-bg:#FFF;--btn-primary-text:#000}
+    [data-theme="light"]{--bg-page:rgb(255,255,255);--bg-card:rgb(250,250,250);--text-primary:rgb(0,0,0);--text-muted:rgb(135,135,135);--btn-primary-bg:#000;--btn-primary-text:#FFF}
+    @font-face{font-family:'Inter';src:url('/fonts/inter/Inter-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-text-size-adjust:100%;line-height:1.5;overflow-x:clip}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-page);color:var(--text-primary);min-height:100vh;overflow-x:clip}
     /* Calendar-specific overrides */
     .page-header {
       padding: 20px;
@@ -100,6 +105,10 @@
       color-scheme: dark;
     }
   </style>
+
+  <!-- Full Stylesheet (async) -->
+  <link rel="stylesheet" href="/styles.min.css?v=20260223a" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/styles.min.css?v=20260223a"></noscript>
 
   <!-- Meta Pixel Code -->
   <script>

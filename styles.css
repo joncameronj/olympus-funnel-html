@@ -26,50 +26,43 @@
 
 @font-face {
   font-family: 'Acid Grotesk';
-  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Light-TRIAL.woff2') format('woff2'),
-       url('/fonts/acid-grotesk/FFF-AcidGrotesk-Light-TRIAL.otf') format('opentype');
+  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Light-TRIAL.woff2') format('woff2');
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: 'Acid Grotesk';
-  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.woff2') format('woff2'),
-       url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.otf') format('opentype');
+  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Medium-TRIAL.woff2') format('woff2');
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: 'Acid Grotesk';
-  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Bold-TRIAL.woff2') format('woff2'),
-       url('/fonts/acid-grotesk/FFF-AcidGrotesk-Bold-TRIAL.otf') format('opentype');
+  src: url('/fonts/acid-grotesk/FFF-AcidGrotesk-Bold-TRIAL.woff2') format('woff2');
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Regular.woff2') format('woff2'),
-       url('/fonts/inter/Inter-Regular.ttf') format('truetype');
+  src: url('/fonts/inter/Inter-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Medium.woff2') format('woff2'),
-       url('/fonts/inter/Inter-Medium.ttf') format('truetype');
+  src: url('/fonts/inter/Inter-Medium.woff2') format('woff2');
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/inter/Inter-Bold.woff2') format('woff2'),
-       url('/fonts/inter/Inter-Bold.ttf') format('truetype');
+  src: url('/fonts/inter/Inter-Bold.woff2') format('woff2');
   font-weight: 700;
   font-display: swap;
 }
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2'),
-       url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
+  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2');
   font-weight: 400;
   font-display: swap;
 }

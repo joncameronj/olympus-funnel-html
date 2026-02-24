@@ -12,8 +12,9 @@
 
   <link rel="preload" href="/fonts/inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="/styles.min.css?v=20260217a">
+  <!-- Full Stylesheet (async) -->
+  <link rel="stylesheet" href="/styles.min.css?v=20260223a" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/styles.min.css?v=20260223a"></noscript>
 
   <style>
     :root {
@@ -46,19 +47,19 @@
     }
     @font-face {
       font-family: 'Inter';
-      src: url('/fonts/inter/Inter-Regular.ttf') format('truetype');
+      src: url('/fonts/inter/Inter-Regular.woff2') format('woff2');
       font-weight: 400;
       font-display: swap;
     }
     @font-face {
       font-family: 'Inter';
-      src: url('/fonts/inter/Inter-Medium.ttf') format('truetype');
+      src: url('/fonts/inter/Inter-Medium.woff2') format('woff2');
       font-weight: 500;
       font-display: swap;
     }
     @font-face {
       font-family: 'JetBrains Mono';
-      src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf') format('truetype');
+      src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2');
       font-weight: 400;
       font-display: swap;
     }
