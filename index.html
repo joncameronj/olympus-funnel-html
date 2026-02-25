@@ -50,12 +50,12 @@
     .headline{font-family:'Acid Grotesk',sans-serif;font-size:6rem;font-weight:600;letter-spacing:-0.05em;line-height:0.9;margin-top:32px;margin-bottom:48px;color:var(--text-primary)}
     .subheadline{font-family:'Inter',sans-serif;font-size:1.8rem;font-weight:500;letter-spacing:-0.07em;color:rgb(160,160,160);line-height:1.4;max-width:900px;margin:0 auto 48px}
     .subheadline strong{color:var(--text-primary);font-weight:700}
-    .cta-button{display:inline-block;padding:12px 32px;font-family:'Acid Grotesk',sans-serif;font-size:20px;font-weight:600;letter-spacing:-0.02em;text-decoration:none;background:#fff;color:#000;border:none;border-radius:9999px;cursor:pointer;transition:opacity 0.2s;box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+    .cta-button{display:inline-block;padding:12px 32px;font-family:'Acid Grotesk',sans-serif;font-size:20px;font-weight:600;letter-spacing:-0.02em;text-decoration:none;background:#fff;color:#000;border:none;border-radius:9999px;cursor:pointer;transition:opacity 0.2s}
     [data-theme="light"] .cta-button{background:#000;color:#fff}
     .video-wrapper{width:100%;max-width:1364px;margin-top:60px;margin-bottom:32px;margin-left:auto;margin-right:auto;background-image:url('/assets/images/7.webp');background-size:cover;background-position:center;border-radius:8px;padding:32px;box-sizing:border-box}
     .video-container{position:relative;width:100%;max-width:1300px;aspect-ratio:16/9;background:transparent;border-radius:24px;margin:0 auto;overflow:hidden;cursor:pointer}
     @media(max-width:768px){.header{padding:16px 20px}.header-nav{display:none}.header-cta-desktop{display:none}.header-mobile-actions{display:flex}}
-    @media(max-width:600px){.hero{padding:16px 16px 16px}.pre-video-headline{font-size:1rem;line-height:1.2;margin-bottom:16px;padding:6px 12px}.headline{font-size:3.5rem;margin-top:16px;margin-bottom:24px}.subheadline{font-size:20px;letter-spacing:-0.07em;line-height:1.4;margin-bottom:24px}.video-wrapper{padding:0;background:none;max-width:100%;margin-top:32px}}
+    @media(max-width:600px){.hero{padding:16px 16px 16px}.pre-video-headline{font-size:1rem;line-height:1.2;margin-bottom:16px;padding:6px 12px}.headline{font-size:2.5rem;margin-top:16px;margin-bottom:24px}.subheadline{font-size:20px;letter-spacing:-0.07em;line-height:1.4;margin-bottom:24px}.video-wrapper{padding:0;background:none;max-width:100%;margin-top:32px}}
   </style>
 
   <!-- Full Stylesheet -->
@@ -177,7 +177,7 @@
     </p>
 
     <!-- Headline -->
-    <h1 class="headline">Presold Patient Acquisition. Done Without You.</h1>
+    <h1 class="headline">Install <q>Presold</q> Patient Acquisition That Runs Itself in 7 Days or Less</h1>
 
     <!-- Subheadline -->
     <p class="subheadline">
@@ -289,7 +289,7 @@
     </div>
 
     <div class="results-container">
-      <p class="results-disclaimer">All screenshots from Etho agency engagements. Individual results vary.</p>
+      <p class="results-disclaimer">All screenshots from Etho agency engagements from mid-2024. Individual results vary.</p>
     </div>
   </section>
 
@@ -4958,7 +4958,9 @@
         if (!startTime) startTime = timestamp;
         var progress = Math.min((timestamp - startTime) / duration, 1);
         var easedProgress = easeOutQuart(progress);
-        var current = Math.floor(from + (to - from) * easedProgress);
+        var raw = from + (to - from) * easedProgress;
+        var stepSize = (format === 'desktop') ? 1000000 : 1;
+        var current = Math.floor(raw / stepSize) * stepSize;
 
         element.textContent = formatNumber(current, format);
 
@@ -5365,3 +5367,4 @@
   <script src="/assets/js/quiz.min.js" defer></script>
 </body>
 </html>
++

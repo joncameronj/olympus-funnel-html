@@ -142,12 +142,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update highlighting
     updateHighlighting(revenue);
 
-    // Scroll to top of pricing container
-    const pricingContainer = document.querySelector('.pricing-container');
-    if (pricingContainer) {
-      pricingContainer.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+    // Scroll to the recommended card, accounting for sticky header
+    const recommendedCard = document.querySelector('.pricing-card.highlighted');
+    if (recommendedCard) {
+      const header = document.querySelector('.header');
+      const headerHeight = header ? header.offsetHeight : 0;
+      const cardTop = recommendedCard.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: cardTop - headerHeight - 16,
+        behavior: 'smooth'
       });
     }
 
