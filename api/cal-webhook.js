@@ -447,11 +447,7 @@ function formatRoamMessage(data) {
 **What do you want Olympus to help you achieve?** ${data.goals}
 **Roughly how much goes towards growth & marketing each month?** ${data.budget}
 **Biggest patient acquisition challenges?** ${data.challenges}
-**Olympus tier most interested in?** ${data.tier}
-**Segment:** ${data.segmentLabel || data.segment || 'Not provided'}
-**Revenue range:** ${data.revenueRange || 'Not provided'}
-**Calendar owner:** ${data.calendarOwner || 'Not provided'}
-**Calendar number:** ${data.calendarNumber || 'Not provided'}
+**Segment:** ${[data.segmentLabel || data.segment, data.revenueRange].filter(Boolean).join(' | ') || 'Not provided'}
 **Call link:** ${data.callLink || 'Not provided'}
 
 📅 **Booked:** ${bookingTime}`;

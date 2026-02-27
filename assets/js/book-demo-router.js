@@ -5,7 +5,7 @@
     'just-getting-started': {
       segment: 'just-getting-started',
       label: 'Just Getting Started',
-      revenueRange: '$0-$250K annual revenue',
+      revenueRange: '$0 - $250K',
       tier: 'lambda',
       calendarNumber: 1,
       calendarOwner: 'joncameron'
@@ -13,7 +13,7 @@
     'lambda': {
       segment: 'lambda',
       label: 'Lambda',
-      revenueRange: '$250K-$750K annual revenue',
+      revenueRange: '$250K - $750K',
       tier: 'lambda',
       calendarNumber: 1,
       calendarOwner: 'joncameron'
@@ -21,7 +21,7 @@
     'alpha': {
       segment: 'alpha',
       label: 'Alpha',
-      revenueRange: '$750K-$1.5M annual revenue',
+      revenueRange: '$750K - $1.5M',
       tier: 'alpha',
       calendarNumber: 1,
       calendarOwner: 'joncameron'
@@ -29,7 +29,7 @@
     'sigma': {
       segment: 'sigma',
       label: 'Sigma',
-      revenueRange: '$1.5M-$3.6M annual revenue',
+      revenueRange: '$1.5M - $3.6M',
       tier: 'sigma',
       calendarNumber: 1,
       calendarOwner: 'joncameron'
@@ -37,7 +37,7 @@
     'omega': {
       segment: 'omega',
       label: 'Omega',
-      revenueRange: '$3.6M+ annual revenue or multi-location',
+      revenueRange: '$3.6M+',
       tier: 'enterprise',
       calendarNumber: 1,
       calendarOwner: 'joncameron'
