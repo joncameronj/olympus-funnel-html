@@ -9,6 +9,7 @@
   --text-muted: rgb(155, 155, 155);
   --btn-primary-bg: #FFFFFF;
   --btn-primary-text: #000000;
+  --check-icon-filter: invert(1);
 }
 
 [data-theme="light"] {
@@ -22,6 +23,7 @@
   --text-muted: rgb(135, 135, 135);
   --btn-primary-bg: #000000;
   --btn-primary-text: #FFFFFF;
+  --check-icon-filter: invert(1);
 }
 
 @font-face {
@@ -2917,11 +2919,11 @@ wistia-player:not(:defined) {
 .revenue-check-icon {
   width: 24px;
   height: 24px;
-  filter: brightness(0);
+  filter: var(--check-icon-filter);
 }
 
 [data-theme="light"] .revenue-check-icon {
-  filter: none;
+  filter: var(--check-icon-filter);
 }
 
 /* Revenue Input Error State */
@@ -3248,20 +3250,20 @@ wistia-player:not(:defined) {
 .pricing-feature[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   top: 100%;
   margin-top: 8px;
   padding: 10px 14px;
   background: #1a1a1a;
   color: #ffffff;
+  font-family: Inter, sans-serif;
   font-size: 13px;
   font-weight: 400;
-  letter-spacing: -0.01em;
   line-height: 1.4;
   border-radius: 8px;
-  white-space: normal;
+  white-space: nowrap;
   max-width: 280px;
-  width: max-content;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s, visibility 0.2s;
