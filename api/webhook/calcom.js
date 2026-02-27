@@ -223,11 +223,7 @@ export default async function handler(request) {
       `**What do you want Olympus to help you achieve?** ${bookingData.goals}`,
       `**Roughly how much goes toward marketing each month?** ${bookingData.budget}`,
       `**Biggest patient acquisition challenges?** ${bookingData.challenges}`,
-      `**Tier most interested in?** ${bookingData.tier}`,
-      `**Segment:** ${bookingData.segmentLabel || bookingData.segment || 'Not provided'}`,
-      `**Revenue range:** ${bookingData.revenueRange || 'Not provided'}`,
-      `**Calendar owner:** ${bookingData.calendarOwner || 'Not provided'}`,
-      `**Calendar number:** ${bookingData.calendarNumber || 'Not provided'}`,
+      `**Segment:** ${[bookingData.segmentLabel || bookingData.segment, bookingData.revenueRange].filter(s => s && s !== 'Not provided').join(' | ') || 'Not provided'}`,
       `**Scheduled:** ${bookingTime}`,
     ];
     const message = messageParts.join('\n\n');
