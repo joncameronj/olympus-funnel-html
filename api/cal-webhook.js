@@ -410,15 +410,17 @@ async function sendRoamNotification(data) {
 
   const message = formatRoamMessage(data);
 
-  const response = await fetch('https://api.ro.am/v1/messages', {
+  const response = await fetch('https://api.ro.am/v1/chat.sendMessage', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({
-      channel_id: channelId,
       text: message,
+      sender: { name: 'Olympus', id: 'olympus' },
+      recipients: [channelId],
     }),
   });
 
@@ -450,20 +452,22 @@ function formatRoamMessage(data) {
     });
   }
 
-  return `🔄 **NEW OLYMPUS DEMO BOOKED**
+  const parts = [
+    '🔄 **NEW OLYMPUS DEMO BOOKED**',
+    `**Name:** ${data.name}`,
+    `**Email:** ${data.email}`,
+    `**Phone:** ${data.phone}`,
+    `**Quick description of your practice:** ${data.practiceDescription}`,
+    `**What website do you want Olympus to grow?** ${data.website}`,
+    `**What do you want Olympus to help you achieve?** ${data.goals}`,
+    `**Roughly how much goes towards growth & marketing each month?** ${data.budget}`,
+    `**Biggest patient acquisition challenges?** ${data.challenges}`,
+    `**Segment:** ${[data.segmentLabel || data.segment, data.revenueRange].filter(Boolean).join(' | ') || 'Not provided'}`,
+    `**Call link:** ${data.callLink || 'Not provided'}`,
+    `📅 **Booked:** ${bookingTime}`,
+  ];
 
-**Name:** ${data.name}
-**Email:** ${data.email}
-**Phone:** ${data.phone}
-**Quick description of your practice:** ${data.practiceDescription}
-**What website do you want Olympus to grow?** ${data.website}
-**What do you want Olympus to help you achieve?** ${data.goals}
-**Roughly how much goes towards growth & marketing each month?** ${data.budget}
-**Biggest patient acquisition challenges?** ${data.challenges}
-**Segment:** ${[data.segmentLabel || data.segment, data.revenueRange].filter(Boolean).join(' | ') || 'Not provided'}
-**Call link:** ${data.callLink || 'Not provided'}
-
-📅 **Booked:** ${bookingTime}`;
+  return parts.join('\n\n');
 }
 
 /**
