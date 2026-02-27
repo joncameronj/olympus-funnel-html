@@ -298,7 +298,6 @@
 
     const calConfig = {
       layout: "month_view",
-      successRedirectUrl: "https://olympus.etho.net/confirmation.html",
       metadata: {
         segment: routingSelection.segment,
         segmentLabel: routingSelection.segmentLabel,
@@ -357,6 +356,7 @@
 
         // Fire conversion events
         if (typeof fbq !== 'undefined') {
+          fbq('track', 'SubmitApplication');
           fbq('track', 'Schedule', {
             content_name: data.title,
             booking_id: data.uid
