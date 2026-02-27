@@ -74,6 +74,18 @@ export default async function handler(request) {
       roamResult = { status: 'failed', error: roamError.message };
     }
 
+    // Add contact to Resend "Demo Bookings" audience
+    let contactResult = { status: 'skipped' };
+    if (process.env.RESEND_API_KEY) {
+      try {
+        contactResult = await addResendContact(bookingData);
+        console.log('Resend contact added:', contactResult);
+      } catch (contactError) {
+        console.error('Resend contact error:', contactError.message);
+        contactResult = { status: 'failed', error: contactError.message };
+      }
+    }
+
     // Schedule tier-based prep content emails via Resend
     let emailResult = { status: 'skipped' };
     if (process.env.RESEND_API_KEY) {
@@ -94,6 +106,7 @@ export default async function handler(request) {
     return new Response(JSON.stringify({
       success: true,
       roam: roamResult.status,
+      contact: contactResult.status,
       emails: emailResult.status || 'scheduled',
     }), {
       status: 200,
@@ -451,6 +464,37 @@ function formatRoamMessage(data) {
 **Call link:** ${data.callLink || 'Not provided'}
 
 📅 **Booked:** ${bookingTime}`;
+}
+
+/**
+ * Add booking contact to Resend "Demo Bookings" audience
+ */
+async function addResendContact(data) {
+  const DEMO_BOOKINGS_AUDIENCE_ID = '1c292e4e-529e-4ffb-b13e-bcf8e5b28d68';
+  const nameParts = (data.name || '').split(' ');
+  const firstName = nameParts[0] || '';
+  const lastName = nameParts.slice(1).join(' ') || '';
+
+  const response = await fetch(`https://api.resend.com/audiences/${DEMO_BOOKINGS_AUDIENCE_ID}/contacts`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: data.email,
+      first_name: firstName,
+      last_name: lastName,
+      unsubscribed: false,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Resend contacts API error: ${response.status} - ${errorText}`);
+  }
+
+  return { status: 'added' };
 }
 
 /**
