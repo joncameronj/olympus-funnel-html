@@ -371,30 +371,8 @@
           });
         }
 
-        // Send notification to RO.AM
-        fetch('/api/notify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'booking',
-            data: {
-              uid: data.uid,
-              title: data.title,
-              startTime: data.startTime,
-              endTime: data.endTime,
-              attendeeName: sessionStorage.getItem('lead_name') || 'Unknown',
-              attendeeEmail: sessionStorage.getItem('lead_email') || 'Unknown',
-              segment: sessionStorage.getItem('routing_segment') || routingSelection.segment,
-              segmentLabel: sessionStorage.getItem('routing_segment_label') || routingSelection.segmentLabel,
-              revenueRange: sessionStorage.getItem('routing_revenue_range') || routingSelection.revenueRange,
-              tier: sessionStorage.getItem('routing_tier') || routingSelection.tier,
-              calendarOwner: sessionStorage.getItem('routing_calendar_owner') || routingSelection.calendarOwner,
-              calendarNumber: sessionStorage.getItem('routing_calendar_number') || String(routingSelection.calendarNumber)
-            }
-          })
-        }).catch(function() {
-          console.log('Booking notification queued for retry');
-        });
+        // Notification is handled server-side by Cal.com webhook → /api/cal-webhook
+        // (removed duplicate client-side /api/notify call)
 
         setTimeout(function() {
           window.location.href = '/confirmation.html';
