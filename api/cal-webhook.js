@@ -74,9 +74,10 @@ export default async function handler(request) {
       roamResult = { status: 'failed', error: roamError.message };
     }
 
-    // Add contact to Resend "Demo Bookings" audience
+    // Add contact to Resend "Demo Bookings" audience and schedule prep emails
     let contactResult = { status: 'skipped' };
     if (process.env.RESEND_API_KEY) {
+      console.log('RESEND_API_KEY present, proceeding with Resend integration');
       try {
         contactResult = await addResendContact(bookingData);
         console.log('Resend contact added:', contactResult);
@@ -97,7 +98,7 @@ export default async function handler(request) {
         emailResult = { status: 'failed', error: emailError.message };
       }
     } else {
-      console.log('RESEND_API_KEY not set, skipping email scheduling');
+      console.log('RESEND_API_KEY not set — skipping Resend contact add and email scheduling');
     }
 
     // GHL integration disabled temporarily
@@ -347,10 +348,14 @@ function extractBookingData(payload) {
     'url', 'site', 'web address', 'domain',
   ]);
 
+  // Extract name and email safely - Cal.com can return objects like {value: "John"}
+  const rawName = getResponseValue(responses.name) || attendee.name || '';
+  const rawEmail = getResponseValue(responses.email) || attendee.email || '';
+
   return {
     // Basic info
-    name: responses.name || attendee.name || 'Not provided',
-    email: responses.email || attendee.email || 'Not provided',
+    name: rawName || 'Not provided',
+    email: rawEmail || 'Not provided',
     phone: getResponse(responses, ['phone', 'Phone', 'phone-number', 'phone number']),
 
     // Custom form fields - use getResponse() to handle multiple formats, fall back to metadata
@@ -475,9 +480,18 @@ function formatRoamMessage(data) {
  */
 async function addResendContact(data) {
   const DEMO_BOOKINGS_AUDIENCE_ID = '1c292e4e-529e-4ffb-b13e-bcf8e5b28d68';
+  const recipientEmail = String(data.email || '').trim();
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipientEmail);
+
+  if (!isValidEmail) {
+    throw new Error(`Cannot add Resend contact: invalid email "${data.email}"`);
+  }
+
   const nameParts = (data.name || '').split(' ');
   const firstName = nameParts[0] || '';
   const lastName = nameParts.slice(1).join(' ') || '';
+
+  console.log(`Adding contact to Resend audience: ${recipientEmail} (${firstName} ${lastName})`);
 
   const response = await fetch(`https://api.resend.com/audiences/${DEMO_BOOKINGS_AUDIENCE_ID}/contacts`, {
     method: 'POST',
@@ -486,7 +500,7 @@ async function addResendContact(data) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      email: data.email,
+      email: recipientEmail,
       first_name: firstName,
       last_name: lastName,
       unsubscribed: false,
@@ -498,7 +512,8 @@ async function addResendContact(data) {
     throw new Error(`Resend contacts API error: ${response.status} - ${errorText}`);
   }
 
-  return { status: 'added' };
+  console.log(`Resend contact added successfully: ${recipientEmail}`);
+  return { status: 'added', email: recipientEmail };
 }
 
 /**
