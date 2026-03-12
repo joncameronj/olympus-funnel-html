@@ -362,32 +362,63 @@ function extractBookingData(payload) {
     practiceDescription: practiceFromResponses !== 'Not provided'
       ? practiceFromResponses
       : (getMetadataValue('practiceDescription', 'practice_description', 'quiz_practice_description') || 'Not provided'),
-    website: websiteFromResponses !== 'Not provided'
-      ? websiteFromResponses
-      : (getMetadataValue('website', 'quiz_website') || 'Not provided'),
-    goals: getResponse(responses, [
-      'What do you want Olympus to help you achieve?',
-      'goals',
-      'Goals',
-      'help you achieve',
-    ]),
-    budget: getResponse(responses, [
-      'Roughly how much goes towards growth & marketing each month?',
-      'Roughly how much goes toward marketing each month?',
-      'budget',
-      'Budget',
-      'marketing each month',
-    ]),
-    challenges: getResponse(responses, [
-      'Biggest patient acquisition challenges?',
-      'Biggest marketing challenges?',
-      'challenges',
-      'Challenges',
-      'acquisition challenges',
-    ]),
+    website: (() => {
+      let resolved = websiteFromResponses !== 'Not provided'
+        ? websiteFromResponses
+        : (getMetadataValue('website', 'quiz_website') || 'Not provided');
+      if (resolved !== 'Not provided' && !/^https?:\/\//i.test(resolved)) {
+        resolved = 'https://' + resolved;
+      }
+      return resolved;
+    })(),
+    goals: (() => {
+      const goalsFromResponses = getResponse(responses, [
+        'What do you want Olympus to help you achieve?',
+        'goals',
+        'Goals',
+        'help you achieve',
+      ]);
+      return goalsFromResponses !== 'Not provided'
+        ? goalsFromResponses
+        : (getMetadataValue('goals', 'quiz_goals') || 'Not provided');
+    })(),
+    budget: (() => {
+      const budgetFromResponses = getResponse(responses, [
+        'Roughly how much goes towards growth & marketing each month?',
+        'Roughly how much goes toward marketing each month?',
+        'budget',
+        'Budget',
+        'marketing each month',
+      ]);
+      return budgetFromResponses !== 'Not provided'
+        ? budgetFromResponses
+        : (getMetadataValue('budget', 'quiz_budget') || 'Not provided');
+    })(),
+    challenges: (() => {
+      const challengesFromResponses = getResponse(responses, [
+        'Biggest patient acquisition challenges?',
+        'Biggest marketing challenges?',
+        'challenges',
+        'Challenges',
+        'acquisition challenges',
+      ]);
+      return challengesFromResponses !== 'Not provided'
+        ? challengesFromResponses
+        : (getMetadataValue('challenges', 'quiz_challenges') || 'Not provided');
+    })(),
     tier: resolvedTier,
-    segment: getMetadataValue('segment', 'segmentLabel'),
-    segmentLabel: getMetadataValue('segmentLabel'),
+    segment: (() => {
+      const segmentFromResponses = getResponse(responses, ['segment', 'package', 'selected package']);
+      return segmentFromResponses !== 'Not provided'
+        ? segmentFromResponses
+        : (getMetadataValue('segment', 'segmentLabel') || '');
+    })(),
+    segmentLabel: (() => {
+      const segmentLabelMeta = getMetadataValue('segmentLabel');
+      if (segmentLabelMeta) return segmentLabelMeta;
+      const segmentFromResponses = getResponse(responses, ['segment', 'package', 'selected package']);
+      return segmentFromResponses !== 'Not provided' ? segmentFromResponses : '';
+    })(),
     revenueRange: getMetadataValue('revenueRange'),
     calendarOwner: getMetadataValue('calendarOwner'),
     calendarNumber: getMetadataValue('calendarNumber'),
