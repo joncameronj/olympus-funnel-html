@@ -39,7 +39,7 @@ export const EMAIL_SEQUENCE = [
   { id: 9,  subject: "Let's talk about the risks",                        templateId: 'app-funnel-email-9' },
   { id: 10, subject: 'Is this just ChatGPT/Claude?',                      templateId: 'app-funnel-email-10' },
   { id: 11, subject: 'Might not work for you',                            templateId: 'app-funnel-email-11' },
-  { id: 12, subject: '7 days to launch. How is that even possible?',      templateId: 'app-funnel-email-12' },
+  { id: 12, subject: 'Live in as few as 7 days. How is that even possible?',      templateId: 'app-funnel-email-12' },
   { id: 13, subject: 'What the first 30 days look like',                  templateId: 'app-funnel-email-13' },
   { id: 14, subject: 'Even my 9-year-old can run Olympus',                templateId: 'app-funnel-email-14' },
   { id: 15, subject: 'From practitioners like you',                       templateId: 'app-funnel-email-15' },
