@@ -56,10 +56,11 @@ export function normalizeTier(tierString) {
 
   const normalized = tierString.toLowerCase().trim();
 
-  if (normalized.includes('enterprise')) return TIERS.ENTERPRISE;
+  if (normalized.includes('omega') || normalized.includes('enterprise')) return TIERS.ENTERPRISE;
   if (normalized.includes('sigma')) return TIERS.SIGMA;
   if (normalized.includes('alpha')) return TIERS.ALPHA;
   if (normalized.includes('lambda')) return TIERS.LAMBDA;
+  if (normalized.includes('just') && normalized.includes('started')) return TIERS.LAMBDA;
 
   return TIERS.LAMBDA;
 }

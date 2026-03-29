@@ -51,7 +51,13 @@ export default async function handler(request) {
 
     // Get environment variables
     const apiKey = process.env.ROAM_API_KEY;
-    const channelId = process.env.ROAM_CHANNEL_ID;
+    const defaultChannelId = process.env.ROAM_CHANNEL_ID;
+    const applicationChannelId = process.env.ROAM_CHANNEL_ID_APPLICATION;
+
+    // Route to correct channel based on request
+    const channelId = body.channel === 'application'
+      ? (applicationChannelId || defaultChannelId)
+      : defaultChannelId;
 
     if (!apiKey || !channelId) {
       console.error('Missing ROAM_API_KEY or ROAM_CHANNEL_ID');
@@ -62,16 +68,17 @@ export default async function handler(request) {
     }
 
     // Send to RO.AM API
-    // NOTE: Update this endpoint based on RO.AM's actual API documentation
-    const roamResponse = await fetch('https://api.ro.am/v1/messages', {
+    const roamResponse = await fetch('https://api.ro.am/v1/chat.sendMessage', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify({
-        channel_id: channelId,
         text: message,
+        sender: { name: 'Olympus', id: 'olympus' },
+        recipients: [channelId],
       }),
     });
 

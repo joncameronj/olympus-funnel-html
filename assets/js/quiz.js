@@ -1,6 +1,6 @@
 /**
  * Quiz Modal - Multi-step qualification form
- * 9-step wizard with animated transitions, validation, and ROAM integration
+ * 8-step wizard with animated transitions, validation, and ROAM integration
  */
 (function() {
   'use strict';
@@ -17,43 +17,60 @@
 
   const challengeLabels = {
     'low-leads': 'Not getting enough leads',
-    'poor-quality': 'Leads are low quality',
+    'burned-by-agencies': 'Burned by agencies / Want control of growth',
     'no-system': 'No marketing system in place',
     'conversion': 'Poor conversion rates',
     'scaling': "Can't scale marketing",
-    'roi': "Can't measure ROI",
-    'team': 'Need marketing team'
+    'not-sure-where': 'Not sure where and what to market'
   };
 
   const tierLabels = {
-    'lambda': 'Lambda ($0-$500K annual)',
+    'just-getting-started': 'Just Getting Started ($0-$250K annual)',
+    'lambda': 'Lambda ($250K-$500K annual)',
     'alpha': 'Alpha ($500K-$1.5M annual)',
-    'sigma': 'Sigma ($1.5M+)'
+    'sigma': 'Sigma ($1.5M-$3.6M annual)',
+    'omega': 'Omega ($3.6M+ annual)'
   };
 
   function getRoutingForTier(tier) {
     const map = {
+      'just-getting-started': {
+        segment: 'just-getting-started',
+        segmentLabel: 'Just Getting Started',
+        revenueRange: '$0-$250K in annual revenue',
+        tier: 'just-getting-started',
+        calendarNumber: 2,
+        calendarOwner: 'lukewiercinski'
+      },
       lambda: {
         segment: 'lambda',
         segmentLabel: 'Lambda',
-        revenueRange: '$250K-$750K in annual revenue',
+        revenueRange: '$250K-$500K in annual revenue',
         tier: 'lambda',
         calendarNumber: 2,
-        calendarOwner: 'luke'
+        calendarOwner: 'lukewiercinski'
       },
       alpha: {
         segment: 'alpha',
         segmentLabel: 'Alpha',
-        revenueRange: '$750K-$1.5M in annual revenue',
+        revenueRange: '$500K-$1.5M in annual revenue',
         tier: 'alpha',
-        calendarNumber: 1,
-        calendarOwner: 'joncameron'
+        calendarNumber: 2,
+        calendarOwner: 'lukewiercinski'
       },
       sigma: {
         segment: 'sigma',
         segmentLabel: 'Sigma',
         revenueRange: '$1.5M-$3.6M in annual revenue',
         tier: 'sigma',
+        calendarNumber: 1,
+        calendarOwner: 'joncameron'
+      },
+      omega: {
+        segment: 'omega',
+        segmentLabel: 'Omega',
+        revenueRange: '$3.6M+ in annual revenue',
+        tier: 'omega',
         calendarNumber: 1,
         calendarOwner: 'joncameron'
       }
@@ -87,7 +104,7 @@
 
   const quiz = {
     currentStep: 1,
-    totalSteps: 9,
+    totalSteps: 8,
     direction: 'forward',
     isAnimating: false,
     isMobile: window.innerWidth <= 768,
@@ -166,34 +183,18 @@
     },
 
     setupFormInputs: function() {
-      // Text inputs
+      // Text inputs, textareas, selects
       const inputs = this.modal.querySelectorAll('input, textarea, select');
       inputs.forEach(input => {
         const field = input.dataset.field;
         if (!field) return;
 
         // Set initial value
-        if (input.type === 'checkbox') {
-          input.checked = this.formData.marketingChallenges.includes(input.value);
-        } else {
-          input.value = this.formData[field] || '';
-        }
+        input.value = this.formData[field] || '';
 
         // Listen for changes
         input.addEventListener('input', () => {
-          if (input.type === 'checkbox') {
-            const challenges = this.formData.marketingChallenges;
-            if (input.checked) {
-              if (!challenges.includes(input.value)) {
-                challenges.push(input.value);
-              }
-            } else {
-              const idx = challenges.indexOf(input.value);
-              if (idx > -1) challenges.splice(idx, 1);
-            }
-          } else {
-            this.formData[field] = input.value;
-          }
+          this.formData[field] = input.value;
           this.saveToLocalStorage();
           this.clearError(input);
 
@@ -212,8 +213,11 @@
         });
       });
 
-      // Button groups (marketingSpend)
+      // Single-select button groups (marketingSpend)
       this.setupButtonGroups();
+
+      // Multi-select button groups (marketingChallenges)
+      this.setupMultiSelectGroups();
 
       // Tier buttons
       this.setupTierButtons();
@@ -243,7 +247,8 @@
     },
 
     setupButtonGroups: function() {
-      const buttonGroups = this.modal.querySelectorAll('.quiz-button-group');
+      // Single-select button groups only (exclude multi-select)
+      const buttonGroups = this.modal.querySelectorAll('.quiz-button-group:not(.quiz-multi-select)');
       buttonGroups.forEach(group => {
         const field = group.dataset.field;
         if (!field) return;
@@ -262,12 +267,41 @@
         // Click handlers
         buttons.forEach(btn => {
           btn.addEventListener('click', () => {
-            // Remove selected from all
             buttons.forEach(b => b.classList.remove('selected'));
-            // Add selected to clicked
             btn.classList.add('selected');
-            // Update form data
             this.formData[field] = btn.dataset.value;
+            this.saveToLocalStorage();
+            this.clearError(group);
+          });
+        });
+      });
+    },
+
+    setupMultiSelectGroups: function() {
+      const multiGroups = this.modal.querySelectorAll('.quiz-multi-select');
+      multiGroups.forEach(group => {
+        const field = group.dataset.field;
+        if (!field) return;
+
+        const buttons = group.querySelectorAll('.quiz-option-btn');
+
+        // Set initial selections from formData array
+        if (Array.isArray(this.formData[field])) {
+          buttons.forEach(btn => {
+            if (this.formData[field].includes(btn.dataset.value)) {
+              btn.classList.add('selected');
+            }
+          });
+        }
+
+        // Click handlers — toggle selection
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            btn.classList.toggle('selected');
+            // Rebuild array from selected buttons
+            this.formData[field] = Array.from(buttons)
+              .filter(b => b.classList.contains('selected'))
+              .map(b => b.dataset.value);
             this.saveToLocalStorage();
             this.clearError(group);
           });
@@ -378,7 +412,7 @@
     },
 
     hasPartialData: function() {
-      return this.formData.firstName || this.formData.email;
+      return this.formData.tier || this.formData.firstName || this.formData.email;
     },
 
     showStep: function(step, animate) {
@@ -477,7 +511,15 @@
       const stepEl = this.steps[step - 1];
 
       switch (step) {
-        case 1: // Name
+        case 1: // Tier Selection
+          const tierButtons = stepEl.querySelector('.quiz-tier-buttons');
+          if (!this.formData.tier) {
+            this.showError(tierButtons, 'Please select your practice level');
+            isValid = false;
+          }
+          break;
+
+        case 2: // Name
           const firstName = stepEl.querySelector('[data-field="firstName"]');
           const lastName = stepEl.querySelector('[data-field="lastName"]');
           if (!this.formData.firstName || this.formData.firstName.length < 2) {
@@ -490,7 +532,22 @@
           }
           break;
 
-        case 2: // Practice Description
+        case 3: // Contact Info (Email + Phone)
+          const email = stepEl.querySelector('[data-field="email"]');
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!this.formData.email || !emailRegex.test(this.formData.email)) {
+            this.showError(email, 'Please enter a valid email address');
+            isValid = false;
+          }
+          const phone = stepEl.querySelector('[data-field="phoneNumber"]');
+          const phoneDigits = this.formData.phoneNumber.replace(/\D/g, '');
+          if (!phoneDigits || phoneDigits.length < 10) {
+            this.showError(phone, 'Please enter a valid phone number (at least 10 digits)');
+            isValid = false;
+          }
+          break;
+
+        case 4: // Practice Description
           const practice = stepEl.querySelector('[data-field="practiceDescription"]');
           if (!this.formData.practiceDescription || this.formData.practiceDescription.length < 10) {
             this.showError(practice, 'Please provide more detail (at least 10 characters)');
@@ -498,15 +555,13 @@
           }
           break;
 
-        case 3: // Website (optional)
+        case 5: // Website (optional)
           const website = stepEl.querySelector('[data-field="website"]');
           if (this.formData.website) {
-            // Auto-prepend https if missing
             if (!/^https?:\/\//i.test(this.formData.website)) {
               this.formData.website = 'https://' + this.formData.website;
               website.value = this.formData.website;
             }
-            // Validate URL format
             try {
               new URL(this.formData.website);
             } catch (e) {
@@ -516,7 +571,7 @@
           }
           break;
 
-        case 4: // Marketing Goals
+        case 6: // Marketing Goals
           const goals = stepEl.querySelector('[data-field="currentSituation"]');
           if (!this.formData.currentSituation || this.formData.currentSituation.length < 10) {
             this.showError(goals, 'Please provide more detail (at least 10 characters)');
@@ -524,7 +579,7 @@
           }
           break;
 
-        case 5: // Marketing Spend
+        case 7: // Marketing Spend
           const spendGroup = stepEl.querySelector('.quiz-button-group');
           if (!this.formData.marketingSpend) {
             this.showError(spendGroup, 'Please select an option');
@@ -532,36 +587,10 @@
           }
           break;
 
-        case 6: // Marketing Challenges
-          const challengeContainer = stepEl.querySelector('.quiz-checkbox-group');
+        case 8: // Marketing Challenges (multi-select buttons)
+          const challengeGroup = stepEl.querySelector('.quiz-multi-select');
           if (this.formData.marketingChallenges.length === 0) {
-            this.showError(challengeContainer, 'Please select at least one challenge');
-            isValid = false;
-          }
-          break;
-
-        case 7: // Tier Selection
-          const tierButtons = stepEl.querySelector('.quiz-tier-buttons');
-          if (!this.formData.tier) {
-            this.showError(tierButtons, 'Please select a tier');
-            isValid = false;
-          }
-          break;
-
-        case 8: // Phone
-          const phone = stepEl.querySelector('[data-field="phoneNumber"]');
-          const phoneDigits = this.formData.phoneNumber.replace(/\D/g, '');
-          if (!phoneDigits || phoneDigits.length < 10) {
-            this.showError(phone, 'Please enter a valid phone number (at least 10 digits)');
-            isValid = false;
-          }
-          break;
-
-        case 9: // Email
-          const email = stepEl.querySelector('[data-field="email"]');
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!this.formData.email || !emailRegex.test(this.formData.email)) {
-            this.showError(email, 'Please enter a valid email address');
+            this.showError(challengeGroup, 'Please select at least one challenge');
             isValid = false;
           }
           break;
@@ -610,26 +639,36 @@
           const data = JSON.parse(saved);
           Object.assign(this.formData, data);
 
-          // Update form inputs
+          // Update text/select inputs
           const inputs = this.modal.querySelectorAll('input, textarea, select');
           inputs.forEach(input => {
             const field = input.dataset.field;
             if (!field) return;
-            if (input.type === 'checkbox') {
-              input.checked = this.formData.marketingChallenges.includes(input.value);
-            } else if (this.formData[field]) {
+            if (this.formData[field]) {
               input.value = this.formData[field];
             }
           });
 
-          // Update button group selections (marketingSpend)
-          const buttonGroups = this.modal.querySelectorAll('.quiz-button-group');
+          // Update single-select button groups (marketingSpend)
+          const buttonGroups = this.modal.querySelectorAll('.quiz-button-group:not(.quiz-multi-select)');
           buttonGroups.forEach(group => {
             const field = group.dataset.field;
             if (field && this.formData[field]) {
               const buttons = group.querySelectorAll('.quiz-option-btn');
               buttons.forEach(btn => {
                 btn.classList.toggle('selected', btn.dataset.value === this.formData[field]);
+              });
+            }
+          });
+
+          // Update multi-select button groups (marketingChallenges)
+          const multiGroups = this.modal.querySelectorAll('.quiz-multi-select');
+          multiGroups.forEach(group => {
+            const field = group.dataset.field;
+            if (field && Array.isArray(this.formData[field])) {
+              const buttons = group.querySelectorAll('.quiz-option-btn');
+              buttons.forEach(btn => {
+                btn.classList.toggle('selected', this.formData[field].includes(btn.dataset.value));
               });
             }
           });
@@ -678,25 +717,7 @@
           tier: this.formData.tier
         };
 
-        // POST to lead API
-        const response = await fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(submitData)
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to submit form');
-        }
-
-        const result = await response.json();
-
-        // Store contact ID
-        if (result.ghlContactId) {
-          localStorage.setItem('ghlContactId', result.ghlContactId);
-        }
-
-        // Post to ROAM
+        // Post to ROAM (New Applications channel)
         await this.postToRoam(submitData);
 
         // Track completion
@@ -750,28 +771,29 @@
     postToRoam: async function(data) {
       const challengesList = data.marketingChallenges
         .map(c => challengeLabels[c] || c)
-        .join('\n- ');
+        .join(', ');
 
-      const message = `New Olympus Demo Application
+      const routing = getRoutingForTier(data.tier);
 
-Name: ${data.firstName} ${data.lastName}
-Email: ${data.email}
-Phone: ${data.countryCode} ${data.phoneNumber}
-Practice: ${data.practiceDescription}
-Website: ${data.website || 'Not provided'}
-Goals: ${data.currentSituation}
-Monthly Marketing Spend: ${spendLabels[data.marketingSpend] || data.marketingSpend}
-Challenges:
-- ${challengesList}
-Tier Interest: ${tierLabels[data.tier] || data.tier}
-
-Status: Application submitted - Ready for demo booking`;
+      const message = [
+        'NEW OLYMPUS APPLICATION',
+        'Name: ' + data.firstName + ' ' + data.lastName,
+        'Email: ' + data.email,
+        'Phone: ' + data.countryCode + data.phoneNumber,
+        'Quick description of your practice: ' + data.practiceDescription,
+        'What website do you want Olympus to grow? ' + (data.website || 'Not provided'),
+        'What do you want Olympus to help you achieve? ' + data.currentSituation,
+        'Roughly how much goes towards growth & marketing each month? ' + (spendLabels[data.marketingSpend] || data.marketingSpend),
+        'Biggest patient acquisition challenges? ' + challengesList,
+        'Segment: ' + routing.segmentLabel + ' | ' + routing.revenueRange,
+        'Status: Application submitted - Ready for demo booking'
+      ].join('\n\n');
 
       try {
         await fetch('/api/notify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message })
+          body: JSON.stringify({ message, channel: 'application' })
         });
       } catch (e) {
         console.warn('Could not post to ROAM:', e);

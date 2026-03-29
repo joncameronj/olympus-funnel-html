@@ -457,19 +457,16 @@ function formatRoamMessage(data) {
     });
   }
 
+  const ownerDisplay = data.calendarOwner === 'joncameron' ? 'JonCameron' : 'Luke';
+
   const parts = [
-    '🔄 **NEW OLYMPUS DEMO BOOKED**',
+    '**DEMO BOOKED**',
     `**Name:** ${data.name}`,
     `**Email:** ${data.email}`,
     `**Phone:** ${data.phone}`,
-    `**Quick description of your practice:** ${data.practiceDescription}`,
-    `**What website do you want Olympus to grow?** ${data.website}`,
-    `**What do you want Olympus to help you achieve?** ${data.goals}`,
-    `**Roughly how much goes towards growth & marketing each month?** ${data.budget}`,
-    `**Biggest patient acquisition challenges?** ${data.challenges}`,
-    `**Segment:** ${[data.segmentLabel || data.segment, data.revenueRange].filter(Boolean).join(' | ') || 'Not provided'}`,
+    `**Booked with:** ${ownerDisplay}`,
     `**Call link:** ${data.callLink || 'Not provided'}`,
-    `📅 **Booked:** ${bookingTime}`,
+    `**Booked:** ${bookingTime}`,
   ];
 
   return parts.join('\n\n');

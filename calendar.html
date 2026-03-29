@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Your Call · Olympus</title>
   <meta name="description" content="Select a time that works best for you.">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
 
   <!-- Open Graph -->
   <meta property="og:image" content="/assets/images/olympus-opengraph.webp">
@@ -172,36 +172,36 @@
     <div class="footer-olympus-ghost">Olympus</div>
   </footer>
 
-  <!-- Theme Detection Script (light theme only for now) -->
+  <!-- Theme Detection Script -->
   <script>
     (function() {
       const favicon = document.getElementById('favicon');
       const html = document.documentElement;
-      // const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      // Force light theme for now (dark theme assets pending)
-      const initialTheme = 'light';
-      html.setAttribute('data-theme', initialTheme);
-      favicon.href = '/olympus-icons/olympus-line-light.ico';
+      function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        favicon.href = theme === 'dark'
+          ? '/olympus-icons/olympus-line-dark.ico'
+          : '/olympus-icons/olympus-line-light.ico';
+      }
 
-      // Listen for system theme changes (disabled for now)
-      // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-      //   const theme = e.matches ? 'dark' : 'light';
-      //   html.setAttribute('data-theme', theme);
-      //   favicon.href = theme === 'dark'
-      //     ? '/olympus-icons/olympus-line-dark.ico'
-      //     : '/olympus-icons/olympus-line-light.ico';
-      //
-      //   // Update Cal.com if loaded
-      //   if (typeof Cal !== 'undefined' && Cal.ns && Cal.ns["olympus-demo"]) {
-      //     Cal.ns["olympus-demo"]("ui", {
-      //       "cssVarsPerTheme": {
-      //         "light": {"cal-brand": "#000000"},
-      //         "dark": {"cal-brand": "#ffffff", "cal-bg": "#0a0a0a"}
-      //       }
-      //     });
-      //   }
-      // });
+      setTheme(systemDark ? 'dark' : 'light');
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        const theme = e.matches ? 'dark' : 'light';
+        setTheme(theme);
+
+        // Update Cal.com if loaded
+        if (typeof Cal !== 'undefined' && Cal.ns && Cal.ns["olympus-demo"]) {
+          Cal.ns["olympus-demo"]("ui", {
+            "cssVarsPerTheme": {
+              "light": {"cal-brand": "#000000"},
+              "dark": {"cal-brand": "#ffffff", "cal-bg": "#0a0a0a"}
+            }
+          });
+        }
+      });
     })();
   </script>
 
@@ -212,25 +212,25 @@
         segment: 'just-getting-started',
         segmentLabel: 'Just Getting Started',
         revenueRange: '$0 - $250K',
-        tier: 'lambda',
-        calendarNumber: 1,
-        calendarOwner: 'joncameron'
+        tier: 'just-getting-started',
+        calendarNumber: 2,
+        calendarOwner: 'lukewiercinski'
       },
       'lambda': {
         segment: 'lambda',
         segmentLabel: 'Lambda',
-        revenueRange: '$250K - $750K',
+        revenueRange: '$250K - $500K',
         tier: 'lambda',
-        calendarNumber: 1,
-        calendarOwner: 'joncameron'
+        calendarNumber: 2,
+        calendarOwner: 'lukewiercinski'
       },
       'alpha': {
         segment: 'alpha',
         segmentLabel: 'Alpha',
         revenueRange: '$750K - $1.5M',
         tier: 'alpha',
-        calendarNumber: 1,
-        calendarOwner: 'joncameron'
+        calendarNumber: 2,
+        calendarOwner: 'lukewiercinski'
       },
       'sigma': {
         segment: 'sigma',
@@ -244,7 +244,7 @@
         segment: 'omega',
         segmentLabel: 'Omega',
         revenueRange: '$3.6M+',
-        tier: 'enterprise',
+        tier: 'omega',
         calendarNumber: 1,
         calendarOwner: 'joncameron'
       }
@@ -252,7 +252,7 @@
 
     const CALENDAR_LINKS = {
       1: 'joncameron/olympus-demo',
-      2: 'luke/olympus-demo'
+      2: 'lukewiercinski/olympus-demo'
     };
 
     const params = new URLSearchParams(window.location.search);
@@ -267,7 +267,7 @@
     const routingSelection = {
       ...defaultSelection,
       calendarNumber: resolvedCalendarNumber,
-      calendarOwner: resolvedCalendarNumber === 1 ? 'joncameron' : 'luke'
+      calendarOwner: resolvedCalendarNumber === 1 ? 'joncameron' : 'lukewiercinski'
     };
     const calLink = CALENDAR_LINKS[resolvedCalendarNumber] || CALENDAR_LINKS[1];
 
