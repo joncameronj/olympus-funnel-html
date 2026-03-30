@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service · Olympus</title>
   <meta name="description" content="Terms of service for Olympus.">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
 
   <!-- Open Graph -->
   <meta property="og:image" content="/assets/images/olympus-opengraph.webp">
@@ -346,22 +346,17 @@
     <p class="footer-copy">&copy; 2024 OLYMPUS. ALL RIGHTS RESERVED.</p>
   </footer>
 
-  <!-- Theme Detection (light theme only for now) -->
+  <!-- Theme Detection -->
   <script>
     (function() {
       const html = document.documentElement;
-      // const savedTheme = localStorage.getItem('theme');
-      // const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      // Force light theme for now (dark theme assets pending)
-      html.setAttribute('data-theme', 'light');
+      html.setAttribute('data-theme', systemDark ? 'dark' : 'light');
 
-      // Listen for system theme changes (disabled for now)
-      // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-      //   if (!localStorage.getItem('theme')) {
-      //     html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-      //   }
-      // });
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      });
     })();
   </script>
 

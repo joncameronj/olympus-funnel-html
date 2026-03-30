@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ · Olympus</title>
   <meta name="description" content="Get answers to common questions about Olympus - ROI expectations, pricing, timelines, and how it works.">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
 
   <!-- Open Graph -->
   <meta property="og:title" content="FAQ · Olympus">
@@ -165,6 +165,7 @@
     (function() {
       var favicon = document.getElementById('favicon');
       var html = document.documentElement;
+      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
       function setTheme(theme) {
         html.setAttribute('data-theme', theme);
@@ -173,7 +174,11 @@
           : '/olympus-icons/olympus-line-light.ico';
       }
 
-      setTheme('light');
+      setTheme(systemDark ? 'dark' : 'light');
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        setTheme(e.matches ? 'dark' : 'light');
+      });
     })();
   </script>
 

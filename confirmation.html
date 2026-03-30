@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Call Is Confirmed · Olympus</title>
   <meta name="description" content="Your strategy call has been confirmed. Here's everything you need to know before we talk.">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
 
   <!-- Open Graph -->
   <meta property="og:image" content="/assets/images/olympus-opengraph.webp">
@@ -945,12 +945,12 @@
     <div class="footer-olympus-ghost">Olympus</div>
   </footer>
 
-  <!-- Theme Detection Script (light theme only for now) -->
+  <!-- Theme Detection Script -->
   <script>
     (function() {
       const favicon = document.getElementById('favicon');
       const html = document.documentElement;
-      // const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
       function setTheme(theme) {
         html.setAttribute('data-theme', theme);
@@ -959,13 +959,11 @@
           : '/olympus-icons/olympus-line-light.ico';
       }
 
-      // Force light theme for now (dark theme assets pending)
-      setTheme('light');
+      setTheme(systemDark ? 'dark' : 'light');
 
-      // Listen for system theme changes (disabled for now)
-      // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-      //   setTheme(e.matches ? 'dark' : 'light');
-      // });
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        setTheme(e.matches ? 'dark' : 'light');
+      });
     })();
   </script>
 
