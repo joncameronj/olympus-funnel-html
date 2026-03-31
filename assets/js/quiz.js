@@ -26,8 +26,8 @@
 
   const tierLabels = {
     'just-getting-started': 'Just Getting Started ($0-$250K annual)',
-    'lambda': 'Lambda ($250K-$500K annual)',
-    'alpha': 'Alpha ($500K-$1.5M annual)',
+    'lambda': 'Lambda ($250K-$750K annual)',
+    'alpha': 'Alpha ($750K-$1.5M annual)',
     'sigma': 'Sigma ($1.5M-$3.6M annual)',
     'omega': 'Omega ($3.6M+ annual)'
   };
@@ -45,7 +45,7 @@
       lambda: {
         segment: 'lambda',
         segmentLabel: 'Lambda',
-        revenueRange: '$250K-$500K in annual revenue',
+        revenueRange: '$250K-$750K in annual revenue',
         tier: 'lambda',
         calendarNumber: 2,
         calendarOwner: 'lukewiercinski'
@@ -53,7 +53,7 @@
       alpha: {
         segment: 'alpha',
         segmentLabel: 'Alpha',
-        revenueRange: '$500K-$1.5M in annual revenue',
+        revenueRange: '$750K-$1.5M in annual revenue',
         tier: 'alpha',
         calendarNumber: 2,
         calendarOwner: 'lukewiercinski'
@@ -774,6 +774,7 @@
         .join(', ');
 
       const routing = getRoutingForTier(data.tier);
+      const ownerDisplay = routing.calendarOwner === 'joncameron' ? 'JonCameron' : 'Luke';
 
       const message = [
         'NEW OLYMPUS APPLICATION',
@@ -786,6 +787,7 @@
         'Roughly how much goes towards growth & marketing each month? ' + (spendLabels[data.marketingSpend] || data.marketingSpend),
         'Biggest patient acquisition challenges? ' + challengesList,
         'Segment: ' + routing.segmentLabel + ' | ' + routing.revenueRange,
+        'Demo will be scheduled with: ' + ownerDisplay,
         'Status: Application submitted - Ready for demo booking'
       ].join('\n\n');
 
