@@ -725,6 +725,11 @@
           trackEvent('quiz_completed', submitData);
         }
 
+        // Fire Meta SubmitApplication event on quiz submission
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'SubmitApplication');
+        }
+
         // Clear form data
         localStorage.removeItem('quizFormData');
 
