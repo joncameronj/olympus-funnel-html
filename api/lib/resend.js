@@ -78,9 +78,13 @@ export async function scheduleEmail({ to, subject, templateId, data, html, sched
   }
 
   const payload = {
-    from: 'JonCameron Johnson <joncameron@etho.net>',
-    reply_to: 'saas@etho.net',
+    from: 'JonCameron Johnson <joncameron@getolympus.ai>',
+    reply_to: 'joncameron@getolympus.ai',
     to: [to],
+    headers: {
+      'List-Unsubscribe': '<mailto:unsubscribe@getolympus.ai?subject=unsubscribe>',
+      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+    },
   };
 
   // Only set subject when NOT using a template (template has its own subject)

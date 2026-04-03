@@ -255,6 +255,7 @@ function extractBookingData(payload) {
   const responses = data.responses || {};
   const attendee = data.attendees?.[0] || {};
   const metadata = data.metadata || data.bookingMetadata || data.eventTypeMetadata || {};
+  const organizer = data.organizer || {};
 
   // Log raw responses for debugging
   console.log('Raw responses keys:', Object.keys(responses));
@@ -266,6 +267,8 @@ function extractBookingData(payload) {
     }))
   ));
   console.log('Metadata keys:', Object.keys(metadata));
+  console.log('Organizer:', JSON.stringify({ username: organizer.username, email: organizer.email, name: organizer.name }));
+  console.log('CalendarOwner from metadata:', metadata.calendarOwner, '| from organizer:', organizer.username);
 
   // Flag unmatched response keys for debugging
   const knownKeys = ['name', 'email', 'phone', 'location', 'guests', 'rescheduleReason'];
@@ -389,7 +392,7 @@ function extractBookingData(payload) {
     segment: getMetadataValue('segment', 'segmentLabel'),
     segmentLabel: getMetadataValue('segmentLabel'),
     revenueRange: getMetadataValue('revenueRange'),
-    calendarOwner: getMetadataValue('calendarOwner'),
+    calendarOwner: getMetadataValue('calendarOwner') || organizer.username || '',
     calendarNumber: getMetadataValue('calendarNumber'),
     callLink: resolvedCallLink || 'Not provided',
 
@@ -457,7 +460,13 @@ function formatRoamMessage(data) {
     });
   }
 
-  const ownerDisplay = data.calendarOwner === 'joncameron' ? 'JonCameron' : 'Luke';
+  let ownerDisplay = 'Unknown';
+  const owner = (data.calendarOwner || '').toLowerCase();
+  if (owner === 'joncameron' || owner.includes('joncameron')) {
+    ownerDisplay = 'JonCameron';
+  } else if (owner === 'lukewiercinski' || owner.includes('luke')) {
+    ownerDisplay = 'Luke';
+  }
 
   const parts = [
     '**DEMO BOOKED**',

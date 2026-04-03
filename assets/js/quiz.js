@@ -555,9 +555,12 @@
           }
           break;
 
-        case 5: // Website (optional)
+        case 5: // Website (required)
           const website = stepEl.querySelector('[data-field="website"]');
-          if (this.formData.website) {
+          if (!this.formData.website || !this.formData.website.trim()) {
+            this.showError(website, 'Please enter your website');
+            isValid = false;
+          } else {
             if (!/^https?:\/\//i.test(this.formData.website)) {
               this.formData.website = 'https://' + this.formData.website;
               website.value = this.formData.website;
