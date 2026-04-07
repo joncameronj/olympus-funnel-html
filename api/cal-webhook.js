@@ -359,7 +359,11 @@ function extractBookingData(payload) {
     // Basic info
     name: rawName || 'Not provided',
     email: rawEmail || 'Not provided',
-    phone: getResponse(responses, ['phone', 'Phone', 'phone-number', 'phone number']),
+    phone: (() => {
+      const fromResponses = getResponse(responses, ['phone', 'Phone', 'phone-number', 'phone number']);
+      if (fromResponses !== 'Not provided') return fromResponses;
+      return getMetadataValue('phone') || 'Not provided';
+    })(),
 
     // Custom form fields - use getResponse() to handle multiple formats, fall back to metadata
     practiceDescription: practiceFromResponses !== 'Not provided'
