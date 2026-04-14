@@ -4517,11 +4517,21 @@ wistia-player:not(:defined) {
 
 @media (max-width: 600px) {
   .monitor-display-container {
-    width: 220%;
-    margin-left: 0;
+    width: 90%;
+    margin-left: auto;
+  }
+
+  /* Hide the monitor frame image on mobile; show just the app window card */
+  .monitor-display-container picture {
+    display: none;
   }
 
   .monitor-video-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
     align-items: flex-start;
     justify-content: center;
   }
@@ -4585,49 +4595,44 @@ picture:has(.monitor-display-light) {
 }
 
 @media (max-width: 600px) {
-  /* Reduced by factor of 3 for mobile */
+  /* Menu bar is too complex for mobile; hide it */
   .macos-menu-bar {
-    height: 1%;
-    font-size: clamp(3px, 0.27vw, 4px);
-    padding: 0 clamp(2px, 0.27vw, 4px);
+    display: none;
   }
 
-  .menu-bar-left,
-  .menu-bar-right {
-    gap: clamp(3px, 0.33vw, 5px);
-  }
-
-  .apple-logo {
-    width: clamp(3px, 0.27vw, 4px);
-    height: clamp(3px, 0.27vw, 4px);
-  }
-
-  /* Traffic lights reduced by factor of 3 */
   .traffic-light {
-    width: 3px;
-    height: 3px;
+    width: 10px;
+    height: 10px;
   }
 
   .macos-traffic-lights {
-    gap: 2px;
+    gap: 6px;
   }
 
-  /* Title bar reduced by factor of 3 */
   .macos-title-bar {
-    height: 9px;
-    padding: 0 3px;
-    border-radius: 3px 3px 0 0;
-    border-bottom-width: 0.33px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 10px 10px 0 0;
+    border-bottom-width: 0.5px;
   }
 
   .macos-title-text {
-    font-size: 4px;
+    font-size: 11px;
   }
 
-  /* Window reduced by factor of 3 */
   .macos-window {
-    border-width: 3px;
-    border-radius: 5px;
+    width: 100%;
+    height: auto;
+    border-width: 1px;
+    border-radius: 12px;
+  }
+
+  .macos-window-content {
+    flex: none;
+  }
+
+  .monitor-video {
+    height: auto;
   }
 }
 
