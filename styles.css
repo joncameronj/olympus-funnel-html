@@ -4521,9 +4521,11 @@ wistia-player:not(:defined) {
     margin-left: auto;
   }
 
-  /* Hide the monitor frame image on mobile; show just the app window card */
+  /* Hide the monitor frame image on mobile; show just the app window card.
+     !important needed: picture:has(.monitor-display-dark) { display: block }
+     appears later in the file at equal specificity and would override us. */
   .monitor-display-container picture {
-    display: none;
+    display: none !important;
   }
 
   .monitor-video-container {
